@@ -40,6 +40,9 @@
 		3A07AB222344A3AE00D3F0CE /* gradient.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A07AB212344A3AE00D3F0CE /* gradient.metal */; };
 		3A07AB232344A3AE00D3F0CE /* gradient.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A07AB212344A3AE00D3F0CE /* gradient.metal */; };
 		3A07AB242344A3AE00D3F0CE /* gradient.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A07AB212344A3AE00D3F0CE /* gradient.metal */; };
+		3A07AB2E2344A9FB00D3F0CE /* gradient_header.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A07AB2D2344A9FB00D3F0CE /* gradient_header.metal */; };
+		3A07AB2F2344A9FB00D3F0CE /* gradient_header.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A07AB2D2344A9FB00D3F0CE /* gradient_header.metal */; };
+		3A07AB302344A9FB00D3F0CE /* gradient_header.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A07AB2D2344A9FB00D3F0CE /* gradient_header.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +59,7 @@
 		3A07AAD92344A10800D3F0CE /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3A07AADA2344A10800D3F0CE /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		3A07AB212344A3AE00D3F0CE /* gradient.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = gradient.metal; sourceTree = "<group>"; };
+		3A07AB2D2344A9FB00D3F0CE /* gradient_header.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = gradient_header.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -113,6 +117,7 @@
 				3A07AAD32344A10800D3F0CE /* random_header.metal */,
 				3A07AAD42344A10800D3F0CE /* random.metal */,
 				3A07AAD52344A10800D3F0CE /* noise_header.metal */,
+				3A07AB2D2344A9FB00D3F0CE /* gradient_header.metal */,
 				3A07AB212344A3AE00D3F0CE /* gradient.metal */,
 			);
 			path = Content;
@@ -220,6 +225,7 @@
 				3A07AAF32344A10800D3F0CE /* hsv.metal in Sources */,
 				3A07AAED2344A10800D3F0CE /* noise_header.metal in Sources */,
 				3A07AAC523449DC400D3F0CE /* ContentGeneratorGradientVOX.metal in Sources */,
+				3A07AB2E2344A9FB00D3F0CE /* gradient_header.metal in Sources */,
 				3A07AAE12344A10800D3F0CE /* error.metal in Sources */,
 				3A07AB222344A3AE00D3F0CE /* gradient.metal in Sources */,
 				3A07AAE72344A10800D3F0CE /* random_header.metal in Sources */,
@@ -238,6 +244,7 @@
 				3A07AAF42344A10800D3F0CE /* hsv.metal in Sources */,
 				3A07AAEE2344A10800D3F0CE /* noise_header.metal in Sources */,
 				3A07AAC623449DC400D3F0CE /* ContentGeneratorGradientVOX.metal in Sources */,
+				3A07AB2F2344A9FB00D3F0CE /* gradient_header.metal in Sources */,
 				3A07AAE22344A10800D3F0CE /* error.metal in Sources */,
 				3A07AB232344A3AE00D3F0CE /* gradient.metal in Sources */,
 				3A07AAE82344A10800D3F0CE /* random_header.metal in Sources */,
@@ -256,6 +263,7 @@
 				3A07AAF52344A10800D3F0CE /* hsv.metal in Sources */,
 				3A07AAEF2344A10800D3F0CE /* noise_header.metal in Sources */,
 				3A07AAC723449DC400D3F0CE /* ContentGeneratorGradientVOX.metal in Sources */,
+				3A07AB302344A9FB00D3F0CE /* gradient_header.metal in Sources */,
 				3A07AAE32344A10800D3F0CE /* error.metal in Sources */,
 				3A07AB242344A3AE00D3F0CE /* gradient.metal in Sources */,
 				3A07AAE92344A10800D3F0CE /* random_header.metal in Sources */,
