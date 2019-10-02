@@ -8,12 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		3A07AA5B23448D4400D3F0CE /* VoxelKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A07AA5923448D4400D3F0CE /* VoxelKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A07AA87234497EE00D3F0CE /* GradientVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07AA86234497EE00D3F0CE /* GradientVOX.swift */; };
+		3A07AA89234498B900D3F0CE /* VoxelKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07AA88234498B900D3F0CE /* VoxelKit.swift */; };
+		3A07AA8B234498F100D3F0CE /* VoxelTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07AA8A234498F100D3F0CE /* VoxelTypes.swift */; };
+		3A07AA8C234498F900D3F0CE /* VoxelKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07AA88234498B900D3F0CE /* VoxelKit.swift */; };
+		3A07AA8D234498F900D3F0CE /* VoxelTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07AA8A234498F100D3F0CE /* VoxelTypes.swift */; };
+		3A07AA90234498F900D3F0CE /* GradientVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07AA86234497EE00D3F0CE /* GradientVOX.swift */; };
+		3A07AA91234498F900D3F0CE /* VoxelKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07AA88234498B900D3F0CE /* VoxelKit.swift */; };
+		3A07AA92234498F900D3F0CE /* VoxelTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07AA8A234498F100D3F0CE /* VoxelTypes.swift */; };
+		3A07AA95234498F900D3F0CE /* GradientVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07AA86234497EE00D3F0CE /* GradientVOX.swift */; };
 		73A47D2EB9DB8B2C2C44E80B /* Pods_VoxelKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0997B121D0972FCA9D2CB871 /* Pods_VoxelKit.framework */; };
+		964062DDF4252E4B9539881D /* Pods_VoxelKit_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 404A765C061062943568A786 /* Pods_VoxelKit_macOS.framework */; };
+		9FE4B576B1B01F65277B5339 /* Pods_VoxelKit_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F01BD56BAADEB9E47D1D6E54 /* Pods_VoxelKit_tvOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0405870B6DBED49C7B66FC86 /* Pods-VoxelKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoxelKit.debug.xcconfig"; path = "Target Support Files/Pods-VoxelKit/Pods-VoxelKit.debug.xcconfig"; sourceTree = "<group>"; };
 		0997B121D0972FCA9D2CB871 /* Pods_VoxelKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VoxelKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2469DBDD1021259D49A0CBE3 /* Pods-VoxelKit-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoxelKit-macOS.release.xcconfig"; path = "Target Support Files/Pods-VoxelKit-macOS/Pods-VoxelKit-macOS.release.xcconfig"; sourceTree = "<group>"; };
 		3530B0CC2F60E5F4C6C4B2BE /* Pods-VoxelKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoxelKit.release.xcconfig"; path = "Target Support Files/Pods-VoxelKit/Pods-VoxelKit.release.xcconfig"; sourceTree = "<group>"; };
 		3A07AA5623448D4400D3F0CE /* VoxelKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VoxelKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A07AA5923448D4400D3F0CE /* VoxelKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VoxelKit.h; sourceTree = "<group>"; };
@@ -22,6 +34,14 @@
 		3A07AA6C2344953400D3F0CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A07AA762344954300D3F0CE /* VoxelKit_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VoxelKit_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A07AA782344954300D3F0CE /* VoxelKit_tvOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VoxelKit_tvOS.h; sourceTree = "<group>"; };
+		3A07AA86234497EE00D3F0CE /* GradientVOX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientVOX.swift; sourceTree = "<group>"; };
+		3A07AA88234498B900D3F0CE /* VoxelKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoxelKit.swift; sourceTree = "<group>"; };
+		3A07AA8A234498F100D3F0CE /* VoxelTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoxelTypes.swift; sourceTree = "<group>"; };
+		404A765C061062943568A786 /* Pods_VoxelKit_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VoxelKit_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C800D4DE75D38C2945C76DA /* Pods-VoxelKit-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoxelKit-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-VoxelKit-tvOS/Pods-VoxelKit-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		D46AE5F5EE13D8480C76C8FF /* Pods-VoxelKit-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoxelKit-macOS.debug.xcconfig"; path = "Target Support Files/Pods-VoxelKit-macOS/Pods-VoxelKit-macOS.debug.xcconfig"; sourceTree = "<group>"; };
+		F01BD56BAADEB9E47D1D6E54 /* Pods_VoxelKit_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VoxelKit_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD68E41ECE0E6436A889544F /* Pods-VoxelKit-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoxelKit-tvOS.release.xcconfig"; path = "Target Support Files/Pods-VoxelKit-tvOS/Pods-VoxelKit-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				964062DDF4252E4B9539881D /* Pods_VoxelKit_macOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FE4B576B1B01F65277B5339 /* Pods_VoxelKit_tvOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +99,9 @@
 				3A07AA5923448D4400D3F0CE /* VoxelKit.h */,
 				3A07AA6B2344953400D3F0CE /* VoxelKit_macOS.h */,
 				3A07AA782344954300D3F0CE /* VoxelKit_tvOS.h */,
+				3A07AA88234498B900D3F0CE /* VoxelKit.swift */,
+				3A07AA8A234498F100D3F0CE /* VoxelTypes.swift */,
+				3A07AA7E2344960C00D3F0CE /* VOX */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -89,11 +114,47 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		3A07AA7E2344960C00D3F0CE /* VOX */ = {
+			isa = PBXGroup;
+			children = (
+				3A07AA812344965E00D3F0CE /* VOXs */,
+			);
+			path = VOX;
+			sourceTree = "<group>";
+		};
+		3A07AA812344965E00D3F0CE /* VOXs */ = {
+			isa = PBXGroup;
+			children = (
+				3A07AA822344967200D3F0CE /* Content */,
+			);
+			path = VOXs;
+			sourceTree = "<group>";
+		};
+		3A07AA822344967200D3F0CE /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				3A07AA832344967F00D3F0CE /* Generator */,
+			);
+			path = Content;
+			sourceTree = "<group>";
+		};
+		3A07AA832344967F00D3F0CE /* Generator */ = {
+			isa = PBXGroup;
+			children = (
+				3A07AA86234497EE00D3F0CE /* GradientVOX.swift */,
+			);
+			path = Generator;
+			sourceTree = "<group>";
+		};
 		45A9E1A5B7D5A3FD5D66869E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				0405870B6DBED49C7B66FC86 /* Pods-VoxelKit.debug.xcconfig */,
 				3530B0CC2F60E5F4C6C4B2BE /* Pods-VoxelKit.release.xcconfig */,
+				D46AE5F5EE13D8480C76C8FF /* Pods-VoxelKit-macOS.debug.xcconfig */,
+				2469DBDD1021259D49A0CBE3 /* Pods-VoxelKit-macOS.release.xcconfig */,
+				6C800D4DE75D38C2945C76DA /* Pods-VoxelKit-tvOS.debug.xcconfig */,
+				FD68E41ECE0E6436A889544F /* Pods-VoxelKit-tvOS.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -102,6 +163,8 @@
 			isa = PBXGroup;
 			children = (
 				0997B121D0972FCA9D2CB871 /* Pods_VoxelKit.framework */,
+				404A765C061062943568A786 /* Pods_VoxelKit_macOS.framework */,
+				F01BD56BAADEB9E47D1D6E54 /* Pods_VoxelKit_tvOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -157,6 +220,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A07AA702344953400D3F0CE /* Build configuration list for PBXNativeTarget "VoxelKit-macOS" */;
 			buildPhases = (
+				5194B8E57E71F53EBB107361 /* [CP] Check Pods Manifest.lock */,
 				3A07AA642344953400D3F0CE /* Headers */,
 				3A07AA652344953400D3F0CE /* Sources */,
 				3A07AA662344953400D3F0CE /* Frameworks */,
@@ -175,6 +239,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A07AA7B2344954300D3F0CE /* Build configuration list for PBXNativeTarget "VoxelKit-tvOS" */;
 			buildPhases = (
+				F01A40D41EFC4256669AC006 /* [CP] Check Pods Manifest.lock */,
 				3A07AA712344954300D3F0CE /* Headers */,
 				3A07AA722344954300D3F0CE /* Sources */,
 				3A07AA732344954300D3F0CE /* Frameworks */,
@@ -200,6 +265,7 @@
 				TargetAttributes = {
 					3A07AA5523448D4400D3F0CE = {
 						CreatedOnToolsVersion = 11.0;
+						LastSwiftMigration = 1100;
 					};
 					3A07AA682344953400D3F0CE = {
 						CreatedOnToolsVersion = 11.0;
@@ -254,6 +320,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		5194B8E57E71F53EBB107361 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VoxelKit-macOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		5485209DE112301B86BE1623 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -276,6 +364,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F01A40D41EFC4256669AC006 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VoxelKit-tvOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -283,6 +393,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A07AA87234497EE00D3F0CE /* GradientVOX.swift in Sources */,
+				3A07AA8B234498F100D3F0CE /* VoxelTypes.swift in Sources */,
+				3A07AA89234498B900D3F0CE /* VoxelKit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +403,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A07AA90234498F900D3F0CE /* GradientVOX.swift in Sources */,
+				3A07AA8C234498F900D3F0CE /* VoxelKit.swift in Sources */,
+				3A07AA8D234498F900D3F0CE /* VoxelTypes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +413,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A07AA95234498F900D3F0CE /* GradientVOX.swift in Sources */,
+				3A07AA91234498F900D3F0CE /* VoxelKit.swift in Sources */,
+				3A07AA92234498F900D3F0CE /* VoxelTypes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +546,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0405870B6DBED49C7B66FC86 /* Pods-VoxelKit.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2QHTY6FMW2;
@@ -443,6 +563,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = se.hexagons.VoxelKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -452,6 +573,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3530B0CC2F60E5F4C6C4B2BE /* Pods-VoxelKit.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2QHTY6FMW2;
@@ -475,6 +597,7 @@
 		};
 		3A07AA6E2344953400D3F0CE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D46AE5F5EE13D8480C76C8FF /* Pods-VoxelKit-macOS.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -501,6 +624,7 @@
 		};
 		3A07AA6F2344953400D3F0CE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2469DBDD1021259D49A0CBE3 /* Pods-VoxelKit-macOS.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -527,6 +651,7 @@
 		};
 		3A07AA7C2344954300D3F0CE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6C800D4DE75D38C2945C76DA /* Pods-VoxelKit-tvOS.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -553,6 +678,7 @@
 		};
 		3A07AA7D2344954300D3F0CE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD68E41ECE0E6436A889544F /* Pods-VoxelKit-tvOS.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
