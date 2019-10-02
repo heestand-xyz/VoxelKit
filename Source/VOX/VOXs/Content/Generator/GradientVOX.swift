@@ -58,4 +58,11 @@ class GradientVOX: GradientPIX {
         return uniforms
     }
     
+    // MARK: - Life Cycle
+    
+    public required init(res: Res = .auto) {
+        super.init(res: res)
+        name = "gradient"
+    }
+    
 }

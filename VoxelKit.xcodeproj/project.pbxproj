@@ -17,6 +17,7 @@
 		3A07AA91234498F900D3F0CE /* VoxelKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07AA88234498B900D3F0CE /* VoxelKit.swift */; };
 		3A07AA92234498F900D3F0CE /* VoxelTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07AA8A234498F100D3F0CE /* VoxelTypes.swift */; };
 		3A07AA95234498F900D3F0CE /* GradientVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07AA86234497EE00D3F0CE /* GradientVOX.swift */; };
+		3A07AB3F2344D59800D3F0CE /* SlicePIX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07AB3E2344D59800D3F0CE /* SlicePIX.swift */; };
 		73A47D2EB9DB8B2C2C44E80B /* Pods_VoxelKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0997B121D0972FCA9D2CB871 /* Pods_VoxelKit.framework */; };
 		964062DDF4252E4B9539881D /* Pods_VoxelKit_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 404A765C061062943568A786 /* Pods_VoxelKit_macOS.framework */; };
 		9FE4B576B1B01F65277B5339 /* Pods_VoxelKit_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F01BD56BAADEB9E47D1D6E54 /* Pods_VoxelKit_tvOS.framework */; };
@@ -37,6 +38,7 @@
 		3A07AA86234497EE00D3F0CE /* GradientVOX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientVOX.swift; sourceTree = "<group>"; };
 		3A07AA88234498B900D3F0CE /* VoxelKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoxelKit.swift; sourceTree = "<group>"; };
 		3A07AA8A234498F100D3F0CE /* VoxelTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoxelTypes.swift; sourceTree = "<group>"; };
+		3A07AB3E2344D59800D3F0CE /* SlicePIX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlicePIX.swift; sourceTree = "<group>"; };
 		404A765C061062943568A786 /* Pods_VoxelKit_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VoxelKit_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C800D4DE75D38C2945C76DA /* Pods-VoxelKit-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoxelKit-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-VoxelKit-tvOS/Pods-VoxelKit-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		D46AE5F5EE13D8480C76C8FF /* Pods-VoxelKit-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoxelKit-macOS.debug.xcconfig"; path = "Target Support Files/Pods-VoxelKit-macOS/Pods-VoxelKit-macOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				3A07AA88234498B900D3F0CE /* VoxelKit.swift */,
 				3A07AA8A234498F100D3F0CE /* VoxelTypes.swift */,
 				3A07AA7E2344960C00D3F0CE /* VOX */,
+				3A07AB3A2344D55F00D3F0CE /* PIX */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -144,6 +147,38 @@
 				3A07AA86234497EE00D3F0CE /* GradientVOX.swift */,
 			);
 			path = Generator;
+			sourceTree = "<group>";
+		};
+		3A07AB3A2344D55F00D3F0CE /* PIX */ = {
+			isa = PBXGroup;
+			children = (
+				3A07AB3B2344D56800D3F0CE /* PIXs */,
+			);
+			path = PIX;
+			sourceTree = "<group>";
+		};
+		3A07AB3B2344D56800D3F0CE /* PIXs */ = {
+			isa = PBXGroup;
+			children = (
+				3A07AB3C2344D57100D3F0CE /* Effects */,
+			);
+			path = PIXs;
+			sourceTree = "<group>";
+		};
+		3A07AB3C2344D57100D3F0CE /* Effects */ = {
+			isa = PBXGroup;
+			children = (
+				3A07AB3D2344D58A00D3F0CE /* Single */,
+			);
+			path = Effects;
+			sourceTree = "<group>";
+		};
+		3A07AB3D2344D58A00D3F0CE /* Single */ = {
+			isa = PBXGroup;
+			children = (
+				3A07AB3E2344D59800D3F0CE /* SlicePIX.swift */,
+			);
+			path = Single;
 			sourceTree = "<group>";
 		};
 		45A9E1A5B7D5A3FD5D66869E /* Pods */ = {
@@ -395,6 +430,7 @@
 			files = (
 				3A07AA87234497EE00D3F0CE /* GradientVOX.swift in Sources */,
 				3A07AA8B234498F100D3F0CE /* VoxelTypes.swift in Sources */,
+				3A07AB3F2344D59800D3F0CE /* SlicePIX.swift in Sources */,
 				3A07AA89234498B900D3F0CE /* VoxelKit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
