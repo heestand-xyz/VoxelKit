@@ -8,8 +8,15 @@
 
 import Foundation
 
-enum Axis: Int {
-    case x = 0
-    case y = 1
-    case z = 2
+enum Axis {
+    case x
+    case y
+    case z
+    var index: Int {
+        switch self {
+        case .x: return 0
+        case .y: return 1
+        case .z: return 2
+        }
+    }
 }

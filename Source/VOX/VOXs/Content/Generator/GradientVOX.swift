@@ -16,7 +16,7 @@ class GradientVOX: GradientPIX {
     
     override var postUniforms: [CGFloat] {
         var uniforms = super.postUniforms
-        uniforms.append(CGFloat(axis.rawValue))
+        uniforms.append(CGFloat(axis.index))
         return uniforms
     }
     
