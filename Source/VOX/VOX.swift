@@ -11,7 +11,7 @@ import RenderKit
 import Metal
 import simd
 
-public class VOX: NODE {
+public class VOX: NODE3D {
     
     public let id = UUID()
     public var name: String?
