@@ -6,15 +6,15 @@
 //  Copyright © 2019 Hexagons. All rights reserved.
 //
 
-import PixelKit
-
-public class SlicePIX: PIXSingleEffect {
-    
-    override open var shader: String { return "slicePIX" }
-    
-    public required init() {
-        super.init()
-        name = "slice"
-    }
-}
-
+//import PixelKit
+//
+//public class SlicePIX: PIXSingleEffect {
+//    
+//    override open var shader: String { return "slicePIX" }
+//    
+//    public required init() {
+//        super.init()
+//        name = "slice"
+//    }
+//}
+//
