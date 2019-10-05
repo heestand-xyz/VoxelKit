@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Axis {
+public enum Axis {
     case x
     case y
     case z

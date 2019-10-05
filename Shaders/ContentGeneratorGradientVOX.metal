@@ -11,9 +11,9 @@ using namespace metal;
 
 #include "Shaders/Source/Content/gradient_header.metal"
 
-struct VertexOut3 {
+struct VertexOut {
     float4 position [[position]];
-    float3 texCoord;
+    float2 texCoord;
 };
 
 struct Uniforms {
@@ -22,16 +22,13 @@ struct Uniforms {
     float offset;
     float px;
     float py;
+    float pz;
     float extend;
-    float lx;
-    float ly;
-    float lz;
     float axis;
     float premultiply;
-    float aspect;
 };
 
-fragment float4 contentGeneratorGradientVOX(VertexOut3 out [[stage_in]],
+fragment float4 contentGeneratorGradientVOX(VertexOut out [[stage_in]],
                                             const device Uniforms& in [[ buffer(0) ]],
                                             const device array<ArrayUniforms, ARRMAX>& inArr [[ buffer(1) ]],
                                             const device array<bool, ARRMAX>& inArrActive [[ buffer(2) ]],
@@ -40,13 +37,11 @@ fragment float4 contentGeneratorGradientVOX(VertexOut3 out [[stage_in]],
     
     float x = out.texCoord[0];
     float y = out.texCoord[1];
-    float z = out.texCoord[2];
+    float z = 0.5;//out.texCoord[2];
     
-    x -= in.px;// / in.aspect;
+    x -= in.px;
     y -= in.py;
-    x -= in.lx;
-    y -= in.ly;
-    z -= in.lz;
+    z -= in.pz;
 
     float axis = 0.0;
     float axisA = 0.0;
@@ -63,10 +58,10 @@ fragment float4 contentGeneratorGradientVOX(VertexOut3 out [[stage_in]],
         fraction = (axis - in.offset) / in.scale;
     } else if (in.type == 1) {
         // Radial
-        fraction = (sqrt(pow((axisA - 0.5) * in.aspect, 2) + pow(axisB - 0.5, 2)) * 2 - in.offset) / in.scale;
+        fraction = (sqrt(pow((axisA - 0.5), 2) + pow(axisB - 0.5, 2)) * 2 - in.offset) / in.scale;
     } else if (in.type == 2) {
         // Angle
-        fraction = (atan2(axisB - 0.5, (-axisA + 0.5) * in.aspect) / (pi * 2) + 0.5 - in.offset) / in.scale;
+        fraction = (atan2(axisB - 0.5, (-axisA + 0.5)) / (pi * 2) + 0.5 - in.offset) / in.scale;
     }
 
     FractionAndZero fz = fractionAndZero(fraction, int(in.extend));

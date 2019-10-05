@@ -9,13 +9,22 @@
 import LiveValues
 import RenderKit
 
-class GradientVOX: VOXGenerator {
+public struct ColorStep {
+    public var step: LiveFloat
+    public var color: LiveColor
+    public init(_ step: LiveFloat, _ color: LiveColor) {
+        self.step = step
+        self.color = color
+    }
+}
+
+public class GradientVOX: VOXGenerator {
     
     override open var shaderName: String { return "contentGeneratorGradientVOX" }
     
     // MARK: - Public Types
     
-    public enum Direction3D {
+    public enum Direction {
         case linear(Axis)
         case radial
         case angle(Axis)
@@ -26,7 +35,7 @@ class GradientVOX: VOXGenerator {
             case .angle: return 2
             }
         }
-        var axis: Axis? {
+        public var axis: Axis? {
             switch self {
             case .linear(let axis): return axis
             case .radial: return nil
@@ -37,25 +46,31 @@ class GradientVOX: VOXGenerator {
     
     // MARK: - Public Properties
     
-    public var direction3d: Direction3D = .linear(.x) { didSet { setNeedsRender() } }
-    public var location: LiveVec = .zero
+    public var direction: Direction = .linear(.x) { didSet { setNeedsRender() } }
+    public var scale: LiveFloat = 1.0
+    public var offset: LiveFloat = 0.0
+    public var position: LiveVec = .zero
+    public var extendRamp: ExtendMode = .hold { didSet { setNeedsRender() } }
+    public var colorSteps: [ColorStep] = [ColorStep(0.0, .black), ColorStep(1.0, .white)]
     
     // MARK: - Property Helpers
     
-    override public var liveValues: [LiveValue] {
-        var values = super.liveValues
-        values.append(location)
-        return values
+    override open var liveValues: [LiveValue] {
+        return [scale, offset, position]
+    }
+
+    override public var liveArray: [[LiveFloat]] {
+        return colorSteps.map({ colorStep -> [LiveFloat] in
+            return [colorStep.step, colorStep.color.r, colorStep.color.g, colorStep.color.b, colorStep.color.a]
+        })
     }
     
-    override var preUniforms: [CGFloat] {
-        return [CGFloat(direction3d.index)]
+    override open var preUniforms: [CGFloat] {
+        return [CGFloat(direction.index)]
     }
     
-    override var postUniforms: [CGFloat] {
-        var uniforms = super.postUniforms
-        uniforms.append(CGFloat(direction3d.axis?.index ?? 0))
-        return uniforms
+    override open var postUniforms: [CGFloat] {
+        return [CGFloat(extendRamp.index), CGFloat(direction.axis?.index ?? 0)]
     }
     
     // MARK: - Life Cycle
