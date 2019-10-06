@@ -11,11 +11,6 @@ using namespace metal;
 
 #include "Shaders/Source/Content/gradient_header.metal"
 
-struct VertexOut {
-    float4 position [[position]];
-    float2 texCoord;
-};
-
 struct Uniforms {
     float type;
     float scale;
@@ -28,16 +23,22 @@ struct Uniforms {
     float premultiply;
 };
 
-fragment float4 contentGeneratorGradientVOX(VertexOut out [[stage_in]],
-                                            const device Uniforms& in [[ buffer(0) ]],
-                                            const device array<ArrayUniforms, ARRMAX>& inArr [[ buffer(1) ]],
-                                            const device array<bool, ARRMAX>& inArrActive [[ buffer(2) ]],
-                                            sampler s [[ sampler(0) ]]) {
+kernel void contentGeneratorGradientVOX(const device Uniforms& in [[ buffer(0) ]],
+                                        texture3d<float, access::write>  outTex [[ texture(0) ]],
+                                        const device array<ArrayUniforms, ARRMAX>& inArr [[ buffer(1) ]],
+                                        const device array<bool, ARRMAX>& inArrActive [[ buffer(2) ]],
+                                        uint3 pos [[ thread_position_in_grid ]],
+                                        sampler s [[ sampler(0) ]]) {
+    
+    if (pos.x >= outTex.get_width() || pos.y >= outTex.get_height() || pos.z >= outTex.get_depth()) {
+        return;
+    }
+    
     float pi = 3.14159265359;
     
-    float x = out.texCoord[0];
-    float y = out.texCoord[1];
-    float z = 0.5;//out.texCoord[2];
+    float x = float(pos.x) / float(outTex.get_width());
+    float y = float(pos.y) / float(outTex.get_height());
+    float z = float(pos.z) / float(outTex.get_depth());
     
     x -= in.px;
     y -= in.py;
@@ -51,7 +52,7 @@ fragment float4 contentGeneratorGradientVOX(VertexOut out [[stage_in]],
     case 1: axis = y; axisA = x; axisB = z;
     case 2: axis = z; axisA = x; axisB = y;
     }
-    
+
     float fraction = 0;
     if (in.type == 0) {
         // Linear
@@ -75,7 +76,9 @@ fragment float4 contentGeneratorGradientVOX(VertexOut out [[stage_in]],
     if (!fz.zero && in.premultiply) {
         c = float4(c.r * c.a, c.g * c.a, c.b * c.a, c.a);
     }
-
-    return c;
+    
+    c = float4(c.g, c.b, c.r, c.a); // CHECK TEMP
+    
+    outTex.write(float4(in.axis), pos);
     
 }

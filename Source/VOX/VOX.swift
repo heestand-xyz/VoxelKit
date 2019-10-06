@@ -80,6 +80,7 @@ public class VOX: NODE3D {
     public var shaderNeedsAspect: Bool { return false }
     
     public var pipeline: MTLRenderPipelineState!
+    public var pipeline3d: MTLComputePipelineState!
     public var sampler: MTLSamplerState!
     public var interpolate: InterpolateMode = .linear { didSet { updateSampler() } }
     public var extend: ExtendMode = .zero { didSet { updateSampler() } }
@@ -101,7 +102,32 @@ public class VOX: NODE3D {
     
     public var destroyed: Bool = false
     
-    public var texture: MTLTexture?
+    // MARK: Texture
+    
+    var _texture: MTLTexture?
+    public var texture: MTLTexture? {
+        get {
+            guard !bypass else {
+                guard let input = self as? NODEInIO else { return nil }
+                return input.inputList.first?.texture
+            }
+            return _texture
+        }
+        set {
+            _texture = newValue
+            nextTextureAvalibleCallback?()
+        }
+    }
+    public var didRenderTexture: Bool {
+        return _texture != nil
+    }
+    var nextTextureAvalibleCallback: (() -> ())?
+    public func nextTextureAvalible(_ callback: @escaping () -> ()) {
+        nextTextureAvalibleCallback = {
+            callback()
+            self.nextTextureAvalibleCallback = nil
+        }
+    }
     
     // MARK: - Life Cycle
     
@@ -125,9 +151,8 @@ public class VOX: NODE3D {
             return
         }
         do {
-            let frag = try VoxelKit.main.render.makeFrag(shaderName, with: customMetalLibrary, from: self)
-            let vtx: MTLFunction? = customVertexShaderName != nil ? try VoxelKit.main.render.makeVertexShader(customVertexShaderName!, with: customMetalLibrary) : nil
-            pipeline = try VoxelKit.main.render.makeShaderPipeline(frag, with: vtx, addMode: false)
+            let compute = try VoxelKit.main.render.makeFrag(shaderName, with: customMetalLibrary, from: self)
+            pipeline3d = try VoxelKit.main.render.makeShaderPipeline3d(compute)
             #if !os(tvOS) || !targetEnvironment(simulator)
             sampler = try VoxelKit.main.render.makeSampler(interpolate: interpolate.mtl, extend: extend.mtl, mipFilter: mipmap)
             #endif
