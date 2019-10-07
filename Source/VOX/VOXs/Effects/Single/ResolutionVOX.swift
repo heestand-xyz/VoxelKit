@@ -1,6 +1,6 @@
 //
 //  ResolutionVOX.swift
-//  PixelKit
+//  VoxelKit
 //
 //  Created by Hexagons on 2018-08-03.
 //  Open Source - MIT License

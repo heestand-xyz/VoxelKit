@@ -1,6 +1,6 @@
 //
 //  VOXRender.swift
-//  CocoaAsyncSocket
+//  VoxelKit
 //
 //  Created by Hexagons on 2019-10-06.
 //

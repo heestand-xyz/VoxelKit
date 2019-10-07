@@ -1,6 +1,6 @@
 //
 //  VOXEffect.swift
-//  PixelKit
+//  VoxelKit
 //
 //  Created by Hexagons on 2018-07-26.
 //  Open Source - MIT License
