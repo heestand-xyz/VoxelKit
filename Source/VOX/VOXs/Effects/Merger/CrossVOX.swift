@@ -34,22 +34,22 @@ public class CrossVOX: VOXMergerEffect {
 
 public extension NODEOut {
     
-    func _cross(with pix: VOX & NODEOut, fraction: LiveFloat) -> CrossVOX {
+    func _cross(with vox: VOX & NODEOut, fraction: LiveFloat) -> CrossVOX {
         let crossPix = CrossVOX()
         crossPix.name = ":cross:"
         crossPix.inputA = self as? VOX & NODEOut
-        crossPix.inputB = pix
+        crossPix.inputB = vox
         crossPix.fraction = fraction
         return crossPix
     }
     
 }
 
-public func cross(_ pixA: VOX & NODEOut, _ pixB: VOX & NODEOut, at fraction: LiveFloat) -> CrossVOX {
+public func cross(_ voxA: VOX & NODEOut, _ voxB: VOX & NODEOut, at fraction: LiveFloat) -> CrossVOX {
     let crossPix = CrossVOX()
     crossPix.name = ":cross:"
-    crossPix.inputA = pixA
-    crossPix.inputB = pixB
+    crossPix.inputA = voxA
+    crossPix.inputB = voxB
     crossPix.fraction = fraction
     return crossPix
 }

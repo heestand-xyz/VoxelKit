@@ -45,11 +45,11 @@ public class LookupVOX: VOXMergerEffect {
 
 public extension NODEOut {
     
-    func _lookup(with pix: VOX & NODEOut, axis: Axis) -> LookupVOX {
+    func _lookup(with vox: VOX & NODEOut, axis: Axis) -> LookupVOX {
         let lookupPix = LookupVOX()
         lookupPix.name = ":lookup:"
         lookupPix.inputA = self as? VOX & NODEOut
-        lookupPix.inputB = pix
+        lookupPix.inputB = vox
         lookupPix.axis = axis
         return lookupPix
     }

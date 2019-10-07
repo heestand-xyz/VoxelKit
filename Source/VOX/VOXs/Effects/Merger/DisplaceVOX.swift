@@ -36,23 +36,23 @@ public class DisplaceVOX: VOXMergerEffect {
 
 public extension NODEOut {
     
-    func _displace(with pix: VOX & NODEOut, distance: LiveFloat) -> DisplaceVOX {
+    func _displace(with vox: VOX & NODEOut, distance: LiveFloat) -> DisplaceVOX {
         let displacePix = DisplaceVOX()
         displacePix.name = ":displace:"
         displacePix.inputA = self as? VOX & NODEOut
-        displacePix.inputB = pix
+        displacePix.inputB = vox
         displacePix.distance = distance
         return displacePix
     }
     
 //    func _noiseDisplace(distance: LiveFloat, zPosition: LiveFloat = 0.0, octaves: LiveInt = 10) -> DisplaceVOX {
-//        let pix = self as! VOX & NODEOut
-//        let noisePix = NoiseVOX(at: pix.renderResolution)
+//        let vox = self as! VOX & NODEOut
+//        let noisePix = NoiseVOX(at: vox.renderResolution)
 //        noisePix.name = "noiseDisplace:noise"
 //        noisePix.colored = true
 //        noisePix.zPosition = zPosition
 //        noisePix.octaves = octaves
-//        return pix._displace(with: noisePix, distance: distance)
+//        return vox._displace(with: noisePix, distance: distance)
 //    }
     
 }

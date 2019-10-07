@@ -30,10 +30,10 @@ public class BlendVOX: VOXMergerEffect {
     
 }
 
-public func blend(_ mode: BlendMode, _ pixA: VOX & NODEOut, _ pixB: VOX & NODEOut) -> BlendVOX {
+public func blend(_ mode: BlendMode, _ voxA: VOX & NODEOut, _ voxB: VOX & NODEOut) -> BlendVOX {
     let blendPix = BlendVOX()
-    blendPix.inputA = pixA
-    blendPix.inputB = pixB
+    blendPix.inputA = voxA
+    blendPix.inputB = voxB
     blendPix.blendMode = mode
     return blendPix
 }
