@@ -51,6 +51,9 @@
 		3A61CEB5234B809D001D731F /* EffectSingleLevelsVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A61CEB4234B809D001D731F /* EffectSingleLevelsVOX.metal */; };
 		3A61CEB6234B809D001D731F /* EffectSingleLevelsVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A61CEB4234B809D001D731F /* EffectSingleLevelsVOX.metal */; };
 		3A61CEB7234B809D001D731F /* EffectSingleLevelsVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A61CEB4234B809D001D731F /* EffectSingleLevelsVOX.metal */; };
+		3A61CEC1234B8370001D731F /* EffectSingleEdgeVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A61CEC0234B8370001D731F /* EffectSingleEdgeVOX.metal */; };
+		3A61CEC2234B8370001D731F /* EffectSingleEdgeVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A61CEC0234B8370001D731F /* EffectSingleEdgeVOX.metal */; };
+		3A61CEC3234B8370001D731F /* EffectSingleEdgeVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A61CEC0234B8370001D731F /* EffectSingleEdgeVOX.metal */; };
 		74844E842348963000F99875 /* ContentGeneratorColorVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 74844E832348963000F99875 /* ContentGeneratorColorVOX.metal */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +74,7 @@
 		3A61CE53234B361F001D731F /* ContentGeneratorSphereVOX.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = ContentGeneratorSphereVOX.metal; sourceTree = "<group>"; };
 		3A61CE75234B5089001D731F /* EffectSingleResolutionVOX.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = EffectSingleResolutionVOX.metal; sourceTree = "<group>"; };
 		3A61CEB4234B809D001D731F /* EffectSingleLevelsVOX.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = EffectSingleLevelsVOX.metal; sourceTree = "<group>"; };
+		3A61CEC0234B8370001D731F /* EffectSingleEdgeVOX.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = EffectSingleEdgeVOX.metal; sourceTree = "<group>"; };
 		74844E832348963000F99875 /* ContentGeneratorColorVOX.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ContentGeneratorColorVOX.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,6 +94,7 @@
 				3A07AAC423449DC400D3F0CE /* ContentGeneratorGradientVOX.metal */,
 				3A61CE75234B5089001D731F /* EffectSingleResolutionVOX.metal */,
 				3A61CEB4234B809D001D731F /* EffectSingleLevelsVOX.metal */,
+				3A61CEC0234B8370001D731F /* EffectSingleEdgeVOX.metal */,
 				3A07AACB2344A10800D3F0CE /* Shaders */,
 			);
 			name = Shaders;
@@ -247,6 +252,7 @@
 				74844E842348963000F99875 /* ContentGeneratorColorVOX.metal in Sources */,
 				3A07AAE72344A10800D3F0CE /* random_header.metal in Sources */,
 				3A07AAF02344A10800D3F0CE /* hsv_header.metal in Sources */,
+				3A61CEC1234B8370001D731F /* EffectSingleEdgeVOX.metal in Sources */,
 				3A61CE54234B361F001D731F /* ContentGeneratorSphereVOX.metal in Sources */,
 				3A07AAEA2344A10800D3F0CE /* random.metal in Sources */,
 				3A61CE76234B5089001D731F /* EffectSingleResolutionVOX.metal in Sources */,
@@ -269,6 +275,7 @@
 				3A07AB232344A3AE00D3F0CE /* gradient.metal in Sources */,
 				3A07AAE82344A10800D3F0CE /* random_header.metal in Sources */,
 				3A07AAF12344A10800D3F0CE /* hsv_header.metal in Sources */,
+				3A61CEC2234B8370001D731F /* EffectSingleEdgeVOX.metal in Sources */,
 				3A61CE55234B361F001D731F /* ContentGeneratorSphereVOX.metal in Sources */,
 				3A07AAEB2344A10800D3F0CE /* random.metal in Sources */,
 				3A61CE77234B5089001D731F /* EffectSingleResolutionVOX.metal in Sources */,
@@ -291,6 +298,7 @@
 				3A07AB242344A3AE00D3F0CE /* gradient.metal in Sources */,
 				3A07AAE92344A10800D3F0CE /* random_header.metal in Sources */,
 				3A07AAF22344A10800D3F0CE /* hsv_header.metal in Sources */,
+				3A61CEC3234B8370001D731F /* EffectSingleEdgeVOX.metal in Sources */,
 				3A61CE56234B361F001D731F /* ContentGeneratorSphereVOX.metal in Sources */,
 				3A07AAEC2344A10800D3F0CE /* random.metal in Sources */,
 				3A61CE78234B5089001D731F /* EffectSingleResolutionVOX.metal in Sources */,

@@ -46,6 +46,9 @@
 		3A61CEAC234B8007001D731F /* LevelsVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61CEA8234B8007001D731F /* LevelsVOX.swift */; };
 		3A61CEAD234B8007001D731F /* LevelsVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61CEA8234B8007001D731F /* LevelsVOX.swift */; };
 		3A61CEAE234B8007001D731F /* LevelsVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61CEA8234B8007001D731F /* LevelsVOX.swift */; };
+		3A61CEBD234B833B001D731F /* EdgeVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61CEB9234B833B001D731F /* EdgeVOX.swift */; };
+		3A61CEBE234B833B001D731F /* EdgeVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61CEB9234B833B001D731F /* EdgeVOX.swift */; };
+		3A61CEBF234B833B001D731F /* EdgeVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61CEB9234B833B001D731F /* EdgeVOX.swift */; };
 		3AFD7F0A23477D0D00E38CD3 /* VOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD7F0923477D0D00E38CD3 /* VOX.swift */; };
 		3AFD7F0C23477D1B00E38CD3 /* VOXContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD7F0B23477D1B00E38CD3 /* VOXContent.swift */; };
 		3AFD7F0E23477D2400E38CD3 /* VOXGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD7F0D23477D2400E38CD3 /* VOXGenerator.swift */; };
@@ -79,6 +82,7 @@
 		3A61CE88234B6828001D731F /* VoxelKit_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VoxelKit_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A61CE8A234B6828001D731F /* VoxelKit_tvOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VoxelKit_tvOS.h; path = "../VoxelKit-tvOS/VoxelKit_tvOS.h"; sourceTree = "<group>"; };
 		3A61CEA8234B8007001D731F /* LevelsVOX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsVOX.swift; sourceTree = "<group>"; };
+		3A61CEB9234B833B001D731F /* EdgeVOX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdgeVOX.swift; sourceTree = "<group>"; };
 		3AFD7F0923477D0D00E38CD3 /* VOX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VOX.swift; sourceTree = "<group>"; };
 		3AFD7F0B23477D1B00E38CD3 /* VOXContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VOXContent.swift; sourceTree = "<group>"; };
 		3AFD7F0D23477D2400E38CD3 /* VOXGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VOXGenerator.swift; sourceTree = "<group>"; };
@@ -220,6 +224,7 @@
 				3A61CE6D234B4EB5001D731F /* VOXSingleEffect.swift */,
 				3A61CE71234B4F0B001D731F /* ResolutionVOX.swift */,
 				3A61CEA8234B8007001D731F /* LevelsVOX.swift */,
+				3A61CEB9234B833B001D731F /* EdgeVOX.swift */,
 			);
 			path = Single;
 			sourceTree = "<group>";
@@ -481,6 +486,7 @@
 				3AFD7F0E23477D2400E38CD3 /* VOXGenerator.swift in Sources */,
 				3A61CE49234B30CF001D731F /* SphereVOX.swift in Sources */,
 				3A61CEAC234B8007001D731F /* LevelsVOX.swift in Sources */,
+				3A61CEBD234B833B001D731F /* EdgeVOX.swift in Sources */,
 				3A61CE6E234B4EB5001D731F /* VOXSingleEffect.swift in Sources */,
 				3A61CE6A234B4EAD001D731F /* VOXEffect.swift in Sources */,
 				3A07AA89234498B900D3F0CE /* VoxelKit.swift in Sources */,
@@ -503,6 +509,7 @@
 				3A61CEA1234B6992001D731F /* VOXResource.swift in Sources */,
 				3A07AA8D234498F900D3F0CE /* VoxelTypes.swift in Sources */,
 				3A61CEAD234B8007001D731F /* LevelsVOX.swift in Sources */,
+				3A61CEBE234B833B001D731F /* EdgeVOX.swift in Sources */,
 				3A61CEA2234B6992001D731F /* VOXGenerator.swift in Sources */,
 				3A61CEA4234B6992001D731F /* SphereVOX.swift in Sources */,
 				3A61CE73234B4F0B001D731F /* ResolutionVOX.swift in Sources */,
@@ -525,6 +532,7 @@
 				3A61CE93234B6992001D731F /* VOX.swift in Sources */,
 				3A61CE95234B6992001D731F /* VOXRender.swift in Sources */,
 				3A61CEAE234B8007001D731F /* LevelsVOX.swift in Sources */,
+				3A61CEBF234B833B001D731F /* EdgeVOX.swift in Sources */,
 				3A61CE98234B6992001D731F /* VOXGenerator.swift in Sources */,
 				3A61CE99234B6992001D731F /* ColorVOX.swift in Sources */,
 				3A61CE92234B6992001D731F /* VoxelTypes.swift in Sources */,
