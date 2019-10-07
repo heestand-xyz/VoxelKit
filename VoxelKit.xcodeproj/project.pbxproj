@@ -64,6 +64,27 @@
 		74844E82234895F100F99875 /* ColorVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74844E81234895F100F99875 /* ColorVOX.swift */; };
 		7495EB07234A0B1C00376100 /* VOXRender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7495EB03234A0B1C00376100 /* VOXRender.swift */; };
 		7495EB08234A0B1C00376100 /* VOXRender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7495EB03234A0B1C00376100 /* VOXRender.swift */; };
+		74F0CB68234BAEF0001EBF23 /* BlurVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F0CB64234BAEF0001EBF23 /* BlurVOX.swift */; };
+		74F0CB69234BAEF0001EBF23 /* BlurVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F0CB64234BAEF0001EBF23 /* BlurVOX.swift */; };
+		74F0CB6A234BAEF0001EBF23 /* BlurVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F0CB64234BAEF0001EBF23 /* BlurVOX.swift */; };
+		74F0CB6D234BAF1E001EBF23 /* QuantizeVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F0CB6B234BAF1E001EBF23 /* QuantizeVOX.swift */; };
+		74F0CB6E234BAF1E001EBF23 /* QuantizeVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F0CB6B234BAF1E001EBF23 /* QuantizeVOX.swift */; };
+		74F0CB6F234BAF1E001EBF23 /* QuantizeVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F0CB6B234BAF1E001EBF23 /* QuantizeVOX.swift */; };
+		74F0CB70234BAF1E001EBF23 /* ThresholdVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F0CB6C234BAF1E001EBF23 /* ThresholdVOX.swift */; };
+		74F0CB71234BAF1E001EBF23 /* ThresholdVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F0CB6C234BAF1E001EBF23 /* ThresholdVOX.swift */; };
+		74F0CB72234BAF1E001EBF23 /* ThresholdVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F0CB6C234BAF1E001EBF23 /* ThresholdVOX.swift */; };
+		74F0CB75234BAF53001EBF23 /* CrossVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F0CB73234BAF53001EBF23 /* CrossVOX.swift */; };
+		74F0CB76234BAF53001EBF23 /* CrossVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F0CB73234BAF53001EBF23 /* CrossVOX.swift */; };
+		74F0CB77234BAF53001EBF23 /* CrossVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F0CB73234BAF53001EBF23 /* CrossVOX.swift */; };
+		74F0CB78234BAF53001EBF23 /* DisplaceVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F0CB74234BAF53001EBF23 /* DisplaceVOX.swift */; };
+		74F0CB79234BAF53001EBF23 /* DisplaceVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F0CB74234BAF53001EBF23 /* DisplaceVOX.swift */; };
+		74F0CB7A234BAF53001EBF23 /* DisplaceVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F0CB74234BAF53001EBF23 /* DisplaceVOX.swift */; };
+		74F0CB7C234BB035001EBF23 /* LookupVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F0CB7B234BB035001EBF23 /* LookupVOX.swift */; };
+		74F0CB7D234BB035001EBF23 /* LookupVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F0CB7B234BB035001EBF23 /* LookupVOX.swift */; };
+		74F0CB7E234BB035001EBF23 /* LookupVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F0CB7B234BB035001EBF23 /* LookupVOX.swift */; };
+		74F0CB90234BB123001EBF23 /* TransformVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F0CB8F234BB123001EBF23 /* TransformVOX.swift */; };
+		74F0CB91234BB123001EBF23 /* TransformVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F0CB8F234BB123001EBF23 /* TransformVOX.swift */; };
+		74F0CB92234BB123001EBF23 /* TransformVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F0CB8F234BB123001EBF23 /* TransformVOX.swift */; };
 		964062DDF4252E4B9539881D /* Pods_VoxelKit_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 404A765C061062943568A786 /* Pods_VoxelKit_macOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -101,6 +122,13 @@
 		74844E77234893AF00F99875 /* VoxelKitShaders.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VoxelKitShaders.xcodeproj; path = Resources/VoxelKitShaders.xcodeproj; sourceTree = "<group>"; };
 		74844E81234895F100F99875 /* ColorVOX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorVOX.swift; sourceTree = "<group>"; };
 		7495EB03234A0B1C00376100 /* VOXRender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VOXRender.swift; sourceTree = "<group>"; };
+		74F0CB64234BAEF0001EBF23 /* BlurVOX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurVOX.swift; sourceTree = "<group>"; };
+		74F0CB6B234BAF1E001EBF23 /* QuantizeVOX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuantizeVOX.swift; sourceTree = "<group>"; };
+		74F0CB6C234BAF1E001EBF23 /* ThresholdVOX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThresholdVOX.swift; sourceTree = "<group>"; };
+		74F0CB73234BAF53001EBF23 /* CrossVOX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrossVOX.swift; sourceTree = "<group>"; };
+		74F0CB74234BAF53001EBF23 /* DisplaceVOX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplaceVOX.swift; sourceTree = "<group>"; };
+		74F0CB7B234BB035001EBF23 /* LookupVOX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LookupVOX.swift; sourceTree = "<group>"; };
+		74F0CB8F234BB123001EBF23 /* TransformVOX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformVOX.swift; sourceTree = "<group>"; };
 		D46AE5F5EE13D8480C76C8FF /* Pods-VoxelKit-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoxelKit-macOS.debug.xcconfig"; path = "Target Support Files/Pods-VoxelKit-macOS/Pods-VoxelKit-macOS.debug.xcconfig"; sourceTree = "<group>"; };
 		F01BD56BAADEB9E47D1D6E54 /* Pods_VoxelKit_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VoxelKit_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD68E41ECE0E6436A889544F /* Pods-VoxelKit-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoxelKit-tvOS.release.xcconfig"; path = "Target Support Files/Pods-VoxelKit-tvOS/Pods-VoxelKit-tvOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -234,6 +262,10 @@
 				3A61CE71234B4F0B001D731F /* ResolutionVOX.swift */,
 				3A61CEA8234B8007001D731F /* LevelsVOX.swift */,
 				3A61CEB9234B833B001D731F /* EdgeVOX.swift */,
+				74F0CB64234BAEF0001EBF23 /* BlurVOX.swift */,
+				74F0CB6B234BAF1E001EBF23 /* QuantizeVOX.swift */,
+				74F0CB6C234BAF1E001EBF23 /* ThresholdVOX.swift */,
+				74F0CB8F234BB123001EBF23 /* TransformVOX.swift */,
 			);
 			path = Single;
 			sourceTree = "<group>";
@@ -243,6 +275,9 @@
 			children = (
 				3A61CEC5234B8636001D731F /* VOXMergerEffect.swift */,
 				3A61CEC9234B86B8001D731F /* BlendVOX.swift */,
+				74F0CB73234BAF53001EBF23 /* CrossVOX.swift */,
+				74F0CB74234BAF53001EBF23 /* DisplaceVOX.swift */,
+				74F0CB7B234BB035001EBF23 /* LookupVOX.swift */,
 			);
 			path = Merger;
 			sourceTree = "<group>";
@@ -496,6 +531,7 @@
 			files = (
 				3AFD7F1523477FC100E38CD3 /* VOXResource.swift in Sources */,
 				3A07AA87234497EE00D3F0CE /* GradientVOX.swift in Sources */,
+				74F0CB6D234BAF1E001EBF23 /* QuantizeVOX.swift in Sources */,
 				3AFD7F0C23477D1B00E38CD3 /* VOXContent.swift in Sources */,
 				3A61CECA234B86B8001D731F /* BlendVOX.swift in Sources */,
 				3A07AA8B234498F100D3F0CE /* VoxelTypes.swift in Sources */,
@@ -503,15 +539,21 @@
 				3A61CE72234B4F0B001D731F /* ResolutionVOX.swift in Sources */,
 				7495EB07234A0B1C00376100 /* VOXRender.swift in Sources */,
 				3AFD7F0E23477D2400E38CD3 /* VOXGenerator.swift in Sources */,
+				74F0CB75234BAF53001EBF23 /* CrossVOX.swift in Sources */,
 				3A61CEC6234B8636001D731F /* VOXMergerEffect.swift in Sources */,
+				74F0CB90234BB123001EBF23 /* TransformVOX.swift in Sources */,
 				3A61CE49234B30CF001D731F /* SphereVOX.swift in Sources */,
+				74F0CB70234BAF1E001EBF23 /* ThresholdVOX.swift in Sources */,
 				3A61CEAC234B8007001D731F /* LevelsVOX.swift in Sources */,
 				3A61CEBD234B833B001D731F /* EdgeVOX.swift in Sources */,
+				74F0CB68234BAEF0001EBF23 /* BlurVOX.swift in Sources */,
+				74F0CB7C234BB035001EBF23 /* LookupVOX.swift in Sources */,
 				3A61CE6E234B4EB5001D731F /* VOXSingleEffect.swift in Sources */,
 				3A61CE6A234B4EAD001D731F /* VOXEffect.swift in Sources */,
 				3A07AA89234498B900D3F0CE /* VoxelKit.swift in Sources */,
 				74844E82234895F100F99875 /* ColorVOX.swift in Sources */,
 				3AFD7F1223477F2200E38CD3 /* VOXResolution.swift in Sources */,
+				74F0CB78234BAF53001EBF23 /* DisplaceVOX.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,6 +563,7 @@
 			files = (
 				3A61CE9F234B6992001D731F /* VOXResolution.swift in Sources */,
 				3A07AA90234498F900D3F0CE /* GradientVOX.swift in Sources */,
+				74F0CB6E234BAF1E001EBF23 /* QuantizeVOX.swift in Sources */,
 				3A61CE9E234B6992001D731F /* VOX.swift in Sources */,
 				3A61CECB234B86B8001D731F /* BlendVOX.swift in Sources */,
 				3A61CE6B234B4EAD001D731F /* VOXEffect.swift in Sources */,
@@ -528,15 +571,21 @@
 				3A61CEA0234B6992001D731F /* VOXContent.swift in Sources */,
 				3A07AA8C234498F900D3F0CE /* VoxelKit.swift in Sources */,
 				3A61CEA1234B6992001D731F /* VOXResource.swift in Sources */,
+				74F0CB76234BAF53001EBF23 /* CrossVOX.swift in Sources */,
 				3A61CEC7234B8636001D731F /* VOXMergerEffect.swift in Sources */,
+				74F0CB91234BB123001EBF23 /* TransformVOX.swift in Sources */,
 				3A07AA8D234498F900D3F0CE /* VoxelTypes.swift in Sources */,
+				74F0CB71234BAF1E001EBF23 /* ThresholdVOX.swift in Sources */,
 				3A61CEAD234B8007001D731F /* LevelsVOX.swift in Sources */,
 				3A61CEBE234B833B001D731F /* EdgeVOX.swift in Sources */,
+				74F0CB69234BAEF0001EBF23 /* BlurVOX.swift in Sources */,
+				74F0CB7D234BB035001EBF23 /* LookupVOX.swift in Sources */,
 				3A61CEA2234B6992001D731F /* VOXGenerator.swift in Sources */,
 				3A61CEA4234B6992001D731F /* SphereVOX.swift in Sources */,
 				3A61CE73234B4F0B001D731F /* ResolutionVOX.swift in Sources */,
 				3A61CEA3234B6992001D731F /* ColorVOX.swift in Sources */,
 				7495EB08234A0B1C00376100 /* VOXRender.swift in Sources */,
+				74F0CB79234BAF53001EBF23 /* DisplaceVOX.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,6 +595,7 @@
 			files = (
 				3A61CE96234B6992001D731F /* VOXContent.swift in Sources */,
 				3A61CE97234B6992001D731F /* VOXResource.swift in Sources */,
+				74F0CB6F234BAF1E001EBF23 /* QuantizeVOX.swift in Sources */,
 				3A61CE9D234B6992001D731F /* VOXSingleEffect.swift in Sources */,
 				3A61CECC234B86B8001D731F /* BlendVOX.swift in Sources */,
 				3A61CE9B234B6992001D731F /* SphereVOX.swift in Sources */,
@@ -553,15 +603,21 @@
 				3A61CE94234B6992001D731F /* VOXResolution.swift in Sources */,
 				3A61CE9A234B6992001D731F /* GradientVOX.swift in Sources */,
 				3A61CE93234B6992001D731F /* VOX.swift in Sources */,
+				74F0CB77234BAF53001EBF23 /* CrossVOX.swift in Sources */,
 				3A61CEC8234B8636001D731F /* VOXMergerEffect.swift in Sources */,
+				74F0CB92234BB123001EBF23 /* TransformVOX.swift in Sources */,
 				3A61CE95234B6992001D731F /* VOXRender.swift in Sources */,
+				74F0CB72234BAF1E001EBF23 /* ThresholdVOX.swift in Sources */,
 				3A61CEAE234B8007001D731F /* LevelsVOX.swift in Sources */,
 				3A61CEBF234B833B001D731F /* EdgeVOX.swift in Sources */,
+				74F0CB6A234BAEF0001EBF23 /* BlurVOX.swift in Sources */,
+				74F0CB7E234BB035001EBF23 /* LookupVOX.swift in Sources */,
 				3A61CE98234B6992001D731F /* VOXGenerator.swift in Sources */,
 				3A61CE99234B6992001D731F /* ColorVOX.swift in Sources */,
 				3A61CE92234B6992001D731F /* VoxelTypes.swift in Sources */,
 				3A61CE91234B6992001D731F /* VoxelKit.swift in Sources */,
 				3A61CE9C234B6992001D731F /* VOXEffect.swift in Sources */,
+				74F0CB7A234BAF53001EBF23 /* DisplaceVOX.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
