@@ -60,7 +60,7 @@ kernel void contentGeneratorGradientVOX(const device Uniforms& in [[ buffer(0) ]
         fraction = (axis - in.offset) / in.scale;
     } else if (in.type == 1) {
         // Radial
-        fraction = (sqrt(pow((axisA - 0.5), 2) + pow(axisB - 0.5, 2)) * 2 - in.offset) / in.scale;
+        fraction = (sqrt(pow(sqrt(pow(x - 0.5, 2) + pow(y - 0.5, 2)), 2) + pow(z - 0.5, 2)) * 2 - in.offset) / in.scale;
     } else if (in.type == 2) {
         // Angle
         fraction = (atan2(axisB - 0.5, (-axisA + 0.5)) / (pi * 2) + 0.5 - in.offset) / in.scale;

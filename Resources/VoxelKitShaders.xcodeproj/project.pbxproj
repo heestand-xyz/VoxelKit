@@ -42,6 +42,9 @@
 		3A07AB302344A9FB00D3F0CE /* gradient_header.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A07AB2D2344A9FB00D3F0CE /* gradient_header.metal */; };
 		3A61CE23234B23AA001D731F /* ContentGeneratorColorVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 74844E832348963000F99875 /* ContentGeneratorColorVOX.metal */; };
 		3A61CE24234B23AA001D731F /* ContentGeneratorColorVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 74844E832348963000F99875 /* ContentGeneratorColorVOX.metal */; };
+		3A61CE54234B361F001D731F /* ContentGeneratorSphereVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A61CE53234B361F001D731F /* ContentGeneratorSphereVOX.metal */; };
+		3A61CE55234B361F001D731F /* ContentGeneratorSphereVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A61CE53234B361F001D731F /* ContentGeneratorSphereVOX.metal */; };
+		3A61CE56234B361F001D731F /* ContentGeneratorSphereVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A61CE53234B361F001D731F /* ContentGeneratorSphereVOX.metal */; };
 		74844E842348963000F99875 /* ContentGeneratorColorVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 74844E832348963000F99875 /* ContentGeneratorColorVOX.metal */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +62,7 @@
 		3A07AADA2344A10800D3F0CE /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		3A07AB212344A3AE00D3F0CE /* gradient.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = gradient.metal; sourceTree = "<group>"; };
 		3A07AB2D2344A9FB00D3F0CE /* gradient_header.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = gradient_header.metal; sourceTree = "<group>"; };
+		3A61CE53234B361F001D731F /* ContentGeneratorSphereVOX.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = ContentGeneratorSphereVOX.metal; sourceTree = "<group>"; };
 		74844E832348963000F99875 /* ContentGeneratorColorVOX.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ContentGeneratorColorVOX.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				74844E832348963000F99875 /* ContentGeneratorColorVOX.metal */,
+				3A61CE53234B361F001D731F /* ContentGeneratorSphereVOX.metal */,
 				3A07AAC423449DC400D3F0CE /* ContentGeneratorGradientVOX.metal */,
 				3A07AACB2344A10800D3F0CE /* Shaders */,
 			);
@@ -231,6 +236,7 @@
 				74844E842348963000F99875 /* ContentGeneratorColorVOX.metal in Sources */,
 				3A07AAE72344A10800D3F0CE /* random_header.metal in Sources */,
 				3A07AAF02344A10800D3F0CE /* hsv_header.metal in Sources */,
+				3A61CE54234B361F001D731F /* ContentGeneratorSphereVOX.metal in Sources */,
 				3A07AAEA2344A10800D3F0CE /* random.metal in Sources */,
 				3A07AAE42344A10800D3F0CE /* noise.metal in Sources */,
 			);
@@ -250,6 +256,7 @@
 				3A07AB232344A3AE00D3F0CE /* gradient.metal in Sources */,
 				3A07AAE82344A10800D3F0CE /* random_header.metal in Sources */,
 				3A07AAF12344A10800D3F0CE /* hsv_header.metal in Sources */,
+				3A61CE55234B361F001D731F /* ContentGeneratorSphereVOX.metal in Sources */,
 				3A07AAEB2344A10800D3F0CE /* random.metal in Sources */,
 				3A07AAE52344A10800D3F0CE /* noise.metal in Sources */,
 			);
@@ -269,6 +276,7 @@
 				3A07AB242344A3AE00D3F0CE /* gradient.metal in Sources */,
 				3A07AAE92344A10800D3F0CE /* random_header.metal in Sources */,
 				3A07AAF22344A10800D3F0CE /* hsv_header.metal in Sources */,
+				3A61CE56234B361F001D731F /* ContentGeneratorSphereVOX.metal in Sources */,
 				3A07AAEC2344A10800D3F0CE /* random.metal in Sources */,
 				3A07AAE62344A10800D3F0CE /* noise.metal in Sources */,
 			);

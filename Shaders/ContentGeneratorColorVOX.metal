@@ -21,6 +21,7 @@ kernel void contentGeneratorColorVOX(const device Uniforms& in [[ buffer(0) ]],
                                      texture3d<float, access::write>  outTex [[ texture(0) ]],
                                      uint3 pos [[ thread_position_in_grid ]],
                                      sampler s [[ sampler(0) ]]) {
+    
     if (pos.x >= outTex.get_width() || pos.y >= outTex.get_height() || pos.z >= outTex.get_depth()) {
         return;
     }
