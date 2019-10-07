@@ -54,6 +54,7 @@ public class VoxelKit: EngineDelegate, LoggerDelegate {
 
         var generator: Bool = false
         var inputTexture: MTLTexture? = nil
+        var secondInputTexture: MTLTexture? = nil
         if let nodeContent = node as? NODEContent {
             if let nodeResource = nodeContent as? NODEResource {
                 guard let pixelBuffer = nodeResource.pixelBuffer else {
@@ -71,6 +72,13 @@ public class VoxelKit: EngineDelegate, LoggerDelegate {
                 throw Engine.RenderError.texture("IO Texture not found for: \(nodeOut)")
             }
             inputTexture = nodeOutTexture // CHECK copy?
+            if node is NODEInMerger {
+                let nodeOutB = nodeIn.inputList[1]
+                guard let nodeOutTextureB = nodeOutB.texture else {
+                    throw Engine.RenderError.texture("IO Texture B not found for: \(nodeOutB)")
+                }
+                secondInputTexture = nodeOutTextureB // CHECK copy?
+            }
         }
 
         guard generator || inputTexture != nil else {
@@ -86,7 +94,7 @@ public class VoxelKit: EngineDelegate, LoggerDelegate {
 //            try Texture.mipmap(texture: secondInputTexture!, with: commandBuffer)
 //        }
 
-        return (inputTexture, nil, nil)
+        return (inputTexture, secondInputTexture, nil)
 
     }
     

@@ -25,3 +25,8 @@ gradient.direction = .linear(.x)
 ~~~~
 
 <img src="https://github.com/hexagons/VoxelKit/blob/master/Assets/Renders/voxelkit_render_gradient.jpg?raw=true" width="256"/>
+
+
+## Data
+
+You can access the rendered voxels with `.renderedVoxels`.
