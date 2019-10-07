@@ -57,7 +57,7 @@ public extension VOX {
         public let resolution: Resolution3D
         public let raw: [[[Voxel]]]
         public func voxel(x: Int, y: Int, z: Int) -> Voxel {
-            return raw[y][x][z]
+            return raw[z][y][x]
         }
         public func voxel(uvw: Vector) -> Voxel {
             let xMax = resolution.vector.x - 1

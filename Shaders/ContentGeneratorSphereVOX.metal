@@ -39,10 +39,9 @@ kernel void contentGeneratorSphereVOX(const device Uniforms& in [[ buffer(0) ]],
         return;
     }
     
-    // FIXME: XYZ shuffle
-    float x = float(pos.y) / float(outTex.get_width() - 1);
-    float y = float(pos.z) / float(outTex.get_height() - 1);
-    float z = float(pos.x) / float(outTex.get_depth() - 1);
+    float x = float(pos.x + 0.5) / float(outTex.get_width());
+    float y = float(pos.y + 0.5) / float(outTex.get_height());
+    float z = float(pos.z + 0.5) / float(outTex.get_depth());
     
     float4 ac = float4(in.ar, in.ag, in.ab, in.aa);
     float4 ec = float4(in.er, in.eg, in.eb, in.ea);

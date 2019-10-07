@@ -21,15 +21,38 @@ extension VOX {
 
     public var realResolution: Resolution3D? {
         guard !bypass else {
-            if let pixIn = self as? NODEInIO {
-                return (pixIn.inputList.first as? VOX)?.realResolution
+            if let voxIn = self as? NODEInIO {
+                return (voxIn.inputList.first as? VOX)?.realResolution
             }
             return nil
         }
-        if let pixContent = self as? VOXContent {
-            if let pixGenerator = pixContent as? VOXGenerator {
-                return pixGenerator.resolution
+        if let voxContent = self as? VOXContent {
+            if let voxGenerator = voxContent as? VOXGenerator {
+                return voxGenerator.resolution
             }
+        } else if let resPix = self as? ResolutionVOX {
+            let resRes: Resolution3D
+            if resPix.inheritInResolution {
+                guard let inResolution = (resPix.inputList.first as? VOX)?.realResolution else { return nil }
+                resRes = inResolution
+            } else {
+                resRes = resPix.resolution
+            }
+            return resRes * resPix.resMultiplier
+        } else if let voxIn = self as? VOX & NODEInIO {
+//            if let remapPix = voxIn as? RemapPIX {
+//                guard let inResB = (remapPix.inputB as? PIX)?.realResolution else { return nil }
+//                return inResB
+//            }
+            guard let inRes = (voxIn.inputList.first as? VOX)?.realResolution else { return nil }
+//            if let cropPix = self as? CropPIX {
+//                return .size(inRes.size * LiveSize(cropPix.resScale))
+//            } else if let convertPix = self as? ConvertPIX {
+//                return .size(inRes.size * LiveSize(convertPix.resScale))
+//            } else if let flipFlopPix = self as? FlipFlopPIX {
+//                return flipFlopPix.flop != .none ? Resolution(inRes.raw.flopped) : inRes
+//            }
+            return inRes
         }
         return nil
     }
@@ -46,8 +69,8 @@ extension VOX {
 //        view.setResolution(res)
 //        VoxelKit.main.logger.log(node: self, .info, .res, "Applied: \(res) [\(res.w)x\(res.h)]")
 //        applied()
-//        if let pixOut = self as? NODEOutIO {
-//            for pathList in pixOut.outputPathList {
+//        if let voxOut = self as? NODEOutIO {
+//            for pathList in voxOut.outputPathList {
 //                pathList.nodeIn.applyResolution(applied: {})
 //            }
 //        }

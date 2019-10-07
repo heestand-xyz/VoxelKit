@@ -11,7 +11,7 @@ import RenderKit
 import Metal
 import simd
 
-public class VOX: NODE3D {
+public class VOX: NODE3D, Equatable {
     
     public let id = UUID()
     public var name: String?
@@ -213,15 +213,15 @@ public class VOX: NODE3D {
         self.texture = texture
         renderIndex += 1
         delegate?.nodeDidRender(self)
-//        if voxelKit.render.engine.renderMode != .frameTree {
-//            for customLinkedVox in customLinkedNodes {
-//                customLinkedVox.setNeedsRender()
-//            }
-//            if !force { // CHECK the force!
-//                renderOuts()
+        if VoxelKit.main.render.engine.renderMode != .frameTree {
+            for customLinkedVox in customLinkedNodes {
+                customLinkedVox.setNeedsRender()
+            }
+            if !force { // CHECK the force!
+                renderOuts()
 //                renderCustomVertexTexture()
-//            }
-//        }
+            }
+        }
     }
     
     // MARK: - Connect
@@ -339,6 +339,10 @@ public class VOX: NODE3D {
     
     public func isEqual(to node: NODE) -> Bool {
         id == node.id
+    }
+    
+    public static func == (lhs: VOX, rhs: VOX) -> Bool {
+        lhs.id == rhs.id
     }
     
 }

@@ -36,10 +36,9 @@ kernel void contentGeneratorGradientVOX(const device Uniforms& in [[ buffer(0) ]
     
     float pi = 3.14159265359;
     
-    // FIXME: XYZ shuffle
-    float x = float(pos.y) / float(outTex.get_width());
-    float y = float(pos.z) / float(outTex.get_height());
-    float z = float(pos.x) / float(outTex.get_depth());
+    float x = float(pos.x + 0.5) / float(outTex.get_width());
+    float y = float(pos.y + 0.5) / float(outTex.get_height());
+    float z = float(pos.z + 0.5) / float(outTex.get_depth());
     
     x -= in.px;
     y -= in.py;

@@ -63,6 +63,14 @@ public class VoxelKit: EngineDelegate, LoggerDelegate {
             } else if nodeContent is NODEGenerator {
                 generator = true
             }
+        } else if let nodeIn = node as? NODE & NODEInIO {
+            guard let nodeOut = nodeIn.inputList.first else {
+                throw Engine.RenderError.texture("input not connected.")
+            }
+            guard let nodeOutTexture = nodeOut.texture else {
+                throw Engine.RenderError.texture("IO Texture not found for: \(nodeOut)")
+            }
+            inputTexture = nodeOutTexture // CHECK copy?
         }
 
         guard generator || inputTexture != nil else {
