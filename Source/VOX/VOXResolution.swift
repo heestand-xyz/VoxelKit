@@ -30,16 +30,19 @@ extension VOX {
             if let voxGenerator = voxContent as? VOXGenerator {
                 return voxGenerator.resolution
             }
-        } else if let resPix = self as? ResolutionVOX {
-            let resRes: Resolution3D
-            if resPix.inheritInResolution {
-                guard let inResolution = (resPix.inputList.first as? VOX)?.realResolution else { return nil }
-                resRes = inResolution
-            } else {
-                resRes = resPix.resolution
-            }
-            return resRes * resPix.resMultiplier
         } else if let voxIn = self as? VOX & NODEInIO {
+            if #available(iOS 11.3, *) {
+                if let resPix = self as? ResolutionVOX {
+                    let resRes: Resolution3D
+                    if resPix.inheritInResolution {
+                        guard let inResolution = (resPix.inputList.first as? VOX)?.realResolution else { return nil }
+                        resRes = inResolution
+                    } else {
+                        resRes = resPix.resolution
+                    }
+                    return resRes * resPix.resMultiplier
+                }
+            }
 //            if let remapPix = voxIn as? RemapPIX {
 //                guard let inResB = (remapPix.inputB as? PIX)?.realResolution else { return nil }
 //                return inResB

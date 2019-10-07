@@ -8,8 +8,10 @@
 
 import RenderKit
 import CoreGraphics
+//import MetalPerformanceShaders
 
-public class ResolutionVOX: VOXSingleEffect, NODEResolution3D {
+@available(iOS 11.3, *)
+public class ResolutionVOX: VOXSingleEffect, NODEResolution3D/*, CustomRenderDelegate*/ {
 
     override open var shaderName: String { return "effectSingleResolutionVOX" }
     
@@ -25,6 +27,8 @@ public class ResolutionVOX: VOXSingleEffect, NODEResolution3D {
         self.resolution = resolution
         super.init()
         name = "res"
+//        customRenderDelegate = self
+//        customRenderActive = true
     }
     
     required init() {
@@ -32,8 +36,22 @@ public class ResolutionVOX: VOXSingleEffect, NODEResolution3D {
         super.init()
     }
     
+//    public func customRender(_ texture: MTLTexture, with commandBuffer: MTLCommandBuffer) -> MTLTexture? {
+//        do {
+//            let destinationTexture = try Texture.emptyTexture3D(at: resolution, bits: VoxelKit.main.render.bits, on: VoxelKit.main.render.metalDevice)
+//            let scaleKernel = MPSImageReduceRowMax(device: VoxelKit.main.render.metalDevice)
+//            scaleKernel.clipRectSource = MTLRegion(origin: MTLOrigin(x: 0, y: 0, z: 0), size: MTLSize(width: resolution.x, height: resolution.y, depth: resolution.z))
+//            scaleKernel.encode(commandBuffer: commandBuffer, sourceTexture: texture, destinationTexture: destinationTexture)
+//            return destinationTexture
+//        } catch {
+//            VoxelKit.main.logger.log(node: self, .error, .generator, "Resolution Custom Render failed.", e: error)
+//            return nil
+//        }
+//    }
+    
 }
 
+@available(iOS 11.3, *)
 public extension NODEOut {
     
     func _reRes(to resolution: Resolution3D) -> ResolutionVOX {

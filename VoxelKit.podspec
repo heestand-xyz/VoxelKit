@@ -15,9 +15,9 @@ Pod::Spec.new do |spec|
   spec.author             = { "Hexagons" => "anton@hexagons.se" }
   spec.social_media_url   = "https://twitter.com/anton_hexagons"
 
-  spec.ios.deployment_target = "11.0"
+  spec.ios.deployment_target = "11.3"
   spec.osx.deployment_target = "10.13"
-  spec.tvos.deployment_target = "11.0"
+  spec.tvos.deployment_target = "11.3"
 
   spec.swift_version = '5.0'
 
@@ -40,5 +40,6 @@ Pod::Spec.new do |spec|
 
   spec.dependency 'LiveValues'
   spec.dependency 'RenderKit'
+  # spec.framework = 'MetalPerformanceShaders'
 
 end
