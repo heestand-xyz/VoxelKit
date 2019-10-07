@@ -4,4 +4,4 @@
 
 Volumetric realtime graphics.
 
-Based on [PixelKit](https://github.com/hexagons/PixelKit).
+Runs on [RenderKit](https://github.com/hexagons/RenderKit)
