@@ -9,30 +9,30 @@
 #include <metal_stdlib>
 using namespace metal;
 
-struct VertexOut {
-    float4 position [[position]];
-    float2 texCoord;
-};
-
 struct Uniforms {
     float r;
     float g;
     float b;
     float a;
     float premultiply;
-    float aspect;
 };
 
-fragment float4 contentGeneratorColorVOX(VertexOut out [[stage_in]],
-                                          const device Uniforms& in [[ buffer(0) ]],
-                                          sampler s [[ sampler(0) ]]) {
+kernel void contentGeneratorColorVOX(const device Uniforms& in [[ buffer(0) ]],
+                                     texture3d<float, access::write>  outTex [[ texture(0) ]],
+                                     uint3 pos [[ thread_position_in_grid ]],
+                                     sampler s [[ sampler(0) ]]) {
+    if (pos.x >= outTex.get_width() || pos.y >= outTex.get_height() || pos.z >= outTex.get_depth()) {
+        return;
+    }
     
     float4 c = float4(in.r, in.g, in.b, in.a);
 
     if (in.premultiply) {
         c = float4(c.r * c.a, c.g * c.a, c.b * c.a, c.a);
     }
+
+//    c = float4(c.b, c.g, c.r, c.a); // CHECK TEMP
+    outTex.write(c, pos);
     
-    return c;
 }
 

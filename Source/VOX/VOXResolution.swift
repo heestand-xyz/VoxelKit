@@ -35,19 +35,22 @@ extension VOX {
     }
 
     public func applyResolution(applied: @escaping () -> ()) {
-        let res = renderResolution
-        guard view.resolutionSize == nil || view.resolutionSize! != res.size.cg else {
-            applied()
-            return
-        }
-        view.setResolution(res)
-        VoxelKit.main.logger.log(node: self, .info, .res, "Applied: \(res) [\(res.w)x\(res.h)]")
+        let res = renderedResolution3d
+        VoxelKit.main.logger.log(node: self, .info, .res, "Resolution: \(res) [\(res.x)x\(res.y)x\(res.z)] (\(res.count))")
         applied()
-        if let pixOut = self as? NODEOutIO {
-            for pathList in pixOut.outputPathList {
-                pathList.nodeIn.applyResolution(applied: {})
-            }
-        }
+//        let res = renderResolution
+//        guard view.resolutionSize == nil || view.resolutionSize! != res.size.cg else {
+//            applied()
+//            return
+//        }
+//        view.setResolution(res)
+//        VoxelKit.main.logger.log(node: self, .info, .res, "Applied: \(res) [\(res.w)x\(res.h)]")
+//        applied()
+//        if let pixOut = self as? NODEOutIO {
+//            for pathList in pixOut.outputPathList {
+//                pathList.nodeIn.applyResolution(applied: {})
+//            }
+//        }
     }
 
     func removeRes() {

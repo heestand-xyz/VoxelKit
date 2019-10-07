@@ -65,12 +65,16 @@ public class GradientVOX: VOXGenerator {
         })
     }
     
-    override open var preUniforms: [CGFloat] {
-        return [CGFloat(direction.index)]
-    }
+//    override open var preUniforms: [CGFloat] {
+//        return [CGFloat(direction.index)]
+//    }
+//
+//    override open var postUniforms: [CGFloat] {
+//        return [CGFloat(extendRamp.index), CGFloat(direction.axis?.index ?? 0)]
+//    }
     
-    override open var postUniforms: [CGFloat] {
-        return [CGFloat(extendRamp.index), CGFloat(direction.axis?.index ?? 0)]
+    open override var uniforms: [CGFloat] {
+        return [CGFloat(direction.index), scale.uniform, offset.uniform, position.x.uniform, position.y.uniform, position.z.uniform, CGFloat(extendRamp.index), CGFloat(direction.axis?.index ?? 0)]
     }
     
     // MARK: - Life Cycle

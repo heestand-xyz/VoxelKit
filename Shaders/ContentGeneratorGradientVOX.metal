@@ -25,7 +25,7 @@ struct Uniforms {
 
 kernel void contentGeneratorGradientVOX(const device Uniforms& in [[ buffer(0) ]],
                                         texture3d<float, access::write>  outTex [[ texture(0) ]],
-                                        const device array<ArrayUniforms, ARRMAX>& inArr [[ buffer(1) ]],
+                                        const device array<ColorStopArray, ARRMAX>& inArr [[ buffer(1) ]],
                                         const device array<bool, ARRMAX>& inArrActive [[ buffer(2) ]],
                                         uint3 pos [[ thread_position_in_grid ]],
                                         sampler s [[ sampler(0) ]]) {
@@ -36,9 +36,10 @@ kernel void contentGeneratorGradientVOX(const device Uniforms& in [[ buffer(0) ]
     
     float pi = 3.14159265359;
     
-    float x = float(pos.x) / float(outTex.get_width());
-    float y = float(pos.y) / float(outTex.get_height());
-    float z = float(pos.z) / float(outTex.get_depth());
+    // FIXME: XYZ shuffle
+    float x = float(pos.y) / float(outTex.get_width());
+    float y = float(pos.z) / float(outTex.get_height());
+    float z = float(pos.x) / float(outTex.get_depth());
     
     x -= in.px;
     y -= in.py;
@@ -48,9 +49,9 @@ kernel void contentGeneratorGradientVOX(const device Uniforms& in [[ buffer(0) ]
     float axisA = 0.0;
     float axisB = 0.0;
     switch (int(in.axis)) {
-    case 0: axis = x; axisA = y; axisB = z;
-    case 1: axis = y; axisA = x; axisB = z;
-    case 2: axis = z; axisA = x; axisB = y;
+        case 0: axis = x; axisA = y; axisB = z; break;
+        case 1: axis = y; axisA = x; axisB = z; break;
+        case 2: axis = z; axisA = x; axisB = y; break;
     }
 
     float fraction = 0;
@@ -77,8 +78,6 @@ kernel void contentGeneratorGradientVOX(const device Uniforms& in [[ buffer(0) ]
         c = float4(c.r * c.a, c.g * c.a, c.b * c.a, c.a);
     }
     
-    c = float4(c.g, c.b, c.r, c.a); // CHECK TEMP
-    
-    outTex.write(float4(in.axis), pos);
+    outTex.write(c, pos);
     
 }

@@ -40,6 +40,8 @@
 		3A07AB2E2344A9FB00D3F0CE /* gradient_header.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A07AB2D2344A9FB00D3F0CE /* gradient_header.metal */; };
 		3A07AB2F2344A9FB00D3F0CE /* gradient_header.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A07AB2D2344A9FB00D3F0CE /* gradient_header.metal */; };
 		3A07AB302344A9FB00D3F0CE /* gradient_header.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A07AB2D2344A9FB00D3F0CE /* gradient_header.metal */; };
+		3A61CE23234B23AA001D731F /* ContentGeneratorColorVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 74844E832348963000F99875 /* ContentGeneratorColorVOX.metal */; };
+		3A61CE24234B23AA001D731F /* ContentGeneratorColorVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 74844E832348963000F99875 /* ContentGeneratorColorVOX.metal */; };
 		74844E842348963000F99875 /* ContentGeneratorColorVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 74844E832348963000F99875 /* ContentGeneratorColorVOX.metal */; };
 /* End PBXBuildFile section */
 
@@ -239,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A07AADF2344A10800D3F0CE /* QuadVTX.metal in Sources */,
+				3A61CE23234B23AA001D731F /* ContentGeneratorColorVOX.metal in Sources */,
 				3A07AAF42344A10800D3F0CE /* hsv.metal in Sources */,
 				3A07AAEE2344A10800D3F0CE /* noise_header.metal in Sources */,
 				3A07AAC623449DC400D3F0CE /* ContentGeneratorGradientVOX.metal in Sources */,
@@ -257,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A07AAE02344A10800D3F0CE /* QuadVTX.metal in Sources */,
+				3A61CE24234B23AA001D731F /* ContentGeneratorColorVOX.metal in Sources */,
 				3A07AAF52344A10800D3F0CE /* hsv.metal in Sources */,
 				3A07AAEF2344A10800D3F0CE /* noise_header.metal in Sources */,
 				3A07AAC723449DC400D3F0CE /* ContentGeneratorGradientVOX.metal in Sources */,
