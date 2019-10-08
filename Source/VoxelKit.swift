@@ -68,16 +68,28 @@ public class VoxelKit: EngineDelegate, LoggerDelegate {
             guard let nodeOut = nodeIn.inputList.first else {
                 throw Engine.RenderError.texture("input not connected.")
             }
-            guard let nodeOutTexture = nodeOut.texture else {
-                throw Engine.RenderError.texture("IO Texture not found for: \(nodeOut)")
-            }
-            inputTexture = nodeOutTexture // CHECK copy?
-            if node is NODEInMerger {
-                let nodeOutB = nodeIn.inputList[1]
-                guard let nodeOutTextureB = nodeOutB.texture else {
-                    throw Engine.RenderError.texture("IO Texture B not found for: \(nodeOutB)")
+            var feed = false
+            if let feedbackNode = nodeIn as? FeedbackVOX {
+                if feedbackNode.readyToFeed && feedbackNode.feedActive {
+                    guard let feedTexture = feedbackNode.feedTexture else {
+                        throw Engine.RenderError.texture("Feed Texture not avalible.")
+                    }
+                    inputTexture = feedTexture
+                    feed = true
                 }
-                secondInputTexture = nodeOutTextureB // CHECK copy?
+            }
+            if !feed {
+                guard let nodeOutTexture = nodeOut.texture else {
+                    throw Engine.RenderError.texture("IO Texture not found for: \(nodeOut)")
+                }
+                inputTexture = nodeOutTexture // CHECK copy?
+                if node is NODEInMerger {
+                    let nodeOutB = nodeIn.inputList[1]
+                    guard let nodeOutTextureB = nodeOutB.texture else {
+                        throw Engine.RenderError.texture("IO Texture B not found for: \(nodeOutB)")
+                    }
+                    secondInputTexture = nodeOutTextureB // CHECK copy?
+                }
             }
         }
 

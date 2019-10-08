@@ -45,14 +45,14 @@ public extension NODEOut {
         return displacePix
     }
     
-//    func _noiseDisplace(distance: LiveFloat, zPosition: LiveFloat = 0.0, octaves: LiveInt = 10) -> DisplaceVOX {
-//        let vox = self as! VOX & NODEOut
-//        let noisePix = NoiseVOX(at: vox.renderResolution)
-//        noisePix.name = "noiseDisplace:noise"
-//        noisePix.colored = true
-//        noisePix.zPosition = zPosition
-//        noisePix.octaves = octaves
-//        return vox._displace(with: noisePix, distance: distance)
-//    }
+    func _noiseDisplace(distance: LiveFloat, wPosition: LiveFloat = 0.0, octaves: LiveInt = 10) -> DisplaceVOX {
+        let vox = self as! VOX & NODEOut
+        let noisePix = NoiseVOX(at: vox.renderedResolution3d)
+        noisePix.name = "noiseDisplace:noise"
+        noisePix.colored = true
+        noisePix.wPosition = wPosition
+        noisePix.octaves = octaves
+        return vox._displace(with: noisePix, distance: distance)
+    }
     
 }
