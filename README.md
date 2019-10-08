@@ -26,7 +26,14 @@ gradient.direction = .linear(.x)
 
 <img src="https://github.com/hexagons/VoxelKit/blob/master/Assets/Renders/voxelkit_render_gradient.jpg?raw=true" width="256"/>
 
+### Noise
+
+~~~~swift
+let noise = NoiseVOX(at: .cube(16))
+~~~~
+
+<img src="https://github.com/hexagons/VoxelKit/blob/master/Assets/Renders/voxelkit_render_noise.jpg?raw=true" width="256"/>
 
 ## Data
 
-You can access the rendered voxels with `.renderedVoxels`.
+You can access the rendered voxels with `.renderedVoxels`
