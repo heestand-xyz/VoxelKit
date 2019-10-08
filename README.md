@@ -34,6 +34,39 @@ let noise = NoiseVOX(at: .cube(16))
 
 <img src="https://github.com/hexagons/VoxelKit/blob/master/Assets/Renders/voxelkit_render_noise.jpg?raw=true" width="256"/>
 
+
+## VOX
+
+### VOXContent
+
+#### VOXGenerator
+
+- ColorVOX
+- GradientVOX
+- NoiseVOX
+- SphereVOX
+
+### VOXEffect
+
+#### VOXSingleEffect
+
+- BlurVOX
+- EdgeVOX
+- FeedbackVOX
+- LevelsVOX
+- QuantizeVOX
+- ResolutionVOX
+- ThresholdVOX
+- TransformVOX
+
+#### VOXMergerEffect
+
+- BlendVOX
+- CrossVOX
+- DisplaceVOX
+- LookupVOX
+
+
 ## Data
 
 You can access the rendered voxels with `.renderedVoxels`
