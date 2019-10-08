@@ -55,6 +55,9 @@
 		3A61CECA234B86B8001D731F /* BlendVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61CEC9234B86B8001D731F /* BlendVOX.swift */; };
 		3A61CECB234B86B8001D731F /* BlendVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61CEC9234B86B8001D731F /* BlendVOX.swift */; };
 		3A61CECC234B86B8001D731F /* BlendVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61CEC9234B86B8001D731F /* BlendVOX.swift */; };
+		3A90637A234C79E700172ED4 /* NoiseVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A906376234C79E700172ED4 /* NoiseVOX.swift */; };
+		3A90637B234C79E700172ED4 /* NoiseVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A906376234C79E700172ED4 /* NoiseVOX.swift */; };
+		3A90637C234C79E700172ED4 /* NoiseVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A906376234C79E700172ED4 /* NoiseVOX.swift */; };
 		3AFD7F0A23477D0D00E38CD3 /* VOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD7F0923477D0D00E38CD3 /* VOX.swift */; };
 		3AFD7F0C23477D1B00E38CD3 /* VOXContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD7F0B23477D1B00E38CD3 /* VOXContent.swift */; };
 		3AFD7F0E23477D2400E38CD3 /* VOXGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD7F0D23477D2400E38CD3 /* VOXGenerator.swift */; };
@@ -112,6 +115,7 @@
 		3A61CEB9234B833B001D731F /* EdgeVOX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdgeVOX.swift; sourceTree = "<group>"; };
 		3A61CEC5234B8636001D731F /* VOXMergerEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VOXMergerEffect.swift; sourceTree = "<group>"; };
 		3A61CEC9234B86B8001D731F /* BlendVOX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlendVOX.swift; sourceTree = "<group>"; };
+		3A906376234C79E700172ED4 /* NoiseVOX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoiseVOX.swift; sourceTree = "<group>"; };
 		3AFD7F0923477D0D00E38CD3 /* VOX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VOX.swift; sourceTree = "<group>"; };
 		3AFD7F0B23477D1B00E38CD3 /* VOXContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VOXContent.swift; sourceTree = "<group>"; };
 		3AFD7F0D23477D2400E38CD3 /* VOXGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VOXGenerator.swift; sourceTree = "<group>"; };
@@ -241,6 +245,7 @@
 				74844E81234895F100F99875 /* ColorVOX.swift */,
 				3A07AA86234497EE00D3F0CE /* GradientVOX.swift */,
 				3A61CE48234B30CF001D731F /* SphereVOX.swift */,
+				3A906376234C79E700172ED4 /* NoiseVOX.swift */,
 			);
 			path = Generator;
 			sourceTree = "<group>";
@@ -531,6 +536,7 @@
 			files = (
 				3AFD7F1523477FC100E38CD3 /* VOXResource.swift in Sources */,
 				3A07AA87234497EE00D3F0CE /* GradientVOX.swift in Sources */,
+				3A90637A234C79E700172ED4 /* NoiseVOX.swift in Sources */,
 				74F0CB6D234BAF1E001EBF23 /* QuantizeVOX.swift in Sources */,
 				3AFD7F0C23477D1B00E38CD3 /* VOXContent.swift in Sources */,
 				3A61CECA234B86B8001D731F /* BlendVOX.swift in Sources */,
@@ -563,6 +569,7 @@
 			files = (
 				3A61CE9F234B6992001D731F /* VOXResolution.swift in Sources */,
 				3A07AA90234498F900D3F0CE /* GradientVOX.swift in Sources */,
+				3A90637B234C79E700172ED4 /* NoiseVOX.swift in Sources */,
 				74F0CB6E234BAF1E001EBF23 /* QuantizeVOX.swift in Sources */,
 				3A61CE9E234B6992001D731F /* VOX.swift in Sources */,
 				3A61CECB234B86B8001D731F /* BlendVOX.swift in Sources */,
@@ -595,6 +602,7 @@
 			files = (
 				3A61CE96234B6992001D731F /* VOXContent.swift in Sources */,
 				3A61CE97234B6992001D731F /* VOXResource.swift in Sources */,
+				3A90637C234C79E700172ED4 /* NoiseVOX.swift in Sources */,
 				74F0CB6F234BAF1E001EBF23 /* QuantizeVOX.swift in Sources */,
 				3A61CE9D234B6992001D731F /* VOXSingleEffect.swift in Sources */,
 				3A61CECC234B86B8001D731F /* BlendVOX.swift in Sources */,

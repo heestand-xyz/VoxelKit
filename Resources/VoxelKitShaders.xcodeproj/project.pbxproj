@@ -69,6 +69,9 @@
 		3A61CEEC234B8B0B001D731F /* blend_header.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A61CEE2234B8B0B001D731F /* blend_header.metal */; };
 		3A61CEED234B8B0B001D731F /* blend_header.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A61CEE2234B8B0B001D731F /* blend_header.metal */; };
 		3A61CEEE234B8B0B001D731F /* blend_header.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A61CEE2234B8B0B001D731F /* blend_header.metal */; };
+		3A90637E234C7A5400172ED4 /* ContentGeneratorNoisePIX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A90637D234C7A5400172ED4 /* ContentGeneratorNoisePIX.metal */; };
+		3A90637F234C7A5400172ED4 /* ContentGeneratorNoisePIX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A90637D234C7A5400172ED4 /* ContentGeneratorNoisePIX.metal */; };
+		3A906380234C7A5400172ED4 /* ContentGeneratorNoisePIX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A90637D234C7A5400172ED4 /* ContentGeneratorNoisePIX.metal */; };
 		74844E842348963000F99875 /* ContentGeneratorColorVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 74844E832348963000F99875 /* ContentGeneratorColorVOX.metal */; };
 		74F0CB83234BB0E4001EBF23 /* EffectSingleBlurVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 74F0CB7F234BB0E3001EBF23 /* EffectSingleBlurVOX.metal */; };
 		74F0CB84234BB0E4001EBF23 /* EffectSingleBlurVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 74F0CB7F234BB0E3001EBF23 /* EffectSingleBlurVOX.metal */; };
@@ -116,6 +119,7 @@
 		3A61CEE0234B8B0B001D731F /* place_header.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = place_header.metal; sourceTree = "<group>"; };
 		3A61CEE1234B8B0B001D731F /* blend.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = blend.metal; sourceTree = "<group>"; };
 		3A61CEE2234B8B0B001D731F /* blend_header.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = blend_header.metal; sourceTree = "<group>"; };
+		3A90637D234C7A5400172ED4 /* ContentGeneratorNoisePIX.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = ContentGeneratorNoisePIX.metal; sourceTree = "<group>"; };
 		74844E832348963000F99875 /* ContentGeneratorColorVOX.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ContentGeneratorColorVOX.metal; sourceTree = "<group>"; };
 		74F0CB7F234BB0E3001EBF23 /* EffectSingleBlurVOX.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = EffectSingleBlurVOX.metal; sourceTree = "<group>"; };
 		74F0CB80234BB0E3001EBF23 /* EffectSingleThresholdVOX.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = EffectSingleThresholdVOX.metal; sourceTree = "<group>"; };
@@ -139,6 +143,7 @@
 			children = (
 				74844E832348963000F99875 /* ContentGeneratorColorVOX.metal */,
 				3A07AAC423449DC400D3F0CE /* ContentGeneratorGradientVOX.metal */,
+				3A90637D234C7A5400172ED4 /* ContentGeneratorNoisePIX.metal */,
 				3A61CE53234B361F001D731F /* ContentGeneratorSphereVOX.metal */,
 				3A61CECD234B8724001D731F /* EffectMergerBlendVOX.metal */,
 				74F0CB95234BB146001EBF23 /* EffectMergerCrossVOX.metal */,
@@ -302,6 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A07AADE2344A10800D3F0CE /* QuadVTX.metal in Sources */,
+				3A90637E234C7A5400172ED4 /* ContentGeneratorNoisePIX.metal in Sources */,
 				3A07AAF32344A10800D3F0CE /* hsv.metal in Sources */,
 				3A07AAED2344A10800D3F0CE /* noise_header.metal in Sources */,
 				3A07AAC523449DC400D3F0CE /* ContentGeneratorGradientVOX.metal in Sources */,
@@ -337,6 +343,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A07AADF2344A10800D3F0CE /* QuadVTX.metal in Sources */,
+				3A90637F234C7A5400172ED4 /* ContentGeneratorNoisePIX.metal in Sources */,
 				3A61CE23234B23AA001D731F /* ContentGeneratorColorVOX.metal in Sources */,
 				3A07AAF42344A10800D3F0CE /* hsv.metal in Sources */,
 				3A07AAEE2344A10800D3F0CE /* noise_header.metal in Sources */,
@@ -372,6 +379,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A07AAE02344A10800D3F0CE /* QuadVTX.metal in Sources */,
+				3A906380234C7A5400172ED4 /* ContentGeneratorNoisePIX.metal in Sources */,
 				3A61CE24234B23AA001D731F /* ContentGeneratorColorVOX.metal in Sources */,
 				3A07AAF52344A10800D3F0CE /* hsv.metal in Sources */,
 				3A07AAEF2344A10800D3F0CE /* noise_header.metal in Sources */,
