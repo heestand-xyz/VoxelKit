@@ -55,6 +55,7 @@
 		3A61CECA234B86B8001D731F /* BlendVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61CEC9234B86B8001D731F /* BlendVOX.swift */; };
 		3A61CECB234B86B8001D731F /* BlendVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61CEC9234B86B8001D731F /* BlendVOX.swift */; };
 		3A61CECC234B86B8001D731F /* BlendVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61CEC9234B86B8001D731F /* BlendVOX.swift */; };
+		3A8D7E2C234E075B00DC555E /* ObjectVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D7E2B234E075B00DC555E /* ObjectVOX.swift */; };
 		3A90637A234C79E700172ED4 /* NoiseVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A906376234C79E700172ED4 /* NoiseVOX.swift */; };
 		3A90637B234C79E700172ED4 /* NoiseVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A906376234C79E700172ED4 /* NoiseVOX.swift */; };
 		3A90637C234C79E700172ED4 /* NoiseVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A906376234C79E700172ED4 /* NoiseVOX.swift */; };
@@ -118,6 +119,7 @@
 		3A61CEB9234B833B001D731F /* EdgeVOX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdgeVOX.swift; sourceTree = "<group>"; };
 		3A61CEC5234B8636001D731F /* VOXMergerEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VOXMergerEffect.swift; sourceTree = "<group>"; };
 		3A61CEC9234B86B8001D731F /* BlendVOX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlendVOX.swift; sourceTree = "<group>"; };
+		3A8D7E2B234E075B00DC555E /* ObjectVOX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectVOX.swift; sourceTree = "<group>"; };
 		3A906376234C79E700172ED4 /* NoiseVOX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoiseVOX.swift; sourceTree = "<group>"; };
 		3A906383234C863100172ED4 /* FeedbackVOX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackVOX.swift; sourceTree = "<group>"; };
 		3A90638D234C8BE000172ED4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 			isa = PBXGroup;
 			children = (
 				3AFD7F1423477FC100E38CD3 /* VOXResource.swift */,
+				3A8D7E2B234E075B00DC555E /* ObjectVOX.swift */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -568,6 +571,7 @@
 				74844E82234895F100F99875 /* ColorVOX.swift in Sources */,
 				3AFD7F1223477F2200E38CD3 /* VOXResolution.swift in Sources */,
 				74F0CB78234BAF53001EBF23 /* DisplaceVOX.swift in Sources */,
+				3A8D7E2C234E075B00DC555E /* ObjectVOX.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

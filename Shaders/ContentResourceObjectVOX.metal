@@ -1,5 +1,5 @@
 //
-//  ContentGeneratorColorVOX.metal
+//  ContentResourceObjectVOX.metal
 //  VoxelKitShaders
 //
 //  Created by Hexagons on 2019-10-05.
@@ -9,16 +9,18 @@
 #include <metal_stdlib>
 using namespace metal;
 
-struct Uniforms {
-    float r;
-    float g;
-    float b;
-    float a;
-    float premultiply;
-};
+struct Uniforms {};
 
-kernel void contentGeneratorColorVOX(const device Uniforms& in [[ buffer(0) ]],
+//struct UniformArray {
+//    float x;
+//    float y;
+//    float z;
+//};
+
+kernel void contentResourceObjectVOX(const device Uniforms& in [[ buffer(0) ]],
                                      texture3d<float, access::write>  outTex [[ texture(0) ]],
+                                     const device array<float3, 10000>& vertexArr [[ buffer(1) ]],
+                                     const device array<int3, 10000>& polyArr [[ buffer(2) ]],
                                      uint3 pos [[ thread_position_in_grid ]],
                                      sampler s [[ sampler(0) ]]) {
     
@@ -26,11 +28,7 @@ kernel void contentGeneratorColorVOX(const device Uniforms& in [[ buffer(0) ]],
         return;
     }
     
-    float4 c = float4(in.r, in.g, in.b, in.a);
-
-    if (in.premultiply) {
-        c = float4(c.r * c.a, c.g * c.a, c.b * c.a, c.a);
-    }
+    float4 c = 0.0;
 
     outTex.write(c, pos);
     

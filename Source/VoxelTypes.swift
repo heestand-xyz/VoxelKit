@@ -6,7 +6,7 @@
 //  Copyright © 2019 Hexagons. All rights reserved.
 //
 
-import Foundation
+import RenderKit
 
 public enum Axis {
     case x
@@ -19,4 +19,22 @@ public enum Axis {
         case .z: return 2
         }
     }
+}
+
+public struct Polygon {
+    var vertexIndecies: [Int]
+    var normalIndecies: [Int]
+    var uvIndecies: [Int]
+    init(vertexIndecies: [Int] = [], normalIndecies: [Int] = [], uvIndecies: [Int] = []) {
+        self.vertexIndecies = vertexIndecies
+        self.normalIndecies = normalIndecies
+        self.uvIndecies = uvIndecies
+    }
+}
+
+public struct Geometry {
+    let vertecies: [Vector]
+    let normals: [Vector]
+    let uvs: [CGVector]
+    let polygons: [Polygon]
 }
