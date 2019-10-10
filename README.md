@@ -34,6 +34,37 @@ let noise = NoiseVOX(at: .cube(16))
 
 <img src="https://github.com/hexagons/VoxelKit/blob/master/Assets/Renders/voxelkit_render_noise.jpg?raw=true" width="256"/>
 
+## Downsampled Sphere
+
+~~~~swift
+let sphere = SphereVOX(at: .cube(200))
+
+let avg = AveragePIX()
+avg.input = sphere
+
+avg.pixView.frame = view.bounds
+view.addSubview(avg.pixView)
+~~~~
+
+<img src="https://github.com/hexagons/VoxelKit/blob/master/Assets/Renders/voxelkit_render_flat_sphere.jpg?raw=true" width="256"/>
+
+## Downsampled Sphere with Edge
+
+~~~~swift
+let sphere = SphereVOX(at: .cube(200))
+
+let edge = EdgeVOX()
+edge.input = sphere
+edge.strength = 10
+
+let avg = AveragePIX()
+avg.input = edge
+
+avg.pixView.frame = view.bounds
+view.addSubview(avg.pixView)
+~~~~
+
+<img src="https://github.com/hexagons/VoxelKit/blob/master/Assets/Renders/voxelkit_render_flat_sphere_edge.jpg?raw=true" width="256"/>
 
 ## VOX
 
