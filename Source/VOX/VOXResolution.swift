@@ -57,6 +57,9 @@ extension VOX {
 //            }
             return inRes
         }
+        if let nodeRes3d = self as? NODEResolution3D {
+            return nodeRes3d.resolution
+        }
         return nil
     }
 

@@ -53,6 +53,7 @@ public class VoxelKit: EngineDelegate, LoggerDelegate {
     public func textures(from node: NODE, with commandBuffer: MTLCommandBuffer) throws -> (a: MTLTexture?, b: MTLTexture?, custom: MTLTexture?) {
 
         var generator: Bool = false
+        var resourceCustom: Bool = false
         var inputTexture: MTLTexture? = nil
         var secondInputTexture: MTLTexture? = nil
         if let nodeContent = node as? NODEContent {
@@ -61,6 +62,8 @@ public class VoxelKit: EngineDelegate, LoggerDelegate {
                     throw Engine.RenderError.texture("Pixel Buffer is nil.")
                 }
                 inputTexture = try Texture.makeTexture(from: pixelBuffer, with: commandBuffer, force8bit: false, on: render.metalDevice)
+            } else if nodeContent is NODEResourceCustom {
+                resourceCustom = true
             } else if nodeContent is NODEGenerator {
                 generator = true
             }
@@ -93,7 +96,7 @@ public class VoxelKit: EngineDelegate, LoggerDelegate {
             }
         }
 
-        guard generator || inputTexture != nil else {
+        guard generator || resourceCustom || inputTexture != nil else {
             throw Engine.RenderError.texture("Input Texture missing.")
         }
         

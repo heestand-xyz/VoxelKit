@@ -59,6 +59,10 @@ public class VOX: NODE3D, Equatable {
             })
         })
     }
+    public var uniformArrayMaxLimit: Int? { nil }
+    public var uniformIndexArray: [[Int]] { [] }
+    public var uniformIndexArrayMaxLimit: Int? { nil }
+    
     
     public var needsRender: Bool = false {
         didSet {

@@ -22,9 +22,9 @@ public enum Axis {
 }
 
 public struct Polygon {
-    var vertexIndecies: [Int]
-    var normalIndecies: [Int]
-    var uvIndecies: [Int]
+    public var vertexIndecies: [Int]
+    public var normalIndecies: [Int]
+    public var uvIndecies: [Int]
     init(vertexIndecies: [Int] = [], normalIndecies: [Int] = [], uvIndecies: [Int] = []) {
         self.vertexIndecies = vertexIndecies
         self.normalIndecies = normalIndecies
@@ -33,8 +33,8 @@ public struct Polygon {
 }
 
 public struct Geometry {
-    let vertecies: [Vector]
-    let normals: [Vector]
-    let uvs: [CGVector]
-    let polygons: [Polygon]
+    public let vertecies: [Vector]
+    public let normals: [Vector]
+    public let uvs: [CGVector]
+    public let polygons: [Polygon]
 }

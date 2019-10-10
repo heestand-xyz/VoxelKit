@@ -10,21 +10,133 @@ import RenderKit
 
 public class ObjectVOX: VOXResource {
     
-    override open var shaderName: String { return "nilVOX" }
+    override open var shaderName: String { return "contentResourceObjectVOX" }
     
-    public var geometry: Geometry?
+    public var geometry: Geometry? { didSet { setNeedsRender() } }
+    
+    var minVertex: Vector {
+        guard let geo = geometry else { return Vector(x: 0.0, y: 0.0, z: 0.0) }
+        guard !geo.vertecies.isEmpty else { return Vector(x: 0.0, y: 0.0, z: 0.0) }
+        var x: CGFloat?
+        var y: CGFloat?
+        var z: CGFloat?
+        for vertex in geo.vertecies {
+            if x == nil {
+                x = vertex.x
+                y = vertex.y
+                z = vertex.z
+            } else {
+                if vertex.x < x! {
+                    x = vertex.x
+                }
+                if vertex.y < y! {
+                    y = vertex.y
+                }
+                if vertex.z < z! {
+                    z = vertex.z
+                }
+            }
+        }
+        return Vector(x: x!, y: y!, z: z!)
+    }
+    
+    var maxVertex: Vector {
+        guard let geo = geometry else { return Vector(x: 0.0, y: 0.0, z: 0.0) }
+        guard !geo.vertecies.isEmpty else { return Vector(x: 0.0, y: 0.0, z: 0.0) }
+        var x: CGFloat?
+        var y: CGFloat?
+        var z: CGFloat?
+        for vertex in geo.vertecies {
+            if x == nil {
+                x = vertex.x
+                y = vertex.y
+                z = vertex.z
+            } else {
+                if vertex.x > x! {
+                    x = vertex.x
+                }
+                if vertex.y > y! {
+                    y = vertex.y
+                }
+                if vertex.z > z! {
+                    z = vertex.z
+                }
+            }
+        }
+        return Vector(x: x!, y: y!, z: z!)
+    }
+    
+    var centerVertex: Vector {
+        Vector(x: (maxVertex.x + minVertex.x) / 2,
+               y: (maxVertex.y + minVertex.y) / 2,
+               z: (maxVertex.z + minVertex.z) / 2)
+    }
+    
+    var scaleVertex: Vector {
+        Vector(x: maxVertex.x - minVertex.x,
+               y: maxVertex.y - minVertex.y,
+               z: maxVertex.z - minVertex.z)
+    }
+    
+    var translation: Vector {
+        Vector(x: -centerVertex.x,
+               y: -centerVertex.y,
+               z: -centerVertex.z)
+    }
+    
+    public var scale: CGFloat = 1.0
+    var transformScale: CGFloat {
+        let x = (1.0 / scaleVertex.x) * scale
+        let y = (1.0 / scaleVertex.y) * scale
+        let z = (1.0 / scaleVertex.z) * scale
+        return min(x, y, z)
+    }
+    
+    // MARK: - Uniforms
+    
+    public override var uniforms: [CGFloat] {
+        [translation.x, translation.y, translation.z, transformScale, CGFloat(geometry?.vertecies.count ?? 0), CGFloat(geometry?.polygons.count ?? 0)]
+    }
+    
+    // MARK: - Uniform Arrays
     
     public override var uniformArray: [[CGFloat]] {
-        
+        geometry?.vertecies.map({ vector -> [CGFloat] in
+            [vector.x, vector.y, vector.z]
+        }) ?? []
     }
-    public override var uniformArrayMaxLimit: Int { 10_000 }
+    public override var uniformArrayMaxLimit: Int? { 10_000 }
+
+    public override var uniformIndexArray: [[Int]] {
+        geometry?.polygons.map({ polygon -> [Int] in
+            polygon.vertexIndecies
+        }) ?? []
+    }
+    public override var uniformIndexArrayMaxLimit: Int? { 10_000 }
     
-    public init(name: String) {
-        
-        super.init()
-        
+    // MARK: - Life Cycle
+    
+    public init(name: String, at resolution: Resolution3D) {
+        super.init(at: resolution)
+        self.name = "object"
         load(name)
-        
+    }
+    
+    public required init(at resolution: Resolution3D) {
+        super.init(at: resolution)
+        self.name = "object"
+        geometry = Geometry(vertecies: [
+            Vector(x: 0.0, y: 0.0, z: 0.0),
+            Vector(x: 1.0, y: 0.0, z: 0.0),
+            Vector(x: 0.5, y: 1.0, z: 0.0),
+            Vector(x: 0.5, y: 0.5, z: 1.0)
+        ], normals: [], uvs: [], polygons: [
+            Polygon(vertexIndecies: [0, 1, 2], normalIndecies: [], uvIndecies: []),
+            Polygon(vertexIndecies: [0, 1, 3], normalIndecies: [], uvIndecies: []),
+            Polygon(vertexIndecies: [1, 2, 3], normalIndecies: [], uvIndecies: []),
+            Polygon(vertexIndecies: [0, 2, 3], normalIndecies: [], uvIndecies: [])
+        ])
+        setNeedsRender()
     }
     
     func load(_ name: String) {
@@ -52,7 +164,7 @@ public class ObjectVOX: VOXResource {
     }
     
     func parse(_ text: String) {
-        let rows = text.split(separator: "\n")
+        let rows = text.split { $0.isNewline }
         var verts: [Vector] = []
         var norms: [Vector] = []
         var coords: [CGVector] = []
@@ -99,6 +211,11 @@ public class ObjectVOX: VOXResource {
                 }
             }
         }
+        guard !verts.isEmpty && !polys.isEmpty else {
+            VoxelKit.main.logger.log(node: self, .error, .resource, ".obj file could not be parsed.")
+            return
+        }
+        VoxelKit.main.logger.log(node: self, .detail, .resource, ".obj file has \(verts.count) vertecies and \(polys.count) polygons.")
         geometry = Geometry(vertecies: verts, normals: norms, uvs: coords, polygons: polys)
     }
     

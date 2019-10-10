@@ -8,8 +8,12 @@
 
 import RenderKit
 
-public class VOXResource: VOXContent, NODEResource {
+public class VOXResource: VOXContent, NODEResourceCustom {
     
-    public var pixelBuffer: CVPixelBuffer?
+    public var resolution: Resolution3D { didSet { applyResolution { self.setNeedsRender() } } }
     
+    public required init(at resolution: Resolution3D) {
+        self.resolution = resolution
+        super.init()
+    }
 }
