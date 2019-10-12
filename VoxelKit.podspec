@@ -29,10 +29,12 @@ Pod::Spec.new do |spec|
   # spec.osx.exclude_files = 
   # spec.tvos.exclude_files = 
 
-  spec.ios.resources = "Resources/Metal Libs/VoxelKitShaders.metallib",
-                       "Resources/Metal Libs/VoxelKitShaders-macOS.metallib"
+  spec.ios.resources = "Resources/Metal Libs/VoxelKitShaders-iOS.metallib",
+                       "Resources/Metal Libs/VoxelKitShaders-iOS-Simulator.metallib",
+                       "Resources/Metal Libs/VoxelKitShaders-macCatalyst.metallib"
   spec.osx.resources = "Resources/Metal Libs/VoxelKitShaders-macOS.metallib"
-  spec.tvos.resources = "Resources/Metal Libs/VoxelKitShaders-tvOS.metallib"
+  spec.tvos.resources = "Resources/Metal Libs/VoxelKitShaders-tvOS.metallib",
+                        "Resources/Metal Libs/VoxelKitShaders-tvOS-Simulator.metallib"
   # spec.resources = "Source/PIX/PIXs/Content/Generator/Metal/ContentGeneratorMetalPIX.metal.txt",
   #                  "Source/PIX/PIXs/Effects/Single/Metal/EffectSingleMetalPIX.metal.txt",
   #                  "Source/PIX/PIXs/Effects/Merger/Metal/EffectMergerMetalPIX.metal.txt",
