@@ -14,6 +14,18 @@ public class ObjectVOX: VOXResource {
     
     public var geometry: Geometry? { didSet { setNeedsRender() } }
     
+    public enum Mode {
+        case solid
+        case edge
+        var index: Int {
+            switch self {
+            case .solid: return 0
+            case .edge: return 1
+            }
+        }
+    }
+    public var mode: Mode = .solid { didSet { setNeedsRender() } }
+    
     var minVertex: Vector {
         guard let geo = geometry else { return Vector(x: 0.0, y: 0.0, z: 0.0) }
         guard !geo.vertecies.isEmpty else { return Vector(x: 0.0, y: 0.0, z: 0.0) }
@@ -95,7 +107,7 @@ public class ObjectVOX: VOXResource {
     // MARK: - Uniforms
     
     public override var uniforms: [CGFloat] {
-        [translation.x, translation.y, translation.z, transformScale, CGFloat(geometry?.vertecies.count ?? 0), CGFloat(geometry?.polygons.count ?? 0)]
+        [CGFloat(mode.index), translation.x, translation.y, translation.z, transformScale, CGFloat(geometry?.vertecies.count ?? 0), CGFloat(geometry?.polygons.count ?? 0)]
     }
     
     // MARK: - Uniform Arrays
