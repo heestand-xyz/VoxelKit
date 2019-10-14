@@ -28,14 +28,15 @@ struct UniformArray {
 };
 
 struct UniformIndexArray {
-    int a;
-    int b;
-    int c;
+    uint a;
+    uint b;
+    uint c;
 };
 
 constant int TRICOUNT = 4;
 struct Triangle {
     bool active;
+    bool hit;
     float3 a;
     float3 b;
     float3 c;
@@ -104,6 +105,8 @@ kernel void contentResourceObjectVOX(const device Uniforms& in [[ buffer(0) ]],
     float x = float(pos.x + 0.5) / w;
     float y = float(pos.y + 0.5) / h;
     float z = float(pos.z + 0.5) / d;
+    // FIXME: Y Flip
+    y = 1.0 - y;
     float3 xyz = float3(x, y, z);
     
     float3 trans = float3(in.tx, in.ty, in.tz);
@@ -132,10 +135,11 @@ kernel void contentResourceObjectVOX(const device Uniforms& in [[ buffer(0) ]],
                 pa = (pa + trans) * scale + 0.5;
                 pb = (pb + trans) * scale + 0.5;
                 pc = (pc + trans) * scale + 0.5;
-                if (pointInTriangle(float2(xyz.x, xyz.y), float2(pa.x, pa.y), float2(pb.x, pb.y), float2(pc.x, pc.y))) {
+                if (pointInTriangle(float2(x, y), float2(pa.x, pa.y), float2(pb.x, pb.y), float2(pc.x, pc.y))) {
                     int count = triangleCount(triangles);
                     Triangle triangle = Triangle();
                     triangle.active = true;
+                    triangle.hit = false;
                     triangle.a = pa;
                     triangle.b = pb;
                     triangle.c = pc;
@@ -146,23 +150,23 @@ kernel void contentResourceObjectVOX(const device Uniforms& in [[ buffer(0) ]],
                 }
             }
             for (int i = 0; i < int(d); ++i) {
-                float3 p = float3(xyz.x, xyz.y, (float(i) + 0.5) / d);
+                float3 p = float3(x, y, (float(i) + 0.5) / d);
                 for (int j = 0; j < TRICOUNT; ++j) {
                     Triangle triangle = triangles[j];
                     if (!triangle.active) {
                         break;
                     }
+                    if (triangle.hit) {
+                        continue;
+                    }
                     float dist = triangleDist(p, triangle.a, triangle.b, triangle.c);
                     if (dist < size) {
-                        if (!edge) {
-                            inside = !inside;
-                        }
-                        edge = true;
-                    } else {
-                        edge = false;
+                        inside = !inside;
+                        triangles[j].hit = true;
+                        break;
                     }
                 }
-                if (i >= int(xyz.z * d)) {
+                if (i >= int(z * d)) {
                     break;
                 }
             }
@@ -191,8 +195,6 @@ kernel void contentResourceObjectVOX(const device Uniforms& in [[ buffer(0) ]],
     
     float4 c = color ? 1.0 : 0.0;
     
-    c = float4(float(polyArr[0].a), float(polyArr[0].b), float(polyArr[0].c), 1.0);
-
     outTex.write(c, pos);
     
 }
