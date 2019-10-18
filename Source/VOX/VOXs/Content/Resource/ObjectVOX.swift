@@ -24,7 +24,7 @@ public class ObjectVOX: VOXResource {
             }
         }
     }
-    public var mode: Mode = .solid { didSet { setNeedsRender() } }
+    public var mode: Mode = .edge { didSet { setNeedsRender() } }
     
     var minVertex: Vector {
         guard let geo = geometry else { return Vector(x: 0.0, y: 0.0, z: 0.0) }

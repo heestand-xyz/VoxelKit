@@ -49,6 +49,14 @@ public extension NODEOut {
         return (self as! VOX & NODEOut)._move(by: LiveVec(x: x, y: y, z: z))
     }
     
+    func _rotatate(x: LiveFloat, y: LiveFloat, z: LiveFloat) -> TransformVOX {
+        let transformVox = TransformVOX()
+        transformVox.name = "rotatate:transform"
+        transformVox.input = self as? VOX & NODEOut
+        transformVox.rotation = LiveVec(x: x, y: y, z: z)
+        return transformVox
+    }
+    
     func _rotatate(by rotation: LiveFloat, on axis: Axis) -> TransformVOX {
         let transformVox = TransformVOX()
         transformVox.name = "rotatate:transform"

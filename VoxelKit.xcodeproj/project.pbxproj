@@ -62,6 +62,9 @@
 		3A906387234C863100172ED4 /* FeedbackVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A906383234C863100172ED4 /* FeedbackVOX.swift */; };
 		3A906388234C863100172ED4 /* FeedbackVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A906383234C863100172ED4 /* FeedbackVOX.swift */; };
 		3A906389234C863100172ED4 /* FeedbackVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A906383234C863100172ED4 /* FeedbackVOX.swift */; };
+		3AB7CB312359D361003C4299 /* KaleidoscopeVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB7CB2D2359D361003C4299 /* KaleidoscopeVOX.swift */; };
+		3AB7CB322359D361003C4299 /* KaleidoscopeVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB7CB2D2359D361003C4299 /* KaleidoscopeVOX.swift */; };
+		3AB7CB332359D361003C4299 /* KaleidoscopeVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB7CB2D2359D361003C4299 /* KaleidoscopeVOX.swift */; };
 		3AFD7F0A23477D0D00E38CD3 /* VOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD7F0923477D0D00E38CD3 /* VOX.swift */; };
 		3AFD7F0C23477D1B00E38CD3 /* VOXContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD7F0B23477D1B00E38CD3 /* VOXContent.swift */; };
 		3AFD7F0E23477D2400E38CD3 /* VOXGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD7F0D23477D2400E38CD3 /* VOXGenerator.swift */; };
@@ -126,6 +129,7 @@
 		3A906376234C79E700172ED4 /* NoiseVOX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoiseVOX.swift; sourceTree = "<group>"; };
 		3A906383234C863100172ED4 /* FeedbackVOX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackVOX.swift; sourceTree = "<group>"; };
 		3A90638D234C8BE000172ED4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3AB7CB2D2359D361003C4299 /* KaleidoscopeVOX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaleidoscopeVOX.swift; sourceTree = "<group>"; };
 		3AFD7F0923477D0D00E38CD3 /* VOX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VOX.swift; sourceTree = "<group>"; };
 		3AFD7F0B23477D1B00E38CD3 /* VOXContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VOXContent.swift; sourceTree = "<group>"; };
 		3AFD7F0D23477D2400E38CD3 /* VOXGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VOXGenerator.swift; sourceTree = "<group>"; };
@@ -285,6 +289,7 @@
 				74F0CB6C234BAF1E001EBF23 /* ThresholdVOX.swift */,
 				74F0CB8F234BB123001EBF23 /* TransformVOX.swift */,
 				3A906383234C863100172ED4 /* FeedbackVOX.swift */,
+				3AB7CB2D2359D361003C4299 /* KaleidoscopeVOX.swift */,
 			);
 			path = Single;
 			sourceTree = "<group>";
@@ -555,6 +560,7 @@
 				74F0CB6D234BAF1E001EBF23 /* QuantizeVOX.swift in Sources */,
 				3AFD7F0C23477D1B00E38CD3 /* VOXContent.swift in Sources */,
 				3A61CECA234B86B8001D731F /* BlendVOX.swift in Sources */,
+				3AB7CB312359D361003C4299 /* KaleidoscopeVOX.swift in Sources */,
 				3A07AA8B234498F100D3F0CE /* VoxelTypes.swift in Sources */,
 				3AFD7F0A23477D0D00E38CD3 /* VOX.swift in Sources */,
 				3A61CE72234B4F0B001D731F /* ResolutionVOX.swift in Sources */,
@@ -596,6 +602,7 @@
 				3A61CEA0234B6992001D731F /* VOXContent.swift in Sources */,
 				3A07AA8C234498F900D3F0CE /* VoxelKit.swift in Sources */,
 				3A61CEA1234B6992001D731F /* VOXResource.swift in Sources */,
+				3AB7CB322359D361003C4299 /* KaleidoscopeVOX.swift in Sources */,
 				74F0CB76234BAF53001EBF23 /* CrossVOX.swift in Sources */,
 				3A61CEC7234B8636001D731F /* VOXMergerEffect.swift in Sources */,
 				74934E152351FFFD009D90E8 /* VOXOperators.swift in Sources */,
@@ -631,6 +638,7 @@
 				3A61CE94234B6992001D731F /* VOXResolution.swift in Sources */,
 				3A61CE9A234B6992001D731F /* GradientVOX.swift in Sources */,
 				3A61CE93234B6992001D731F /* VOX.swift in Sources */,
+				3AB7CB332359D361003C4299 /* KaleidoscopeVOX.swift in Sources */,
 				74F0CB77234BAF53001EBF23 /* CrossVOX.swift in Sources */,
 				3A61CEC8234B8636001D731F /* VOXMergerEffect.swift in Sources */,
 				74934E162351FFFD009D90E8 /* VOXOperators.swift in Sources */,
