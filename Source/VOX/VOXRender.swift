@@ -46,7 +46,11 @@ public extension VOX {
     var renderedRawNormalized: [CGFloat]? {
         guard let texture = renderedTexture else { return nil }
         do {
+            #if os(macOS) || targetEnvironment(macCatalyst)
+            return try Texture.rawNormalizedCopy3d(texture: texture, bits: VoxelKit.main.render.bits, on: VoxelKit.main.render.metalDevice, in: VoxelKit.main.render.commandQueue)
+            #else
             return try Texture.rawNormalized3d(texture: texture, bits: VoxelKit.main.render.bits)
+            #endif
         } catch {
             VoxelKit.main.logger.log(node: self, .error, .texture, "Raw Normalized texture failed.", e: error)
             return nil

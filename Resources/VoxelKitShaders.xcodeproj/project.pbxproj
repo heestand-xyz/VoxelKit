@@ -79,6 +79,9 @@
 		3AB7CB352359D3B9003C4299 /* EffectSingleKaleidoscopeVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3AB7CB342359D3B8003C4299 /* EffectSingleKaleidoscopeVOX.metal */; };
 		3AB7CB362359D3B9003C4299 /* EffectSingleKaleidoscopeVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3AB7CB342359D3B8003C4299 /* EffectSingleKaleidoscopeVOX.metal */; };
 		3AB7CB372359D3B9003C4299 /* EffectSingleKaleidoscopeVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3AB7CB342359D3B8003C4299 /* EffectSingleKaleidoscopeVOX.metal */; };
+		3AD352F7235DDF4A00331E62 /* ContentGeneratorBoxVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3AD352F6235DDF4A00331E62 /* ContentGeneratorBoxVOX.metal */; };
+		3AD352F8235DDF4A00331E62 /* ContentGeneratorBoxVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3AD352F6235DDF4A00331E62 /* ContentGeneratorBoxVOX.metal */; };
+		3AD352F9235DDF4A00331E62 /* ContentGeneratorBoxVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3AD352F6235DDF4A00331E62 /* ContentGeneratorBoxVOX.metal */; };
 		74844E842348963000F99875 /* ContentGeneratorColorVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 74844E832348963000F99875 /* ContentGeneratorColorVOX.metal */; };
 		74F0CB83234BB0E4001EBF23 /* EffectSingleBlurVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 74F0CB7F234BB0E3001EBF23 /* EffectSingleBlurVOX.metal */; };
 		74F0CB84234BB0E4001EBF23 /* EffectSingleBlurVOX.metal in Sources */ = {isa = PBXBuildFile; fileRef = 74F0CB7F234BB0E3001EBF23 /* EffectSingleBlurVOX.metal */; };
@@ -130,6 +133,7 @@
 		3A90637D234C7A5400172ED4 /* ContentGeneratorNoisePIX.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = ContentGeneratorNoisePIX.metal; sourceTree = "<group>"; };
 		3A90638A234C876000172ED4 /* NilVOX.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = NilVOX.metal; sourceTree = "<group>"; };
 		3AB7CB342359D3B8003C4299 /* EffectSingleKaleidoscopeVOX.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = EffectSingleKaleidoscopeVOX.metal; sourceTree = "<group>"; };
+		3AD352F6235DDF4A00331E62 /* ContentGeneratorBoxVOX.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = ContentGeneratorBoxVOX.metal; sourceTree = "<group>"; };
 		74844E832348963000F99875 /* ContentGeneratorColorVOX.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ContentGeneratorColorVOX.metal; sourceTree = "<group>"; };
 		74F0CB7F234BB0E3001EBF23 /* EffectSingleBlurVOX.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = EffectSingleBlurVOX.metal; sourceTree = "<group>"; };
 		74F0CB80234BB0E3001EBF23 /* EffectSingleThresholdVOX.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = EffectSingleThresholdVOX.metal; sourceTree = "<group>"; };
@@ -152,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				74844E832348963000F99875 /* ContentGeneratorColorVOX.metal */,
+				3AD352F6235DDF4A00331E62 /* ContentGeneratorBoxVOX.metal */,
 				3A07AAC423449DC400D3F0CE /* ContentGeneratorGradientVOX.metal */,
 				3A90637D234C7A5400172ED4 /* ContentGeneratorNoisePIX.metal */,
 				3A61CE53234B361F001D731F /* ContentGeneratorSphereVOX.metal */,
@@ -336,6 +341,7 @@
 				74F0CB89234BB0E4001EBF23 /* EffectSingleTransformVOX.metal in Sources */,
 				3A61CEE9234B8B0B001D731F /* blend.metal in Sources */,
 				3A90638B234C876000172ED4 /* NilVOX.metal in Sources */,
+				3AD352F7235DDF4A00331E62 /* ContentGeneratorBoxVOX.metal in Sources */,
 				3A8D7E3C234E1B4E00DC555E /* ContentResourceObjectVOX.metal in Sources */,
 				3A07AB222344A3AE00D3F0CE /* gradient.metal in Sources */,
 				3A61CEE3234B8B0B001D731F /* place.metal in Sources */,
@@ -363,6 +369,7 @@
 				3A8D7E3D234E1B4E00DC555E /* ContentResourceObjectVOX.metal in Sources */,
 				3A61CE23234B23AA001D731F /* ContentGeneratorColorVOX.metal in Sources */,
 				3AB7CB362359D3B9003C4299 /* EffectSingleKaleidoscopeVOX.metal in Sources */,
+				3AD352F8235DDF4A00331E62 /* ContentGeneratorBoxVOX.metal in Sources */,
 				3A07AAF42344A10800D3F0CE /* hsv.metal in Sources */,
 				3A07AAEE2344A10800D3F0CE /* noise_header.metal in Sources */,
 				3A61CECF234B8724001D731F /* EffectMergerBlendVOX.metal in Sources */,
@@ -401,6 +408,7 @@
 				3A8D7E3E234E1B4E00DC555E /* ContentResourceObjectVOX.metal in Sources */,
 				3A61CE24234B23AA001D731F /* ContentGeneratorColorVOX.metal in Sources */,
 				3AB7CB372359D3B9003C4299 /* EffectSingleKaleidoscopeVOX.metal in Sources */,
+				3AD352F9235DDF4A00331E62 /* ContentGeneratorBoxVOX.metal in Sources */,
 				3A07AAF52344A10800D3F0CE /* hsv.metal in Sources */,
 				3A07AAEF2344A10800D3F0CE /* noise_header.metal in Sources */,
 				3A61CED0234B8724001D731F /* EffectMergerBlendVOX.metal in Sources */,
