@@ -15,6 +15,14 @@ struct Uniforms {
     float b;
     float a;
     float premultiply;
+    float tile;
+    float tileX;
+    float tileY;
+    float tileZ;
+    float tileResX;
+    float tileResY;
+    float tileResZ;
+    float tileFraction;
 };
 
 kernel void contentGeneratorColorVOX(const device Uniforms& in [[ buffer(0) ]],

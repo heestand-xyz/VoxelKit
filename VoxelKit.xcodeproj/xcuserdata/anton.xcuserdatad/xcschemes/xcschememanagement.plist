@@ -7,17 +7,17 @@
 		<key>VoxelKit-macOS.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>12</integer>
+			<integer>14</integer>
 		</dict>
 		<key>VoxelKit-tvOS.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>13</integer>
+			<integer>15</integer>
 		</dict>
 		<key>VoxelKit.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>11</integer>
+			<integer>13</integer>
 		</dict>
 	</dict>
 </dict>

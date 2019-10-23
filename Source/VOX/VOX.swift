@@ -11,7 +11,7 @@ import RenderKit
 import Metal
 import simd
 
-public class VOX: NODE3D, Equatable {
+public class VOX: NODE3D, Equatable, NODETileable {
     
     public let id = UUID()
     public var name: String?
@@ -26,29 +26,29 @@ public class VOX: NODE3D, Equatable {
     open var preUniforms: [CGFloat] { return [] }
     open var postUniforms: [CGFloat] { return [] }
     open var uniforms: [CGFloat] {
-        var vals: [CGFloat] = []
-        vals.append(contentsOf: preUniforms)
+        var uniforms: [CGFloat] = []
+        uniforms.append(contentsOf: preUniforms)
         for liveValue in liveValues {
             if let liveFloat = liveValue as? LiveFloat {
-                vals.append(liveFloat.uniform)
+                uniforms.append(liveFloat.uniform)
             } else if let liveInt = liveValue as? LiveInt {
-                vals.append(CGFloat(liveInt.uniform))
+                uniforms.append(CGFloat(liveInt.uniform))
             } else if let liveBool = liveValue as? LiveBool {
-                vals.append(liveBool.uniform ? 1.0 : 0.0)
+                uniforms.append(liveBool.uniform ? 1.0 : 0.0)
             } else if let liveColor = liveValue as? LiveColor {
-                vals.append(contentsOf: liveColor.colorCorrect.uniformList)
+                uniforms.append(contentsOf: liveColor.colorCorrect.uniformList)
             } else if let livePoint = liveValue as? LivePoint {
-                vals.append(contentsOf: livePoint.uniformList)
+                uniforms.append(contentsOf: livePoint.uniformList)
             } else if let liveSize = liveValue as? LiveSize {
-                vals.append(contentsOf: liveSize.uniformList)
+                uniforms.append(contentsOf: liveSize.uniformList)
             } else if let liveRect = liveValue as? LiveRect {
-                vals.append(contentsOf: liveRect.uniformList)
+                uniforms.append(contentsOf: liveRect.uniformList)
             } else if let liveVec = liveValue as? LiveVec {
-                vals.append(contentsOf: liveVec.uniformList)
+                uniforms.append(contentsOf: liveVec.uniformList)
             }
         }
-        vals.append(contentsOf: postUniforms)
-        return vals
+        uniforms.append(contentsOf: postUniforms)
+        return uniforms
     }
     
     public var liveArray: [[LiveFloat]] { return [] }
@@ -215,6 +215,14 @@ public class VOX: NODE3D, Equatable {
 
     public func didRender(texture: MTLTexture, force: Bool) {
         self.texture = texture
+        didRender(force: force)
+    }
+    
+    public func didRenderTiles(force: Bool) {
+        didRender(force: force)
+    }
+    
+    func didRender(force: Bool = false) {
         renderIndex += 1
         delegate?.nodeDidRender(self)
         if VoxelKit.main.render.engine.renderMode != .frameTree {

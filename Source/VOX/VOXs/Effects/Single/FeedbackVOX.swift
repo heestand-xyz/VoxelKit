@@ -22,12 +22,12 @@ public class FeedbackVOX: VOXSingleEffect {
     // MARK: - Public Properties
     
     var feedTexture: MTLTexture? {
-        guard let texture = feedPix?.texture else { return nil }
+        guard let texture = feedVox?.texture else { return nil }
         return try? Texture.copy3D(texture: texture, on: VoxelKit.main.render.metalDevice, in: VoxelKit.main.render.commandQueue)
     }
     
     public var feedActive: Bool = true { didSet { setNeedsRender() } }
-    public var feedPix: (VOX & NODEOut)? { didSet { if feedActive { setNeedsRender() } } }
+    public var feedVox: (VOX & NODEOut)? { didSet { if feedActive { setNeedsRender() } } }
     
     public required init() {
         super.init()
@@ -40,6 +40,15 @@ public class FeedbackVOX: VOXSingleEffect {
                 return .continue
             }
         }
+    }
+    
+    func tileFeedTexture(at tileIndex: TileIndex) -> MTLTexture? {
+        guard let tileFeedVox = feedVox as? VOX & NODETileable3D else {
+            VoxelKit.main.logger.log(node: self, .error, .texture, "Feed Input VOX Not Tileable.")
+            return nil
+        }
+        guard let texture = tileFeedVox.tileTextures?[tileIndex.z][tileIndex.y][tileIndex.x] else { return nil }
+        return try? Texture.copy3D(texture: texture, on: VoxelKit.main.render.metalDevice, in: VoxelKit.main.render.commandQueue)
     }
     
     override public func didRender(texture: MTLTexture, force: Bool) {
@@ -75,7 +84,7 @@ public extension NODEOut {
         crossPix.inputA = self as? VOX & NODEOut
         crossPix.inputB = loop?(feedbackPix) ?? feedbackPix
         crossPix.fraction = fraction
-        feedbackPix.feedPix = crossPix
+        feedbackPix.feedVox = crossPix
         return feedbackPix
     }
     

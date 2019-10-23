@@ -8,12 +8,15 @@
 
 import RenderKit
 
-public class VOXEffect: VOX, NODEInIO, NODEOutIO {
+public class VOXEffect: VOX, NODEInIO, NODEOutIO, NODETileable3D {
     
     public var inputList: [NODE & NODEOut] = []
     public var outputPathList: [NODEOutPath] = []
     public var connectedIn: Bool { return !inputList.isEmpty }
     public var connectedOut: Bool { return !outputPathList.isEmpty }
+
+    public var tileResolution: Resolution3D { VoxelKit.main.tileResolution }
+    public var tileTextures: [[[MTLTexture]]]?
         
     override init() {
         super.init()

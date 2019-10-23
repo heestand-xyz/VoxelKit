@@ -29,6 +29,7 @@ public class EdgeVOX: VOXSingleEffect {
     public required init() {
         super.init()
         name = "edge"
+        extend = .hold
     }
     
 }

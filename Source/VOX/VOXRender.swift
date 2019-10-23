@@ -13,8 +13,33 @@ public extension VOX {
     
     var renderedTexture: MTLTexture? { return texture }
     
+    var renderedTileTexture: MTLTexture? {
+        guard let nodeTileable3d = self as? NODETileable3D else {
+            VoxelKit.main.logger.log(.error, .texture, "VOX is not tilable.")
+            return nil
+        }
+        guard let textures = nodeTileable3d.tileTextures else {
+            VoxelKit.main.logger.log(.error, .texture, "Tile textures not available.")
+            return nil
+        }
+        do {
+            return try Texture.mergeTiles3d(textures: textures, on: VoxelKit.main.render.metalDevice, in: VoxelKit.main.render.commandQueue)
+        } catch {
+            VoxelKit.main.logger.log(.error, .texture, "Tile texture merge failed.", e: error)
+            return nil
+        }
+    }
+    
+    var dynamicTexture: MTLTexture? {
+        if VoxelKit.main.render.engine.renderMode.isTile {
+            return renderedTileTexture
+        } else {
+            return renderedTexture
+        }
+    }
+    
     var renderedRaw8: [UInt8]? {
-        guard let texture = renderedTexture else { return nil }
+        guard let texture = dynamicTexture else { return nil }
         do {
             return try Texture.raw3d8(texture: texture)
         } catch {
@@ -24,7 +49,7 @@ public extension VOX {
     }
     
     var renderedRaw16: [Float]? {
-        guard let texture = renderedTexture else { return nil }
+        guard let texture = dynamicTexture else { return nil }
         do {
             return try Texture.raw3d16(texture: texture)
         } catch {
@@ -34,7 +59,7 @@ public extension VOX {
     }
     
     var renderedRaw32: [float4]? {
-        guard let texture = renderedTexture else { return nil }
+        guard let texture = dynamicTexture else { return nil }
         do {
             return try Texture.raw3d32(texture: texture)
         } catch {
@@ -44,7 +69,29 @@ public extension VOX {
     }
     
     var renderedRawNormalized: [CGFloat]? {
-        guard let texture = renderedTexture else { return nil }
+        guard let texture = dynamicTexture else { return nil }
+        do {
+            #if os(macOS) || targetEnvironment(macCatalyst)
+            return try Texture.rawNormalizedCopy3d(texture: texture, bits: VoxelKit.main.render.bits, on: VoxelKit.main.render.metalDevice, in: VoxelKit.main.render.commandQueue)
+            #else
+            return try Texture.rawNormalized3d(texture: texture, bits: VoxelKit.main.render.bits)
+            #endif
+        } catch {
+            VoxelKit.main.logger.log(node: self, .error, .texture, "Raw Normalized texture failed.", e: error)
+            return nil
+        }
+    }
+    
+    func renderedRawNormalized(for tileIndex: TileIndex) -> [CGFloat]? {
+        guard let nodeTileable3d = self as? NODETileable3D else {
+            VoxelKit.main.logger.log(.error, .texture, "VOX is not tilable.")
+            return nil
+        }
+        guard let textures = nodeTileable3d.tileTextures else {
+            VoxelKit.main.logger.log(.error, .texture, "Tile textures not available.")
+            return nil
+        }
+        let texture = textures[tileIndex.z][tileIndex.y][tileIndex.x]
         do {
             #if os(macOS) || targetEnvironment(macCatalyst)
             return try Texture.rawNormalizedCopy3d(texture: texture, bits: VoxelKit.main.render.bits, on: VoxelKit.main.render.metalDevice, in: VoxelKit.main.render.commandQueue)
@@ -134,14 +181,30 @@ public extension VOX {
     }
     
     var renderedVoxels: VoxelPack? {
-        guard let resolution = realResolution else {
-            VoxelKit.main.logger.log(node: self, .error, .texture, "Rendered voxels failed. Resolution not found.")
-            return nil
-        }
         guard let rawVoxels = renderedRawNormalized else {
             VoxelKit.main.logger.log(node: self, .error, .texture, "Rendered voxels failed. Voxels not found.")
             return nil
         }
+        guard let resolution = realResolution else {
+            VoxelKit.main.logger.log(node: self, .error, .texture, "Rendered voxels failed. Resolution not found.")
+            return nil
+        }
+        return renderedVoxels(for: rawVoxels, at: resolution)
+    }
+    
+    func renderedVoxels(for tileIndex: TileIndex) -> VoxelPack? {
+        guard let nodeTileable3d = self as? NODETileable3D else {
+            VoxelKit.main.logger.log(.error, .texture, "VOX is not tilable.")
+            return nil
+        }
+        guard let rawVoxels = renderedRawNormalized(for: tileIndex) else {
+            VoxelKit.main.logger.log(node: self, .error, .texture, "Rendered voxels failed. Voxels not found.")
+            return nil
+        }
+        return renderedVoxels(for: rawVoxels, at: nodeTileable3d.tileResolution)
+    }
+    
+    func renderedVoxels(for rawVoxels: [CGFloat], at resolution: Resolution3D) -> VoxelPack? {
         var voxels: [[[Voxel]]] = []
         let rx = Int(resolution.vector.x)
         let ry = Int(resolution.vector.y)
@@ -157,7 +220,10 @@ public extension VOX {
                     var c: [CGFloat] = []
                     for i in 0..<4 {
                         let j = (z * rx * ry * 4) + (y * ry * 4) + (x * 4) + i
-                        guard j < rawVoxels.count else { return nil }
+                        guard j < rawVoxels.count else {
+                            VoxelKit.main.logger.log(node: self, .error, .texture, "Voxel index out of bounds.")
+                            return nil
+                        }
                         let chan = rawVoxels[j]
                         c.append(chan)
                     }

@@ -24,6 +24,14 @@ struct Uniforms{
     float random;
     float includeAlpha;
     float premultiply;
+    float tile;
+    float tileX;
+    float tileY;
+    float tileZ;
+    float tileResX;
+    float tileResY;
+    float tileResZ;
+    float tileFraction;
 };
 
 kernel void contentGeneratorNoiseVOX(const device Uniforms& in [[ buffer(0) ]],
@@ -38,6 +46,11 @@ kernel void contentGeneratorNoiseVOX(const device Uniforms& in [[ buffer(0) ]],
     float x = float(pos.x + 0.5) / float(outTex.get_width());
     float y = float(pos.y + 0.5) / float(outTex.get_height());
     float z = float(pos.z + 0.5) / float(outTex.get_depth());
+    if (in.tile > 0.0) {
+        x = (in.tileX / in.tileResX) + x * in.tileFraction;
+        y = (in.tileY / in.tileResY) + y * in.tileFraction;
+        z = (in.tileZ / in.tileResZ) + z * in.tileFraction;
+    }
     
     int max_res = 16384 - 1;
     

@@ -73,6 +73,7 @@
 		3AFD7F0E23477D2400E38CD3 /* VOXGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD7F0D23477D2400E38CD3 /* VOXGenerator.swift */; };
 		3AFD7F1223477F2200E38CD3 /* VOXResolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD7F1123477F2200E38CD3 /* VOXResolution.swift */; };
 		3AFD7F1523477FC100E38CD3 /* VOXResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD7F1423477FC100E38CD3 /* VOXResource.swift */; };
+		40D9643A012DC365C672EF44 /* Pods_VoxelKit_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F01BD56BAADEB9E47D1D6E54 /* Pods_VoxelKit_tvOS.framework */; };
 		73A47D2EB9DB8B2C2C44E80B /* Pods_VoxelKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0997B121D0972FCA9D2CB871 /* Pods_VoxelKit.framework */; };
 		74844E82234895F100F99875 /* ColorVOX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74844E81234895F100F99875 /* ColorVOX.swift */; };
 		74934E142351FFFD009D90E8 /* VOXOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74934E102351FFFD009D90E8 /* VOXOperators.swift */; };
@@ -178,6 +179,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40D9643A012DC365C672EF44 /* Pods_VoxelKit_tvOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +424,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A61CE8D234B6828001D731F /* Build configuration list for PBXNativeTarget "VoxelKit-tvOS" */;
 			buildPhases = (
+				874BA1016FD76971E55F2D6A /* [CP] Check Pods Manifest.lock */,
 				3A61CE83234B6828001D731F /* Headers */,
 				3A61CE84234B6828001D731F /* Sources */,
 				3A61CE85234B6828001D731F /* Frameworks */,
@@ -546,6 +549,28 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-VoxelKit-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		874BA1016FD76971E55F2D6A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VoxelKit-tvOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -905,6 +930,7 @@
 		};
 		3A61CE8E234B6828001D731F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6C800D4DE75D38C2945C76DA /* Pods-VoxelKit-tvOS.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -932,6 +958,7 @@
 		};
 		3A61CE8F234B6828001D731F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD68E41ECE0E6436A889544F /* Pods-VoxelKit-tvOS.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;

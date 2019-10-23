@@ -37,6 +37,8 @@ public class VoxelKit: EngineDelegate, LoggerDelegate {
     #endif
     #endif
     
+    public var tileResolution: Resolution3D = .cube(32)
+    
     public let render: Render
     public let logger: Logger
 
@@ -125,4 +127,66 @@ public class VoxelKit: EngineDelegate, LoggerDelegate {
 
     }
     
+    public func tileTextures(from node: NODE & NODETileable, at tileIndex: TileIndex, with commandBuffer: MTLCommandBuffer) throws -> (a: MTLTexture?, b: MTLTexture?, custom: MTLTexture?) {
+        
+        var generator: Bool = false
+        var inputTexture: MTLTexture? = nil
+        var secondInputTexture: MTLTexture? = nil
+        if let nodeContent = node as? NODEContent {
+            if nodeContent is NODEGenerator {
+                generator = true
+            }
+        } else if let nodeIn = node as? NODE & NODEInIO {
+            guard let nodeOut = nodeIn.inputList.first else {
+                throw Engine.RenderError.texture("input not connected.")
+            }
+            guard let nodeOutTileable3d = nodeOut as? NODE & NODETileable3D else {
+                 throw Engine.RenderError.nodeNotTileable
+            }
+            var feed = false
+            if let feedbackNode = nodeIn as? FeedbackVOX {
+                if feedbackNode.readyToFeed && feedbackNode.feedActive {
+                    guard let feedTexture = feedbackNode.tileFeedTexture(at: tileIndex) else {
+                        throw Engine.RenderError.texture("Feed Texture not avalible.")
+                    }
+                    inputTexture = feedTexture
+                    feed = true
+                }
+            }
+            if !feed {
+                guard let nodeOutTexture = nodeOutTileable3d.tileTextures?[tileIndex.z][tileIndex.y][tileIndex.x] else {
+                    throw Engine.RenderError.texture("Tile IO Texture not found for: \(nodeOut)")
+                }
+                inputTexture = nodeOutTexture // CHECK copy?
+                if node is NODEInMerger {
+                    let nodeOutB = nodeIn.inputList[1]
+                    guard let nodeOutBTileable3d = nodeOutB as? NODE & NODETileable3D else {
+                         throw Engine.RenderError.nodeNotTileable
+                    }
+                    guard let nodeOutTextureB = nodeOutBTileable3d.tileTextures?[tileIndex.z][tileIndex.y][tileIndex.x] else {
+                        throw Engine.RenderError.texture("Tile IO Texture B not found for: \(nodeOutB)")
+                    }
+                    secondInputTexture = nodeOutTextureB // CHECK copy?
+                }
+            }
+        }
+
+        guard generator || inputTexture != nil else {
+            throw Engine.RenderError.texture("Input Texture missing.")
+        }
+        
+        // Mipmap
+
+//        if inputTexture != nil {
+//            try Texture.mipmap(texture: inputTexture!, with: commandBuffer)
+//        }
+//        if secondInputTexture != nil {
+//            try Texture.mipmap(texture: secondInputTexture!, with: commandBuffer)
+//        }
+
+        return (inputTexture, secondInputTexture, nil)
+
+    }
+    
+
 }

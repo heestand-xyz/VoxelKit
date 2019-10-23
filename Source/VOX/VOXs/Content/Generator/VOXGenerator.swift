@@ -10,10 +10,13 @@ import LiveValues
 import RenderKit
 import CoreGraphics
 
-public class VOXGenerator: VOXContent, NODEGenerator, NODEResolution3D {
+public class VOXGenerator: VOXContent, NODEGenerator, NODETileable3D, NODEResolution3D {
     
     public var resolution: Resolution3D { didSet { setNeedsRender() } }
     public var premultiply: Bool = true { didSet { setNeedsRender() } }
+    
+    public var tileResolution: Resolution3D { VoxelKit.main.tileResolution }
+    public var tileTextures: [[[MTLTexture]]]?
     
     public var bgColor: LiveColor = .black
     public var color: LiveColor = .white
