@@ -8,6 +8,7 @@
 
 import LiveValues
 import RenderKit
+import CoreGraphics
 
 public struct ColorStep {
     public var step: LiveFloat

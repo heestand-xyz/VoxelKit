@@ -14,10 +14,6 @@ public class VOXSingleEffect: VOXEffect, NODESingleEffect, NODEInSingle {
     
     // MARK: - Life Cycle
     
-    public required override init() {
-        super.init()
-    }
-    
     public override func destroy() {
         input = nil
         super.destroy()

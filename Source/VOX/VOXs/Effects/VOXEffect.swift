@@ -7,6 +7,7 @@
 //
 
 import RenderKit
+import MetalKit
 
 public class VOXEffect: VOX, NODEInIO, NODEOutIO, NODETileable3D {
     
@@ -17,9 +18,5 @@ public class VOXEffect: VOX, NODEInIO, NODEOutIO, NODETileable3D {
 
     public var tileResolution: Resolution3D { VoxelKit.main.tileResolution }
     public var tileTextures: [[[MTLTexture]]]?
-        
-    override init() {
-        super.init()
-    }
     
 }

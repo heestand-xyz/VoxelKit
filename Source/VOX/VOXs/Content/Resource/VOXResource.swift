@@ -12,8 +12,8 @@ public class VOXResource: VOXContent, NODEResourceCustom {
     
     public var resolution: Resolution3D { didSet { applyResolution { self.setNeedsRender() } } }
     
-    public required init(at resolution: Resolution3D) {
+    public required init(at resolution: Resolution3D, name: String, typeName: String) {
         self.resolution = resolution
-        super.init()
+        super.init(name: name, typeName: typeName)
     }
 }

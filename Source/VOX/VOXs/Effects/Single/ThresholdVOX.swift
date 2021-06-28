@@ -8,6 +8,7 @@
 
 import LiveValues
 import RenderKit
+import CoreGraphics
 
 public class ThresholdVOX: VOXSingleEffect {
     

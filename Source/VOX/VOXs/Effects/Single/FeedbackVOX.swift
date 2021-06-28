@@ -30,8 +30,7 @@ public class FeedbackVOX: VOXSingleEffect {
     public var feedVox: (VOX & NODEOut)? { didSet { if feedActive { setNeedsRender() } } }
     
     public required init() {
-        super.init()
-        name = "feedback"
+        super.init(name: "Feedback", typeName: "vox-effect-single-feedback")
         VoxelKit.main.render.listenToFramesUntil {
             if self.input?.texture != nil && self.feedTexture != nil {
                 self.setNeedsRender()

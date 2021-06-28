@@ -25,8 +25,7 @@ public class ResolutionVOX: VOXSingleEffect, NODEResolution3D/*, CustomRenderDel
     
     required public init(at resolution: Resolution3D) {
         self.resolution = resolution
-        super.init()
-        name = "res"
+        super.init(name: "Resolution", typeName: "vox-effect-single-resolution")
 //        customRenderDelegate = self
 //        customRenderActive = true
     }

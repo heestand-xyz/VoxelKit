@@ -9,6 +9,7 @@
 import LiveValues
 import RenderKit
 import CoreGraphics
+import MetalKit
 
 public class VOXGenerator: VOXContent, NODEGenerator, NODETileable3D, NODEResolution3D {
     

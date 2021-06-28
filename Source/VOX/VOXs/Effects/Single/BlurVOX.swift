@@ -8,6 +8,7 @@
 
 import LiveValues
 import RenderKit
+import CoreGraphics
 
 public class BlurVOX: VOXSingleEffect {
     
@@ -69,9 +70,8 @@ public class BlurVOX: VOXSingleEffect {
     override open var shaderNeedsAspect: Bool { return true }
     
     public required init() {
-        super.init()
+        super.init(name: "Blur", typeName: "vox-effect-single-blur")
         extend = .hold
-        name = "blur"
     }
 }
 

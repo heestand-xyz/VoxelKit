@@ -8,6 +8,8 @@
 
 import LiveValues
 import RenderKit
+import CoreGraphics
+import CoreGraphics
 
 public class KaleidoscopeVOX: VOXSingleEffect {
     
@@ -32,9 +34,8 @@ public class KaleidoscopeVOX: VOXSingleEffect {
     }
     
     public required init() {
-        super.init()
+        super.init(name: "Kaleidoscope", typeName: "vox-effect-single-kaleidoscope")
         extend = .mirror
-        name = "kaleidoscope"
     }
     
 }

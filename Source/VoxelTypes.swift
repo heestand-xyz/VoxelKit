@@ -7,6 +7,7 @@
 //
 
 import RenderKit
+import CoreGraphics
 
 public enum Axis {
     case x

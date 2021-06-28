@@ -29,8 +29,7 @@ public class TransformVOX: VOXSingleEffect {
     // MARK: - Life Cycle
     
     public required init() {
-        super.init()
-        name = "transform"
+        super.init(name: "Transform", typeName: "vox-effect-single-transform")
     }
       
 }

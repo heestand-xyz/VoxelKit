@@ -7,6 +7,10 @@
 //
 
 import RenderKit
+import MetalKit
+
+/// overrides the default metal lib
+public var pixelKitMetalLibURL: URL?
 
 public class VoxelKit: EngineDelegate, LoggerDelegate {
 
@@ -44,7 +48,12 @@ public class VoxelKit: EngineDelegate, LoggerDelegate {
 
     init() {
         
-        render = Render(with: kMetalLibName, in: Bundle(for: type(of: self)))
+        if let url = pixelKitMetalLibURL {
+            render = Render(metalLibURL: url)
+        } else {
+            let metalLibURL: URL = Bundle.module.url(forResource: kMetalLibName, withExtension: "metallib", subdirectory: "Metal")!
+            render = Render(metalLibURL: metalLibURL)
+        }
         logger = Logger(name: "VoxelKit")
         
         render.engine.deleagte = self

@@ -8,6 +8,7 @@
 
 import LiveValues
 import RenderKit
+import CoreGraphics
 
 public class BlendVOX: VOXMergerEffect {
     
@@ -24,8 +25,7 @@ public class BlendVOX: VOXMergerEffect {
     }
     
     public required init() {
-        super.init()
-        name = "blend"
+        super.init(name: "Blend", typeName: "vox-effect-merger-blend")
     }
     
 }

@@ -10,11 +10,13 @@ import LiveValues
 import RenderKit
 import Metal
 import simd
+import CoreGraphics
 
 public class VOX: NODE3D, Equatable, NODETileable {
     
     public let id = UUID()
-    public var name: String?
+    public var name: String
+    public let typeName: String
     
     public var delegate: NODEDelegate?
     
@@ -22,6 +24,8 @@ public class VOX: NODE3D, Equatable, NODETileable {
     
     public var view: NODEView
     
+    public var overrideBits: LiveColor.Bits? { nil }
+
     open var liveValues: [LiveValue] { return [] }
     open var preUniforms: [CGFloat] { return [] }
     open var postUniforms: [CGFloat] { return [] }
@@ -135,9 +139,13 @@ public class VOX: NODE3D, Equatable, NODETileable {
     
     // MARK: - Life Cycle
     
-    init() {
+    init(name: String, typeName: String) {
         
-        view = NODEView(with: VoxelKit.main.render)
+        self.name = name
+        self.typeName = typeName
+        
+        let pixelFormat: MTLPixelFormat = overrideBits?.pixelFormat ?? VoxelKit.main.render.bits.pixelFormat
+        view = NODEView(with: VoxelKit.main.render, pixelFormat: pixelFormat)
         
         setupShader()
             

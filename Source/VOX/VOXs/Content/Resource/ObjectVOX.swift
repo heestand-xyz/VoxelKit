@@ -6,7 +6,9 @@
 //  Copyright © 2019 Hexagons. All rights reserved.
 //
 
+import Foundation
 import RenderKit
+import CoreGraphics
 
 public class ObjectVOX: VOXResource {
     

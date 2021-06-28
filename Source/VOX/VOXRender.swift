@@ -8,6 +8,7 @@
 import LiveValues
 import RenderKit
 import simd
+import MetalKit
 
 public extension VOX {
     
@@ -48,6 +49,7 @@ public extension VOX {
         }
     }
     
+    #if !os(macOS) && !targetEnvironment(macCatalyst)
     var renderedRaw16: [Float]? {
         guard let texture = dynamicTexture else { return nil }
         do {
@@ -57,6 +59,7 @@ public extension VOX {
             return nil
         }
     }
+    #endif
     
     var renderedRaw32: [float4]? {
         guard let texture = dynamicTexture else { return nil }

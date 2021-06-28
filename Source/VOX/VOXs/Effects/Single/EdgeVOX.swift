@@ -27,8 +27,7 @@ public class EdgeVOX: VOXSingleEffect {
     // MARK: - Life Cycle
     
     public required init() {
-        super.init()
-        name = "edge"
+        super.init(name: "Edge", typeName: "vox-effect-single-edge")
         extend = .hold
     }
     

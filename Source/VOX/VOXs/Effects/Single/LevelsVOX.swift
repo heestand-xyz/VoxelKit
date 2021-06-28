@@ -31,8 +31,7 @@ public class LevelsVOX: VOXSingleEffect {
     // MARK: - Life Cycle
     
     public required init() {
-        super.init()
-        name = "levels"
+        super.init(name: "Levels", typeName: "vox-effect-single-levels")
     }
     
 }
