@@ -6,26 +6,39 @@
 //  Copyright © 2019 Hexagons. All rights reserved.
 //
 
-import LiveValues
 import RenderKit
 import CoreGraphics
 import MetalKit
+import Resolution
+import PixelColor
 
-public class VOXGenerator: VOXContent, NODEGenerator, NODETileable3D, NODEResolution3D {
+public class VOXGenerator: VOXContent, NODEGenerator, /*NODETileable3D,*/ NODEResolution3D {
     
-    public var resolution: Resolution3D { didSet { setNeedsRender() } }
-    public var premultiply: Bool = true { didSet { setNeedsRender() } }
+    @LiveResolution3D("resolution") public var resolution: Resolution3D = .cube(8)
+    @LiveBool("premultiply") public var premultiply: Bool = true
     
-    public var tileResolution: Resolution3D { VoxelKit.main.tileResolution }
-    public var tileTextures: [[[MTLTexture]]]?
+//    public var tileResolution: Resolution3D { VoxelKit.main.tileResolution }
+//    public var tileTextures: [[[MTLTexture]]]?
     
-    public var bgColor: LiveColor = .black
-    public var color: LiveColor = .white
+    @LiveColor("backgroundColor") public var backgroundColor: PixelColor = .black
+    @LiveColor("color") public var color: PixelColor = .white
+    
+    public override var liveList: [LiveWrap] {
+        [_resolution, _premultiply, _backgroundColor, _color]
+    }
 
-    public required init(at resolution: Resolution3D) {
+    public init(at resolution: Resolution3D, name: String, typeName: String) {
         self.resolution = resolution
-        super.init()
-        applyResolution { self.setNeedsRender() }
+        super.init(name: name, typeName: typeName)
+        applyResolution { self.render() }
+    }
+    
+    public required init(at resolution: Resolution3D) {
+        fatalError("please use init(at:name:typeName:)")
+    }
+    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
     }
     
 }

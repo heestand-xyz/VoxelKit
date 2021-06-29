@@ -6,15 +6,18 @@
 //  Copyright © 2019 Hexagons. All rights reserved.
 //
 
-import LiveValues
 import RenderKit
 import Metal
 import simd
+import Combine
 import CoreGraphics
+import Resolution
 
-public class VOX: NODE3D, Equatable, NODETileable {
+public class VOX: NODE3D, Equatable {
     
-    public let id = UUID()
+    public var renderObject: Render { VoxelKit.main.render }
+    
+    public let id: UUID
     public var name: String
     public let typeName: String
     
@@ -22,97 +25,40 @@ public class VOX: NODE3D, Equatable, NODETileable {
     
     public var shaderName: String { return "" }
     
-    public var view: NODEView
+    public var overrideBits: Bits? { nil }
     
-    public var overrideBits: LiveColor.Bits? { nil }
-
-    open var liveValues: [LiveValue] { return [] }
-    open var preUniforms: [CGFloat] { return [] }
-    open var postUniforms: [CGFloat] { return [] }
+    open var liveList: [LiveWrap] { [] }
+    open var values: [Floatable] { [] }
+    open var extraUniforms: [CGFloat] { [] }
     open var uniforms: [CGFloat] {
-        var uniforms: [CGFloat] = []
-        uniforms.append(contentsOf: preUniforms)
-        for liveValue in liveValues {
-            if let liveFloat = liveValue as? LiveFloat {
-                uniforms.append(liveFloat.uniform)
-            } else if let liveInt = liveValue as? LiveInt {
-                uniforms.append(CGFloat(liveInt.uniform))
-            } else if let liveBool = liveValue as? LiveBool {
-                uniforms.append(liveBool.uniform ? 1.0 : 0.0)
-            } else if let liveColor = liveValue as? LiveColor {
-                uniforms.append(contentsOf: liveColor.colorCorrect.uniformList)
-            } else if let livePoint = liveValue as? LivePoint {
-                uniforms.append(contentsOf: livePoint.uniformList)
-            } else if let liveSize = liveValue as? LiveSize {
-                uniforms.append(contentsOf: liveSize.uniformList)
-            } else if let liveRect = liveValue as? LiveRect {
-                uniforms.append(contentsOf: liveRect.uniformList)
-            } else if let liveVec = liveValue as? LiveVec {
-                uniforms.append(contentsOf: liveVec.uniformList)
-            }
-        }
-        uniforms.append(contentsOf: postUniforms)
+        var uniforms: [CGFloat] = values.flatMap(\.floats)
+        uniforms.append(contentsOf: extraUniforms)
         return uniforms
     }
     
-    public var liveArray: [[LiveFloat]] { return [] }
-    open var uniformArray: [[CGFloat]] {
-        return liveArray.map({ liveFloats -> [CGFloat] in
-            return liveFloats.map({ liveFloat -> CGFloat in
-                return liveFloat.uniform
-            })
-        })
-    }
+    open var uniformArray: [[CGFloat]] { [] }
     public var uniformArrayMaxLimit: Int? { nil }
     public var uniformIndexArray: [[Int]] { [] }
     public var uniformIndexArrayMaxLimit: Int? { nil }
     
-    
-    public var needsRender: Bool = false {
-        didSet {
-            guard needsRender else { return }
-            guard VoxelKit.main.render.engine.renderMode == .direct else { return }
-            VoxelKit.main.render.engine.renderNODE(self, done: { _ in })
-        }
-    }
-    public var rendering: Bool = false
-    public var inRender: Bool = false
-    public var renderIndex: Int = 0
-    
-    public var bypass: Bool = false
-    
-    public var contentLoaded: Bool?
+     
+    @Published public var finalResolution: Resolution = .square(10)
+    @Published public var finalResolution3d: Resolution3D = .cube(10)
+ 
     
     public var vertexUniforms: [CGFloat] { return [] }
-    
     public var shaderNeedsAspect: Bool { return false }
+
+    public var bypass: Bool = false {
+        didSet {
+            guard !bypass else { return }
+            render()
+        }
+    }
     
-    public var pipeline: MTLRenderPipelineState!
-    public var pipeline3d: MTLComputePipelineState!
-    public var sampler: MTLSamplerState!
-    public var interpolate: InterpolateMode = .linear { didSet { updateSampler() } }
-    public var extend: ExtendMode = .zero { didSet { updateSampler() } }
-    public var mipmap: MTLSamplerMipFilter = .linear { didSet { updateSampler() } }
-    var compare: MTLCompareFunction = .never
+    public var shaderNeedsResolution: Bool { false }
     
-    public var customRenderActive: Bool = false
-    public var customRenderDelegate: CustomRenderDelegate?
-    public var customMergerRenderActive: Bool = false
-    public var customMergerRenderDelegate: CustomMergerRenderDelegate?
-    public var customGeometryActive: Bool = false
-    public var customGeometryDelegate: CustomGeometryDelegate?
-    public var customMetalLibrary: MTLLibrary? { return nil }
-    public var customVertexShaderName: String? { return nil }
-    public var customVertexTextureActive: Bool { return false }
-    public var customVertexNodeIn: (NODE & NODEOut)? { return nil }
-    public var customMatrices: [matrix_float4x4] { return [] }
-    public var customLinkedNodes: [NODE] = []
-    
-    public var destroyed: Bool = false
-    
-    // MARK: Texture
-    
-    var _texture: MTLTexture?
+    public var _texture: MTLTexture?
     public var texture: MTLTexture? {
         get {
             guard !bypass else {
@@ -123,7 +69,9 @@ public class VOX: NODE3D, Equatable, NODETileable {
         }
         set {
             _texture = newValue
-            nextTextureAvalibleCallback?()
+            if newValue != nil {
+                nextTextureAvalibleCallback?()
+            }
         }
     }
     public var didRenderTexture: Bool {
@@ -137,12 +85,70 @@ public class VOX: NODE3D, Equatable, NODETileable {
         }
     }
     
-    // MARK: - Life Cycle
+    open var additiveVertexBlending: Bool { false }
+    
+    public var view: NODEView!
+    public var additionalViews: [NODEView] = []
+    
+    public var viewInterpolation: ViewInterpolation = .linear {
+        didSet { view.metalView.viewInterpolation = viewInterpolation }
+    }
+    public var interpolation: PixelInterpolation = .linear { didSet { updateSampler() } }
+    public var extend: ExtendMode = .zero { didSet { updateSampler() } }
+    public var mipmap: MTLSamplerMipFilter = .linear { didSet { updateSampler() } }
+    var compare: MTLCompareFunction = .never
+    
+    public var pipeline: MTLRenderPipelineState!
+    public var pipeline3d: MTLComputePipelineState!
+    public var sampler: MTLSamplerState!
+    public var allGood: Bool {
+        return pipeline != nil && sampler != nil
+    }
+    
+    public var customRenderActive: Bool = false
+    public weak var customRenderDelegate: CustomRenderDelegate?
+    public var customMergerRenderActive: Bool = false
+    public weak var customMergerRenderDelegate: CustomMergerRenderDelegate?
+    public var customGeometryActive: Bool = false
+    public weak var customGeometryDelegate: CustomGeometryDelegate?
+    open var customMetalLibrary: MTLLibrary? { return nil }
+    open var customVertexShaderName: String? { return nil }
+    open var customVertexTextureActive: Bool { return false }
+    open var customVertexNodeIn: (NODE & NODEOut)? { return nil }
+    open var customMatrices: [matrix_float4x4] { return [] }
+    
+    public var renderInProgress = false
+    public var renderQueue: [RenderRequest] = []
+    public var renderIndex: Int = 0
+    public var contentLoaded: Bool?
+    var inputTextureAvalible: Bool?
+    var generatorNotBypassed: Bool?
+    
+    static let metalLibrary: MTLLibrary = {
+        do {
+            return try VoxelKit.main.render.metalDevice.makeDefaultLibrary(bundle: Bundle.module)
+        } catch {
+            fatalError("Loading Metal Library Failed: \(error.localizedDescription)")
+        }
+    }()
+    
+    public var destroyed = false
+    public var cancellables: [AnyCancellable] = []
+    
+    // MARK: - Life Cycle -
     
     init(name: String, typeName: String) {
         
+        id = UUID()
         self.name = name
         self.typeName = typeName
+        
+        setupVOX()
+    }
+    
+    // MARK: - Setup
+    
+    func setupVOX() {
         
         let pixelFormat: MTLPixelFormat = overrideBits?.pixelFormat ?? VoxelKit.main.render.bits.pixelFormat
         view = NODEView(with: VoxelKit.main.render, pixelFormat: pixelFormat)
@@ -151,11 +157,13 @@ public class VOX: NODE3D, Equatable, NODETileable {
             
         VoxelKit.main.render.add(node: self)
         
-        VoxelKit.main.logger.log(node: self, .detail, nil, "Linked with PixelKit.", clean: true)
-    
+        VoxelKit.main.logger.log(node: self, .detail, nil, "Linked with VoxelKit.", clean: true)
+        
+        for liveProp in liveList {
+            liveProp.node = self
+        }
+        
     }
-    
-    // MARK: - Setup
     
     func setupShader() {
         guard shaderName != "" else {
@@ -163,10 +171,15 @@ public class VOX: NODE3D, Equatable, NODETileable {
             return
         }
         do {
-            let compute = try VoxelKit.main.render.makeFrag(shaderName, with: customMetalLibrary, from: self)
-            pipeline3d = try VoxelKit.main.render.makeShaderPipeline3d(compute)
+            if self is NODEMetal == false {
+                guard let compute = VOX.metalLibrary.makeFunction(name: shaderName) else {
+                    VoxelKit.main.logger.log(node: self, .fatal, nil, "Setup of Metal Function \"\(shaderName)\" Failed")
+                    return
+                }
+                pipeline3d = try VoxelKit.main.render.makeShaderPipeline3d(compute)
+            }
             #if !os(tvOS) || !targetEnvironment(simulator)
-            sampler = try VoxelKit.main.render.makeSampler(interpolate: interpolate.mtl, extend: extend.mtl, mipFilter: mipmap)
+            sampler = try VoxelKit.main.render.makeSampler(interpolate: interpolation.mtl, extend: extend.mtl, mipFilter: mipmap)
             #endif
         } catch {
             VoxelKit.main.logger.log(node: self, .fatal, nil, "Setup failed.", e: error)
@@ -178,191 +191,192 @@ public class VOX: NODE3D, Equatable, NODETileable {
     func updateSampler() {
         do {
             #if !os(tvOS) || !targetEnvironment(simulator)
-            sampler = try VoxelKit.main.render.makeSampler(interpolate: interpolate.mtl, extend: extend.mtl, mipFilter: mipmap)
+            sampler = try VoxelKit.main.render.makeSampler(interpolate: interpolation.mtl, extend: extend.mtl, mipFilter: mipmap)
             #endif
-            VoxelKit.main.logger.log(node: self, .info, nil, "New Sample Mode. Interpolate: \(interpolate) & Extend: \(extend)")
-            setNeedsRender()
+            VoxelKit.main.logger.log(node: self, .info, nil, "New Sample Mode. Interpolate: \(interpolation) & Extend: \(extend)")
+            render()
         } catch {
-            VoxelKit.main.logger.log(node: self, .error, nil, "Error setting new Sample Mode. Interpolate: \(interpolate) & Extend: \(extend)", e: error)
+            VoxelKit.main.logger.log(node: self, .error, nil, "Error setting new Sample Mode. Interpolate: \(interpolation) & Extend: \(extend)", e: error)
         }
     }
     
     // MARK: - Render
     
-    public func setNeedsRender() {
-        guard !bypass || self is VOXGenerator else {
-            renderOuts()
-            return
-        }
-        guard !needsRender else { return }
-//        guard view.metalView.resolution != nil else {
-//            VoxelKit.main.logger.log(node: self, .warning, .render, "Metal View res not set.", loop: true)
-//            VoxelKit.main.logger.log(node: self, .debug, .render, "Auto applying Resolution...", loop: true)
-//            applyResolution {
-//                self.setNeedsRender()
-//            }
-//            return
-//        }
-        VoxelKit.main.logger.log(node: self, .detail, .render, "Requested.", loop: true)
-        needsRender = true
-    }
-        
-    func renderOuts() {
-        if let voxOut = self as? NODEOutIO {
-            for voxOutPath in voxOut.outputPathList {
-                let vox = voxOutPath.nodeIn
-                guard !vox.destroyed else { continue }
-                guard vox.id != self.id else {
-                    VoxelKit.main.logger.log(node: self, .error, .render, "Connected to self.")
-                    continue
-                }
-                vox.setNeedsRender()
-            }
-        }
-    }
-
-    public func didRender(texture: MTLTexture, force: Bool) {
-        self.texture = texture
-        didRender(force: force)
+    public func render() {
+        guard renderObject.engine.renderMode == .auto else { return }
+        renderObject.logger.log(node: self, .detail, .render, "Render Requested", loop: true)
+        let renderRequest = RenderRequest(frameIndex: renderObject.frameIndex, node: self, completion: nil)
+        queueRender(renderRequest)
     }
     
-    public func didRenderTiles(force: Bool) {
-        didRender(force: force)
-    }
-    
-    func didRender(force: Bool = false) {
+    open func didRender(renderPack: RenderPack) {
+        self.texture = renderPack.response.texture
         renderIndex += 1
         delegate?.nodeDidRender(self)
-        if VoxelKit.main.render.engine.renderMode != .frameTree {
-            for customLinkedVox in customLinkedNodes {
-                customLinkedVox.setNeedsRender()
-            }
-            if !force { // CHECK the force!
-                renderOuts()
-//                renderCustomVertexTexture()
-            }
-        }
+        renderOuts(renderPack: renderPack)
+        renderCustomVertexTexture()
+    }
+    
+    public func clearRender() {
+        texture = nil
+        renderObject.logger.log(node: self, .info, .render, "Clear Render")
+        removeRes()
     }
     
     // MARK: - Connect
     
-    func setNeedsConnectSingle(new newInVox: (NODE & NODEOut)?, old oldInVox: (NODE & NODEOut)?) {
-        guard var voxInIO = self as? VOX & NODEInIO else { VoxelKit.main.logger.log(node: self, .error, .connection, "NODEIn's Only"); return }
-        if let oldVoxOut = oldInVox {
-            var voxOut = oldVoxOut as! (VOX & NODEOutIO)
-            for (i, voxOutPath) in voxOut.outputPathList.enumerated() {
-                if voxOutPath.nodeIn.id == voxInIO.id {
-                    voxOut.outputPathList.remove(at: i)
-                    break
-                }
-            }
-            voxInIO.inputList = []
-            VoxelKit.main.logger.log(node: self, .info, .connection, "Disonnected Single: \(voxOut)")
-        }
-        if let newVoxOut = newInVox {
-            guard newVoxOut.id != self.id else {
-                VoxelKit.main.logger.log(node: self, .error, .connection, "Can't connect to self.")
-                return
-            }
-            var voxOut = newVoxOut as! (VOX & NODEOutIO)
-            voxInIO.inputList = [voxOut]
-            voxOut.outputPathList.append(NODEOutPath(nodeIn: voxInIO, inIndex: 0))
-            applyResolution { self.setNeedsRender() }
-            VoxelKit.main.logger.log(node: self, .info, .connection, "Connected Single: \(voxOut)")
-        } else {
-            disconnected()
-        }
-    }
+    public func didConnect() {}
     
-    func setNeedsConnectMerger(new newInVox: (NODE & NODEOut)?, old oldInVox: (NODE & NODEOut)?, second: Bool) {
-        guard var voxInIO = self as? VOX & NODEInIO else { VoxelKit.main.logger.log(node: self, .error, .connection, "NODEIn's Only"); return }
-        guard let voxInMerger = self as? NODEInMerger else { return }
-        if let oldVoxOut = oldInVox {
-            var voxOut = oldVoxOut as! (VOX & NODEOutIO)
-            for (i, voxOutPath) in voxOut.outputPathList.enumerated() {
-                if voxOutPath.nodeIn.id == voxInIO.id {
-                    voxOut.outputPathList.remove(at: i)
-                    break
-                }
-            }
-            voxInIO.inputList = []
-            VoxelKit.main.logger.log(node: self, .info, .connection, "Disonnected Merger: \(voxOut)")
-        }
-        if let newVoxOut = newInVox {
-            if var voxOutA = (!second ? newVoxOut : voxInMerger.inputA) as? (VOX & NODEOutIO),
-                var voxOutB = (second ? newVoxOut : voxInMerger.inputB) as? (VOX & NODEOutIO) {
-                voxInIO.inputList = [voxOutA, voxOutB]
-                voxOutA.outputPathList.append(NODEOutPath(nodeIn: voxInIO, inIndex: 0))
-                voxOutB.outputPathList.append(NODEOutPath(nodeIn: voxInIO, inIndex: 1))
-                applyResolution { self.setNeedsRender() }
-                VoxelKit.main.logger.log(node: self, .info, .connection, "Connected Merger: \(voxOutA), \(voxOutB)")
-            }
-        } else {
-            disconnected()
-        }
-    }
-    
-    func setNeedsConnectMulti(new newInVoxs: [NODE & NODEOut], old oldInVoxs: [NODE & NODEOut]) {
-        guard var voxInIO = self as? VOX & NODEInIO else { VoxelKit.main.logger.log(node: self, .error, .connection, "NODEIn's Only"); return }
-        voxInIO.inputList = newInVoxs
-        for oldInVox in oldInVoxs {
-            if var input = oldInVox as? (VOX & NODEOutIO) {
-                for (j, voxOutPath) in input.outputPathList.enumerated() {
-                    if voxOutPath.nodeIn.id == voxInIO.id {
-                        input.outputPathList.remove(at: j)
-                        break
-                    }
-                }
-            }
-        }
-        for (i, newInVox) in newInVoxs.enumerated() {
-            if var input = newInVox as? (VOX & NODEOutIO) {
-                input.outputPathList.append(NODEOutPath(nodeIn: voxInIO, inIndex: i))
-            }
-        }
-        if newInVoxs.isEmpty {
-            disconnected()
-        }
-        VoxelKit.main.logger.log(node: self, .info, .connection, "Connected Multi: \(newInVoxs)")
-        applyResolution { self.setNeedsRender() }
-    }
-    
-    func disconnected() {
+    public func didDisconnect() {
         removeRes()
     }
     
-    // MARK: - Other
+    // MARK: - Codable
     
-    public func checkLive() {
-        for liveValue in liveValues {
-            if liveValue.uniformIsNew {
-                setNeedsRender()
-                break
-            }
-        }
-        for liveValues in liveArray {
-            for liveValue in liveValues {
-                if liveValue.uniformIsNew {
-                    setNeedsRender()
-                    break
-                }
-            }
-        }
+    enum PIXCodingKeys: CodingKey {
+        case id
+        case name
+        case typeName
+        case bypass
+        case viewInterpolation
+        case interpolation
+        case extend
+        case mipmap
+        case compare
+        case liveList
     }
     
+    enum LiveTypeCodingKey: CodingKey {
+        case type
+    }
+
+    private struct EmptyDecodable: Decodable {}
+
+    public required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: PIXCodingKeys.self)
+        id = try container.decode(UUID.self, forKey: .id)
+        name = try container.decode(String.self, forKey: .name)
+        typeName = try container.decode(String.self, forKey: .typeName)
+        bypass = try container.decode(Bool.self, forKey: .bypass)
+        viewInterpolation = try container.decode(ViewInterpolation.self, forKey: .viewInterpolation)
+        interpolation = try container.decode(PixelInterpolation.self, forKey: .interpolation)
+        extend = try container.decode(ExtendMode.self, forKey: .extend)
+        mipmap = MTLSamplerMipFilter(rawValue: try container.decode(UInt.self, forKey: .mipmap))!
+        compare = MTLCompareFunction(rawValue: try container.decode(UInt.self, forKey: .compare))!
+        
+        if Thread.isMainThread {
+            setupVOX()
+        } else {
+            let group = DispatchGroup()
+            group.enter()
+            DispatchQueue.main.async { [weak self] in
+                self?.setupVOX()
+                group.leave()
+            }
+            group.wait()
+        }
+        
+        var liveCodables: [LiveCodable] = []
+        var liveListContainer = try container.nestedUnkeyedContainer(forKey: .liveList)
+        var liveListContainerMain = liveListContainer
+        while(!liveListContainer.isAtEnd) {
+            let liveTypeContainer = try liveListContainer.nestedContainer(keyedBy: LiveTypeCodingKey.self)
+            guard let liveType: LiveType = try? liveTypeContainer.decode(LiveType.self, forKey: .type) else {
+                _ = try? liveListContainerMain.decode(EmptyDecodable.self)
+                continue
+            }
+            let liveCodable: LiveCodable = try liveListContainerMain.decode(liveType.liveCodableType)
+            liveCodables.append(liveCodable)
+        }
+        for liveCodable in liveCodables {
+            guard let liveWrap: LiveWrap = liveList.first(where: { $0.typeName == liveCodable.typeName }) else { continue }
+            liveWrap.setLiveCodable(liveCodable)
+        }
+        
+    }
+    
+    open func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: PIXCodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(name, forKey: .name)
+        try container.encode(typeName, forKey: .typeName)
+        try container.encode(bypass, forKey: .bypass)
+        try container.encode(viewInterpolation, forKey: .viewInterpolation)
+        try container.encode(interpolation, forKey: .interpolation)
+        try container.encode(extend, forKey: .extend)
+        try container.encode(mipmap.rawValue, forKey: .mipmap)
+        try container.encode(compare.rawValue, forKey: .compare)
+        try container.encode(liveList.map({ $0.getLiveCodable() }), forKey: .liveList)
+    }
+    
+    
+    // MARK: - Other
+    
     public func destroy() {
+        clearRender()
         VoxelKit.main.render.remove(node: self)
         texture = nil
         bypass = true
         destroyed = true
+        view.destroy()
+    }
+    
+}
+
+public extension VOX {
+    
+    func addView() -> NODEView {
+        let pixelFormat: MTLPixelFormat = overrideBits?.pixelFormat ?? VoxelKit.main.render.bits.pixelFormat
+        let view = NODEView(with: renderObject, pixelFormat: pixelFormat)
+        additionalViews.append(view)
+        applyResolution { [weak self] in
+            self?.render()
+        }
+        return view
+    }
+    
+    func removeView(_ view: NODEView) {
+        additionalViews.removeAll { nodeView in
+            nodeView == view
+        }
+    }
+    
+}
+
+// MARK: - Equals
+
+extension VOX {
+    
+    public static func ==(lhs: VOX, rhs: VOX) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    public static func !=(lhs: VOX, rhs: VOX) -> Bool {
+        return lhs.id != rhs.id
+    }
+    
+    public static func ==(lhs: VOX?, rhs: VOX) -> Bool {
+        guard lhs != nil else { return false }
+        return lhs!.id == rhs.id
+    }
+    
+    public static func !=(lhs: VOX?, rhs: VOX) -> Bool {
+        guard lhs != nil else { return false }
+        return lhs!.id != rhs.id
+    }
+    
+    public static func ==(lhs: VOX, rhs: VOX?) -> Bool {
+        guard rhs != nil else { return false }
+        return lhs.id == rhs!.id
+    }
+    
+    public static func !=(lhs: VOX, rhs: VOX?) -> Bool {
+        guard rhs != nil else { return false }
+        return lhs.id != rhs!.id
     }
     
     public func isEqual(to node: NODE) -> Bool {
-        id == node.id
-    }
-    
-    public static func == (lhs: VOX, rhs: VOX) -> Bool {
-        lhs.id == rhs.id
+        self.id == node.id
     }
     
 }

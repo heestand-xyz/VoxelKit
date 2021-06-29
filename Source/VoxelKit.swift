@@ -8,6 +8,7 @@
 
 import RenderKit
 import MetalKit
+import Resolution
 
 /// overrides the default metal lib
 public var pixelKitMetalLibURL: URL?
@@ -16,44 +17,14 @@ public class VoxelKit: EngineDelegate, LoggerDelegate {
 
     public static let main = VoxelKit()
     
-    // MARK: Signature
-    
-    #if os(macOS)
-    let kBundleId = "se.hexagons.voxelkit.macos"
-    let kMetalLibName = "VoxelKitShaders-macOS"
-    #elseif os(iOS)
-    let kBundleId = "se.hexagons.voxelkit"
-    #if targetEnvironment(macCatalyst)
-    let kMetalLibName = "VoxelKitShaders-macCatalyst"
-    #else
-    #if targetEnvironment(simulator)
-    let kMetalLibName = "VoxelKitShaders-iOS-Simulator"
-    #else
-    let kMetalLibName = "VoxelKitShaders-iOS"
-    #endif
-    #endif
-    #elseif os(tvOS)
-    let kBundleId = "se.hexagons.voxelkit.tvos"
-    #if targetEnvironment(simulator)
-    let kMetalLibName = "VoxelKitShaders-tvOS-Simulator"
-    #else
-    let kMetalLibName = "VoxelKitShaders-tvOS"
-    #endif
-    #endif
-    
-    public var tileResolution: Resolution3D = .cube(32)
+//    public var tileResolution: Resolution3D = .cube(32)
     
     public let render: Render
     public let logger: Logger
 
     init() {
         
-        if let url = pixelKitMetalLibURL {
-            render = Render(metalLibURL: url)
-        } else {
-            let metalLibURL: URL = Bundle.module.url(forResource: kMetalLibName, withExtension: "metallib", subdirectory: "Metal")!
-            render = Render(metalLibURL: metalLibURL)
-        }
+        render = Render()
         logger = Logger(name: "VoxelKit")
         
         render.engine.deleagte = self
@@ -64,7 +35,7 @@ public class VoxelKit: EngineDelegate, LoggerDelegate {
     // MARK: - Logger Delegate
     
     public func loggerFrameIndex() -> Int {
-        render.frame
+        render.frameIndex
     }
     
     public func loggerLinkIndex(of node: NODE) -> Int? {
@@ -81,7 +52,7 @@ public class VoxelKit: EngineDelegate, LoggerDelegate {
         var secondInputTexture: MTLTexture? = nil
         if let nodeContent = node as? NODEContent {
             if let nodeResource = nodeContent as? NODEResource {
-                guard let pixelBuffer = nodeResource.pixelBuffer else {
+                guard let pixelBuffer = nodeResource.resourcePixelBuffer else {
                     throw Engine.RenderError.texture("Pixel Buffer is nil.")
                 }
                 inputTexture = try Texture.makeTexture(from: pixelBuffer, with: commandBuffer, force8bit: false, on: render.metalDevice)
@@ -96,7 +67,7 @@ public class VoxelKit: EngineDelegate, LoggerDelegate {
             }
             var feed = false
             if let feedbackNode = nodeIn as? FeedbackVOX {
-                if feedbackNode.readyToFeed && feedbackNode.feedActive {
+                if feedbackNode.readyToFeed && feedbackNode.feedbackActive {
                     guard let feedTexture = feedbackNode.feedTexture else {
                         throw Engine.RenderError.texture("Feed Texture not avalible.")
                     }
@@ -154,7 +125,7 @@ public class VoxelKit: EngineDelegate, LoggerDelegate {
             }
             var feed = false
             if let feedbackNode = nodeIn as? FeedbackVOX {
-                if feedbackNode.readyToFeed && feedbackNode.feedActive {
+                if feedbackNode.readyToFeed && feedbackNode.feedbackActive {
                     guard let feedTexture = feedbackNode.tileFeedTexture(at: tileIndex) else {
                         throw Engine.RenderError.texture("Feed Texture not avalible.")
                     }

@@ -7,13 +7,26 @@
 //
 
 import RenderKit
+import Resolution
 
 public class VOXResource: VOXContent, NODEResourceCustom {
     
-    public var resolution: Resolution3D { didSet { applyResolution { self.setNeedsRender() } } }
+    @LiveResolution3D("resolution") public var resolution: Resolution3D = .cube(8)
     
-    public required init(at resolution: Resolution3D, name: String, typeName: String) {
+    public override var liveList: [LiveWrap] {
+        [_resolution]
+    }
+    
+    public init(at resolution: Resolution3D, name: String, typeName: String) {
         self.resolution = resolution
         super.init(name: name, typeName: typeName)
+    }
+    
+    public required init(at resolution: Resolution3D) {
+        fatalError("please use init(name:typeName:)")
+    }
+    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
     }
 }

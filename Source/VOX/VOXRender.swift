@@ -5,10 +5,11 @@
 //  Created by Hexagons on 2019-10-06.
 //
 
-import LiveValues
 import RenderKit
 import simd
 import MetalKit
+import Resolution
+import PixelColor
 
 public extension VOX {
     
@@ -32,11 +33,11 @@ public extension VOX {
     }
     
     var dynamicTexture: MTLTexture? {
-        if VoxelKit.main.render.engine.renderMode.isTile {
-            return renderedTileTexture
-        } else {
-            return renderedTexture
-        }
+//        if VoxelKit.main.render.engine.renderMode.isTile {
+//            return renderedTileTexture
+//        } else {
+        return renderedTexture
+//        }
     }
     
     var renderedRaw8: [UInt8]? {
@@ -50,7 +51,8 @@ public extension VOX {
     }
     
     #if !os(macOS) && !targetEnvironment(macCatalyst)
-    var renderedRaw16: [Float]? {
+    @available(iOS 14.0, *)
+    var renderedRaw16: [Float16]? {
         guard let texture = dynamicTexture else { return nil }
         do {
             return try Texture.raw3d16(texture: texture)
@@ -61,7 +63,7 @@ public extension VOX {
     }
     #endif
     
-    var renderedRaw32: [float4]? {
+    var renderedRaw32: [Float]? {
         guard let texture = dynamicTexture else { return nil }
         do {
             return try Texture.raw3d32(texture: texture)
@@ -131,8 +133,8 @@ public extension VOX {
             let z = max(0, min(Int(round(pos.z)), Int(zMax)))
             return raw[y][x][z]
         }
-        public var average: LiveColor {
-            var color: LiveColor!
+        public var average: PixelColor {
+            var color: PixelColor!
             for row in raw {
                 for col in row {
                     for vx in col {
@@ -140,15 +142,22 @@ public extension VOX {
                             color = vx.color
                             continue
                         }
-                        color += vx.color
+                        color = PixelColor(red: color.red + vx.color.red,
+                                           green: color.green + vx.color.green,
+                                           blue: color.blue + vx.color.blue,
+                                           alpha: color.alpha + vx.color.alpha)
                     }
                 }
             }
-            color /= LiveFloat(CGFloat(resolution.count))
+            let count = CGFloat(resolution.count)
+            color = PixelColor(red: color.red / count,
+                               green: color.green / count,
+                               blue: color.blue / count,
+                               alpha: color.alpha / count)
             return color
         }
-        public var maximum: LiveColor {
-            var color: LiveColor!
+        public var maximum: PixelColor {
+            var color: PixelColor!
             for row in raw {
                 for col in row {
                     for vx in col {
@@ -156,7 +165,7 @@ public extension VOX {
                             color = vx.color
                             continue
                         }
-                        if Bool(vx.color > color!) {
+                        if Bool(vx.color.brightness > color!.brightness) {
                             color = vx.color
                         }
                     }
@@ -164,8 +173,8 @@ public extension VOX {
             }
             return color
         }
-        public var minimum: LiveColor {
-            var color: LiveColor!
+        public var minimum: PixelColor {
+            var color: PixelColor!
             for row in raw {
                 for col in row {
                     for vx in col {
@@ -173,7 +182,7 @@ public extension VOX {
                             color = vx.color
                             continue
                         }
-                        if Bool(vx.color < color!) {
+                        if Bool(vx.color.brightness < color!.brightness) {
                             color = vx.color
                         }
                     }
@@ -230,7 +239,7 @@ public extension VOX {
                         let chan = rawVoxels[j]
                         c.append(chan)
                     }
-                    let color = LiveColor(c)
+                    let color = PixelColor(floats: c)
                     let uvw = Vector(x: u, y: v, z: w)
                     let voxel = Voxel(x: x, y: y, z: z, uvw: uvw, color: color)
                     voxelRow.append(voxel)

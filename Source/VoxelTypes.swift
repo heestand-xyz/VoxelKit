@@ -9,17 +9,17 @@
 import RenderKit
 import CoreGraphics
 
-public enum Axis {
-    case x
-    case y
-    case z
-    var index: Int {
+public enum Axis: String, Enumable {
+    case x, y, z
+    public var index: Int {
         switch self {
         case .x: return 0
         case .y: return 1
         case .z: return 2
         }
     }
+    public var name: String { rawValue.uppercased() }
+    public var typeName: String { rawValue }
 }
 
 public struct Polygon {

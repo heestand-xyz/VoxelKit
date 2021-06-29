@@ -6,8 +6,8 @@
 //  Copyright © 2019 Hexagons. All rights reserved.
 //
 
-import LiveValues
 import RenderKit
+import Resolution
 
 extension VOX {
 
@@ -33,14 +33,7 @@ extension VOX {
         } else if let voxIn = self as? VOX & NODEInIO {
             if #available(iOS 11.3, *) {
                 if let resPix = self as? ResolutionVOX {
-                    let resRes: Resolution3D
-                    if resPix.inheritInResolution {
-                        guard let inResolution = (resPix.inputList.first as? VOX)?.realResolution else { return nil }
-                        resRes = inResolution
-                    } else {
-                        resRes = resPix.resolution
-                    }
-                    return resRes * resPix.resMultiplier
+                    return resPix.resolution
                 }
             }
 //            if let remapPix = voxIn as? RemapPIX {
@@ -65,7 +58,7 @@ extension VOX {
 
     public func applyResolution(applied: @escaping () -> ()) {
         let res = renderedResolution3d
-        VoxelKit.main.logger.log(node: self, .info, .res, "Resolution: \(res) [\(res.x)x\(res.y)x\(res.z)] (\(res.count))")
+        VoxelKit.main.logger.log(node: self, .info, .resolution, "Resolution: \(res) [\(res.x)x\(res.y)x\(res.z)] (\(res.count))")
         applied()
 //        let res = renderResolution
 //        guard view.resolutionSize == nil || view.resolutionSize! != res.size.cg else {

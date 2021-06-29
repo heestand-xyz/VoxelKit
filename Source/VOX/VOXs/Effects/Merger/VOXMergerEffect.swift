@@ -14,7 +14,11 @@ public class VOXMergerEffect: VOXEffect, NODEMergerEffect, NODEInMerger {
     public var inputB: (NODE & NODEOut)? { didSet { setNeedsConnectMerger(new: inputB, old: oldValue, second: true) } }
     public override var connectedIn: Bool { return inputList.count == 2 }
     
-    public var placement: Placement = .fit { didSet { setNeedsRender() } }
+    @LiveEnum("placement") public var placement: Placement = .fit
+    
+    public override var liveList: [LiveWrap] {
+        [_placement]
+    }
     
     // MARK: - Life Cycle
     

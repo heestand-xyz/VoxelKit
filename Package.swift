@@ -5,19 +5,19 @@ import PackageDescription
 let package = Package(
     name: "VoxelKit",
     platforms: [
-        .iOS(.v11),
-        .macOS(.v10_13),
-        .tvOS(.v11)
+        .iOS(.v13),
+        .tvOS(.v14),
+        .macOS(.v10_15),
     ],
     products: [
         .library(name: "VoxelKit", targets: ["VoxelKit"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/hexagons/RenderKit.git", from: "0.5.3"),
+        .package(url: "https://github.com/hexagons/RenderKit.git", from: "1.0.0"),
     ],
     targets: [
-        .target(name: "VoxelKit", dependencies: ["RenderKit"], path: "Source", resources: [
-            .copy("Metal/"),
+        .target(name: "VoxelKit", dependencies: ["RenderKit"], path: "Source", exclude: [
+            "Shaders/README.md",
         ]),
     ]
 )
