@@ -58,7 +58,9 @@ extension VOX {
 
     public func applyResolution(applied: @escaping () -> ()) {
         let res = renderedResolution3d
-        VoxelKit.main.logger.log(node: self, .info, .resolution, "Resolution: \(res) [\(res.x)x\(res.y)x\(res.z)] (\(res.count))")
+        finalResolution = .custom(w: res.x, h: res.y)
+        finalResolution3d = res
+        VoxelKit.main.logger.log(node: self, .info, .resolution, "Apply Resolution: \(res) (\(res.count))")
         applied()
 //        let res = renderResolution
 //        guard view.resolutionSize == nil || view.resolutionSize! != res.size.cg else {

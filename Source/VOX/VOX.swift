@@ -42,8 +42,8 @@ public class VOX: NODE3D, Equatable {
     public var uniformIndexArrayMaxLimit: Int? { nil }
     
      
-    @Published public var finalResolution: Resolution = .square(10)
-    @Published public var finalResolution3d: Resolution3D = .cube(10)
+    @Published public var finalResolution: Resolution = .square(8)
+    @Published public var finalResolution3d: Resolution3D = .cube(8)
  
     
     public var vertexUniforms: [CGFloat] { return [] }
