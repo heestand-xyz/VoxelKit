@@ -22,6 +22,18 @@ public class VOXMergerEffect: VOXEffect, NODEMergerEffect, NODEInMerger {
     
     // MARK: - Life Cycle
     
+    public required init() {
+        fatalError("please use init(name:typeName:)")
+    }
+    
+    public override init(name: String, typeName: String) {
+        super.init(name: name, typeName: typeName)
+    }
+    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    
     public override func destroy() {
         inputA = nil
         inputB = nil
