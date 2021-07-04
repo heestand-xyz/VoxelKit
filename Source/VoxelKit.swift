@@ -69,7 +69,7 @@ public class VoxelKit: EngineDelegate, LoggerDelegate {
             if let feedbackNode = nodeIn as? FeedbackVOX {
                 if feedbackNode.readyToFeed && feedbackNode.feedbackActive {
                     guard let feedTexture = feedbackNode.feedTexture else {
-                        throw Engine.RenderError.texture("Feed Texture not avalible.")
+                        throw Engine.RenderError.texture("Feed Texture not available.")
                     }
                     inputTexture = feedTexture
                     feed = true
@@ -127,7 +127,7 @@ public class VoxelKit: EngineDelegate, LoggerDelegate {
             if let feedbackNode = nodeIn as? FeedbackVOX {
                 if feedbackNode.readyToFeed && feedbackNode.feedbackActive {
                     guard let feedTexture = feedbackNode.tileFeedTexture(at: tileIndex) else {
-                        throw Engine.RenderError.texture("Feed Texture not avalible.")
+                        throw Engine.RenderError.texture("Feed Texture not available.")
                     }
                     inputTexture = feedTexture
                     feed = true
