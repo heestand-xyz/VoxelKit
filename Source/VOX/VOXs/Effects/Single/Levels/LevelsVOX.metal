@@ -16,6 +16,7 @@ struct Uniforms {
     float gamma;
     float invert;
     float opacity;
+    float offset;
 };
 
 kernel void effectSingleLevelsVOX(const device Uniforms& in [[ buffer(0) ]],
@@ -51,6 +52,8 @@ kernel void effectSingleLevelsVOX(const device Uniforms& in [[ buffer(0) ]],
     if (in.invert) {
         c = 1.0 - c;
     }
+    
+    c += in.offset;
     
     c *= in.opacity;
     

@@ -168,5 +168,16 @@ public class VoxelKit: EngineDelegate, LoggerDelegate {
 
     }
     
+    public func logAll(padding: Bool = false) {
+        logger.logAll(padding: padding)
+        render.logger.logAll(padding: padding)
+        render.engine.logger.logAll(padding: padding)
+    }
+    
+    public func logDebug(padding: Bool = false) {
+        logger.logDebug(padding: padding)
+        render.logger.logDebug(padding: padding)
+        render.engine.logger.logDebug(padding: padding)
+    }
 
 }

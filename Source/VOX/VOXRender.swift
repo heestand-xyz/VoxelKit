@@ -197,7 +197,7 @@ public extension VOX {
             VoxelKit.main.logger.log(node: self, .error, .texture, "Rendered voxels failed. Voxels not found.")
             return nil
         }
-        guard let resolution = realResolution else {
+        guard let resolution = derivedResolution else {
             VoxelKit.main.logger.log(node: self, .error, .texture, "Rendered voxels failed. Resolution not found.")
             return nil
         }

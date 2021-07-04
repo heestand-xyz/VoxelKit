@@ -16,42 +16,34 @@ extension VOX {
     }
     
     public var renderedResolution3d: Resolution3D {
-        return realResolution ?? ._8
+        derivedResolution ?? ._8
     }
 
-    public var realResolution: Resolution3D? {
+    public var derivedResolution: Resolution3D? {
         guard !bypass else {
             if let voxIn = self as? NODEInIO {
-                return (voxIn.inputList.first as? VOX)?.realResolution
+                return (voxIn.inputList.first as? VOX)?.derivedResolution
             }
             return nil
         }
         if let voxContent = self as? VOXContent {
             if let voxGenerator = voxContent as? VOXGenerator {
                 return voxGenerator.resolution
+            } else if let voxResource = voxContent as? VOXResource {
+                return voxResource.resolution
             }
-        } else if let voxIn = self as? VOX & NODEInIO {
-            if #available(iOS 11.3, *) {
-                if let resPix = self as? ResolutionVOX {
-                    return resPix.resolution
-                }
+        } else if let voxEffect = self as? VOXEffect {
+            if let resPix = self as? ResolutionVOX {
+                return resPix.resolution
+            } else if let nodeRes3d = self as? NODEResolution3D {
+                return nodeRes3d.resolution
             }
-//            if let remapPix = voxIn as? RemapPIX {
-//                guard let inResB = (remapPix.inputB as? PIX)?.realResolution else { return nil }
-//                return inResB
-//            }
-            guard let inRes = (voxIn.inputList.first as? VOX)?.realResolution else { return nil }
-//            if let cropPix = self as? CropPIX {
-//                return .size(inRes.size * LiveSize(cropPix.resScale))
-//            } else if let convertPix = self as? ConvertPIX {
-//                return .size(inRes.size * LiveSize(convertPix.resScale))
-//            } else if let flipFlopPix = self as? FlipFlopPIX {
-//                return flipFlopPix.flop != .none ? Resolution(inRes.raw.flopped) : inRes
-//            }
+            guard let inRes = (voxEffect.inputList.first as? VOX)?.derivedResolution else {
+//                print("\(name) >>>>>>>>>>> X", voxEffect.inputList.map(\.name))
+                return nil
+            }
+//            print("\(name) >>>>>>>>>>> =D", voxEffect.inputList.map(\.name))
             return inRes
-        }
-        if let nodeRes3d = self as? NODEResolution3D {
-            return nodeRes3d.resolution
         }
         return nil
     }

@@ -30,7 +30,7 @@ public class VOXGenerator: VOXContent, NODEGenerator, /*NODETileable3D,*/ NODERe
     public init(at resolution: Resolution3D, name: String, typeName: String) {
         self.resolution = resolution
         super.init(name: name, typeName: typeName)
-        applyResolution { self.render() }
+        applyResolution { [weak self] in self?.render() }
     }
     
     public required init(at resolution: Resolution3D) {
