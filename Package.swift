@@ -13,7 +13,7 @@ let package = Package(
         .library(name: "VoxelKit", targets: ["VoxelKit"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/hexagons/RenderKit.git", from: "1.0.0"),
+        .package(url: "https://github.com/hexagons/RenderKit.git", from: "1.0.2"),
     ],
     targets: [
         .target(name: "VoxelKit", dependencies: ["RenderKit"], path: "Source", exclude: [
