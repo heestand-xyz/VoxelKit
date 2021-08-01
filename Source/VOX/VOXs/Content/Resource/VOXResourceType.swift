@@ -12,6 +12,10 @@ public enum VOXResourceType: String, Codable, Hashable, CaseIterable, Identifiab
         }
     }
     
+    public var typeName: String {
+        "vox-content-resource-\(name.lowercased().replacingOccurrences(of: " ", with: "-"))"
+    }
+    
     public var type: VOXResource.Type {
         switch self {
         case .object:

@@ -21,6 +21,10 @@ public enum VOXMergerEffectType: String, Codable, Hashable, CaseIterable, Identi
         }
     }
     
+    public var typeName: String {
+        "vox-effect-merger-\(name.lowercased().replacingOccurrences(of: " ", with: "-"))"
+    }
+    
     public var type: VOXMergerEffect.Type {
         switch self {
         case .blend:

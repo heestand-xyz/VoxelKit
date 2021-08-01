@@ -24,6 +24,10 @@ public enum VOXGeneratorType: String, Codable, Hashable, CaseIterable, Identifia
         }
     }
     
+    public var typeName: String {
+        "vox-content-generator-\(name.lowercased().replacingOccurrences(of: " ", with: "-"))"
+    }
+    
     public var type: VOXGenerator.Type {
         switch self {
         case .box:

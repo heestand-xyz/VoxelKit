@@ -37,7 +37,7 @@ public class BoxVOX: VOXGenerator {
     // MARK: - Life Cycle
     
     public required init(at resolution: Resolution3D) {
-        super.init(at: resolution, name: "Sphere", typeName: "vox-content-generator-sphere")
+        super.init(at: resolution, name: "Sphere", typeName: "vox-content-generator-box")
     }
     
     required init(from decoder: Decoder) throws {

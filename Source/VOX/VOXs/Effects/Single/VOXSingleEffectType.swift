@@ -39,6 +39,10 @@ public enum VOXSingleEffectType: String, Codable, Hashable, CaseIterable, Identi
         }
     }
     
+    public var typeName: String {
+        "vox-effect-single-\(name.lowercased().replacingOccurrences(of: " ", with: "-"))"
+    }
+    
     public var type: VOXSingleEffect.Type {
         switch self {
         case .blur:
