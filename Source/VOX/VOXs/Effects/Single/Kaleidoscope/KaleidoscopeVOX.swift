@@ -18,7 +18,7 @@ public class KaleidoscopeVOX: VOXSingleEffect {
     
     @LiveInt("divisions", range: 1...24) public var divisions: Int = 12
     @LiveBool("mirror") public var mirror: Bool = true
-    @LiveFloat("rotation", range: -0.5...0.5) public var rotation: CGFloat = 0.0
+    @LiveFloat("rotation", range: -0.5...0.5, increment: 0.125) public var rotation: CGFloat = 0.0
     @LiveVector("position") public var position: SIMD3<Double> = .zero
     @LiveEnum("axis") public var axis: Axis = .z
     
