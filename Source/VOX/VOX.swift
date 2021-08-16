@@ -233,7 +233,7 @@ public class VOX: NODE3D, Equatable {
     
     // MARK: - Codable
     
-    enum PIXCodingKeys: CodingKey {
+    enum VOXCodingKeys: CodingKey {
         case id
         case name
         case typeName
@@ -253,7 +253,7 @@ public class VOX: NODE3D, Equatable {
     private struct EmptyDecodable: Decodable {}
 
     public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: PIXCodingKeys.self)
+        let container = try decoder.container(keyedBy: VOXCodingKeys.self)
         id = try container.decode(UUID.self, forKey: .id)
         name = try container.decode(String.self, forKey: .name)
         typeName = try container.decode(String.self, forKey: .typeName)
@@ -296,7 +296,7 @@ public class VOX: NODE3D, Equatable {
     }
     
     open func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: PIXCodingKeys.self)
+        var container = encoder.container(keyedBy: VOXCodingKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(name, forKey: .name)
         try container.encode(typeName, forKey: .typeName)
