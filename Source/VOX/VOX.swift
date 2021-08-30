@@ -17,7 +17,7 @@ public class VOX: NODE3D, Equatable {
     
     public var renderObject: Render { VoxelKit.main.render }
     
-    public let id: UUID
+    public var id: UUID
     public var name: String
     public let typeName: String
     
