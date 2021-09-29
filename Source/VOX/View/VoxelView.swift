@@ -209,7 +209,7 @@ extension UINSVoxelView {
         
         var constants = InstanceConstants(modelViewProjectionMatrix: projectionMatrix * viewMatrix * worldMatrix,
                                           normalMatrix: viewMatrix * worldMatrix,
-                                          color: SIMD4<Float>(x: 1.0, y: 1.0, z: 1.0, w: 1.0))
+                                          color: SIMD4<Float>(x: 1.0, y: 0.5, z: 0.5, w: 1.0))
         
         memcpy(constantBuffer.contents(), &constants, MemoryLayout<InstanceConstants>.size)
         
