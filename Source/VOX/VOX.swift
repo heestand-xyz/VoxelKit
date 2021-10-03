@@ -12,6 +12,7 @@ import simd
 import Combine
 import CoreGraphics
 import Resolution
+import PixelColor
 
 public class VOX: NODE3D, Equatable {
     
@@ -45,6 +46,13 @@ public class VOX: NODE3D, Equatable {
     @Published public var finalResolution: Resolution = .square(8)
     @Published public var finalResolution3d: Resolution3D = .cube(8)
  
+    
+    public var clearColor: PixelColor = .clear {
+        didSet {
+            render()
+        }
+    }
+    
     
     public var vertexUniforms: [CGFloat] { return [] }
     public var shaderNeedsAspect: Bool { return false }
@@ -199,6 +207,10 @@ public class VOX: NODE3D, Equatable {
             VoxelKit.main.logger.log(node: self, .error, nil, "Error setting new Sample Mode. Interpolate: \(interpolation) & Extend: \(extend)", e: error)
         }
     }
+    
+    // MARK: - Live
+    
+    public func liveValueChanged() {}
     
     // MARK: - Render
     
