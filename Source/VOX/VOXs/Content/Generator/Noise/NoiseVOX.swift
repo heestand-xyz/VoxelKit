@@ -18,7 +18,7 @@ public class NoiseVOX: VOXGenerator {
     // MARK: - Public Properties
     
     @LiveInt("seed", range: 0...10) public var seed: Int = 0
-    @LiveInt("octaves", range: 1...10) public var octaves: Int = 10
+    @LiveInt("octaves", range: 1...10) public var octaves: Int = 1
     @LiveVector("position") public var position: SIMD3<Double> = .zero
     @LiveFloat("wPosition") public var wPosition: CGFloat = 0.0
     @LiveFloat("zoom") public var zoom: CGFloat = 1.0

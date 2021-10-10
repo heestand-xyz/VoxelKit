@@ -56,7 +56,7 @@ kernel void contentGeneratorNoiseVOX(const device Uniforms& in [[ buffer(0) ]],
     
     float ux = (x - in.x - 0.5) / in.zoom;
     float vy = (y - in.y - 0.5) / in.zoom;
-    float wz = (z - in.y - 0.5) / in.zoom;
+    float wz = (z - in.z - 0.5) / in.zoom;
 
     float n;
     if (in.random > 0.0) {
