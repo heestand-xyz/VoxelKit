@@ -111,11 +111,11 @@ public extension VOX {
     
     struct VoxelPack {
         public let resolution: Resolution3D
-        public let raw: [[[Voxel]]]
-        public func voxel(x: Int, y: Int, z: Int) -> Voxel {
+        public let raw: [[[RenderVoxel]]]
+        public func voxel(x: Int, y: Int, z: Int) -> RenderVoxel {
             return raw[z][y][x]
         }
-        public func voxel(uvw: Vector) -> Voxel {
+        public func voxel(uvw: Vector) -> RenderVoxel {
             let xMax = resolution.vector.x - 1
             let yMax = resolution.vector.y - 1
             let zMax = resolution.vector.z - 1
@@ -124,7 +124,7 @@ public extension VOX {
             let z = max(0, min(Int(round(uvw.z * zMax + 0.5)), Int(zMax)))
             return voxel(pos: Vector(x: CGFloat(x), y: CGFloat(y), z: CGFloat(z)))
         }
-        public func voxel(pos: Vector) -> Voxel {
+        public func voxel(pos: Vector) -> RenderVoxel {
             let xMax = resolution.vector.x - 1
             let yMax = resolution.vector.y - 1
             let zMax = resolution.vector.z - 1
@@ -217,16 +217,16 @@ public extension VOX {
     }
     
     func renderedVoxels(for rawVoxels: [CGFloat], at resolution: Resolution3D) -> VoxelPack? {
-        var voxels: [[[Voxel]]] = []
+        var voxels: [[[RenderVoxel]]] = []
         let rx = Int(resolution.vector.x)
         let ry = Int(resolution.vector.y)
         let rz = Int(resolution.vector.z)
         for z in 0..<rz {
             let w = (CGFloat(z) + 0.5) / CGFloat(rz)
-            var voxelCol: [[Voxel]] = []
+            var voxelCol: [[RenderVoxel]] = []
             for y in 0..<ry {
                 let v = (CGFloat(y) + 0.5) / CGFloat(ry)
-                var voxelRow: [Voxel] = []
+                var voxelRow: [RenderVoxel] = []
                 for x in 0..<rx {
                     let u = (CGFloat(x) + 0.5) / CGFloat(rx)
                     var c: [CGFloat] = []
@@ -241,7 +241,7 @@ public extension VOX {
                     }
                     let color = PixelColor(floats: c)
                     let uvw = Vector(x: u, y: v, z: w)
-                    let voxel = Voxel(x: x, y: y, z: z, uvw: uvw, color: color)
+                    let voxel = RenderVoxel(x: x, y: y, z: z, uvw: uvw, color: color)
                     voxelRow.append(voxel)
                 }
                 voxelCol.append(voxelRow)
