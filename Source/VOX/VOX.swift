@@ -57,6 +57,8 @@ public class VOX: NODE3D, Equatable {
     public var vertexUniforms: [CGFloat] { return [] }
     public var shaderNeedsAspect: Bool { return false }
 
+    public var canRender: Bool = true
+    
     public var bypass: Bool = false {
         didSet {
             guard !bypass else { return }
