@@ -92,6 +92,8 @@ public class GradientVOX: VOXGenerator {
         })
     }
     
+    public override var uniformArrayLength: Int? { 5 }
+    
     // MARK: - Life Cycle
     
     public required init(at resolution: Resolution3D) {

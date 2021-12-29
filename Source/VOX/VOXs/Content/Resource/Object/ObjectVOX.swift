@@ -134,6 +134,8 @@ public class ObjectVOX: VOXResource {
         }) ?? []
     }
     public override var uniformArrayMaxLimit: Int? { 10_000 }
+    
+    public override var uniformArrayLength: Int? { 3 }
 
     public override var uniformIndexArray: [[Int]] {
         geometry?.polygons.map({ polygon -> [Int] in
