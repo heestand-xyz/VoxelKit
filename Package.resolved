@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/heestand-xyz/PixelColor",
         "state": {
           "branch": null,
-          "revision": "674f6cfd6619e73888a61cc95261d046d682c3a4",
-          "version": "1.2.3"
+          "revision": "23851e7ea5f2dc844dd6d9a4d730864199583921",
+          "version": "1.3.2"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/hexagons/RenderKit.git",
         "state": {
           "branch": null,
-          "revision": "ccba6ef4049cbc73ff8b0dba36bec29caaa01f3f",
-          "version": "1.0.2"
+          "revision": "395328a7c069e4eceb49ee381bfa37d946290489",
+          "version": "2.0.0"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/heestand-xyz/Resolution",
         "state": {
           "branch": null,
-          "revision": "6bfdb68f12165876ec7563b931e43d3dfbb3c953",
-          "version": "1.0.3"
+          "revision": "0fdee03d7b312f075897cdac437f366cc6631d6a",
+          "version": "1.0.4"
         }
       }
     ]
