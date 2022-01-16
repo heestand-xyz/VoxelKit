@@ -20,7 +20,7 @@ public class NoiseVOX: VOXGenerator {
         set { generatorModel = newValue }
     }
     
-    override open var shaderName: String { return "contentGeneratorNoiseVOX" }
+    override open var shaderName: String { "contentGeneratorNoiseVOX" }
     
     // MARK: - Public Properties
     

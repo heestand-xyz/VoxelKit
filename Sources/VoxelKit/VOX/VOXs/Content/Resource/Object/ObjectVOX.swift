@@ -13,7 +13,14 @@ import Resolution
 
 public class ObjectVOX: VOXResource {
     
-    override open var shaderName: String { return "contentResourceObjectVOX" }
+    public typealias Model = ObjectVoxelModel
+    
+    private var model: Model {
+        get { resourceModel as! Model }
+        set { resourceModel = newValue }
+    }
+    
+    override open var shaderName: String { "contentResourceObjectVOX" }
     
     public var geometry: Geometry? { didSet { render() } }
     
@@ -39,8 +46,8 @@ public class ObjectVOX: VOXResource {
     @LiveEnum("mode") public var mode: Mode = .edge
     
     var minVertex: Vector {
-        guard let geo = geometry else { return Vector(x: 0.0, y: 0.0, z: 0.0) }
-        guard !geo.vertecies.isEmpty else { return Vector(x: 0.0, y: 0.0, z: 0.0) }
+        guard let geo = geometry else { return .zero }
+        guard !geo.vertecies.isEmpty else { return .zero }
         var x: CGFloat?
         var y: CGFloat?
         var z: CGFloat?
@@ -65,8 +72,8 @@ public class ObjectVOX: VOXResource {
     }
     
     var maxVertex: Vector {
-        guard let geo = geometry else { return Vector(x: 0.0, y: 0.0, z: 0.0) }
-        guard !geo.vertecies.isEmpty else { return Vector(x: 0.0, y: 0.0, z: 0.0) }
+        guard let geo = geometry else { return .zero }
+        guard !geo.vertecies.isEmpty else { return .zero }
         var x: CGFloat?
         var y: CGFloat?
         var z: CGFloat?
@@ -146,27 +153,39 @@ public class ObjectVOX: VOXResource {
     
     // MARK: - Life Cycle -
     
-    public init(at resolution: Resolution3D, fileName: String) {
-        super.init(at: resolution, name: "Object", typeName: "vox-content-resource-object")
+    public init(model: Model) {
+        super.init(model: model)
+    }
+    
+    public required init(at resolution: Resolution3D = .default) {
+        let model = Model(resolution: resolution)
+        super.init(model: model)
+    }
+    
+    public convenience init(at resolution: Resolution3D, fileName: String) {
+        self.init(at: resolution)
         load(fileName)
     }
     
-    public required init(at resolution: Resolution3D) {
-        super.init(at: resolution, name: "Object", typeName: "vox-content-resource-object")
-        self.name = "object"
-        geometry = Geometry(vertecies: [
-            Vector(x: 0.0, y: 0.0, z: 0.0),
-            Vector(x: 1.0, y: 0.0, z: 0.0),
-            Vector(x: 0.5, y: 1.0, z: 0.0),
-            Vector(x: 0.5, y: 0.5, z: 1.0)
-        ], normals: [], uvs: [], polygons: [
-            Polygon(vertexIndecies: [0, 1, 2], normalIndecies: [], uvIndecies: []),
-            Polygon(vertexIndecies: [0, 1, 3], normalIndecies: [], uvIndecies: []),
-            Polygon(vertexIndecies: [1, 2, 3], normalIndecies: [], uvIndecies: []),
-            Polygon(vertexIndecies: [0, 2, 3], normalIndecies: [], uvIndecies: [])
-        ])
-        render()
+    // MARK: - Live Model
+    
+    public override func modelUpdateLive() {
+        super.modelUpdateLive()
+        
+        mode = model.mode
+        
+        super.modelUpdateLiveDone()
     }
+    
+    public override func liveUpdateModel() {
+        super.liveUpdateModel()
+        
+        model.mode = mode
+        
+        super.liveUpdateModelDone()
+    }
+    
+    // MARK: - Load
     
     func load(_ name: String) {
         guard let url = find(name) else {
@@ -192,7 +211,7 @@ public class ObjectVOX: VOXResource {
         return url
     }
     
-    func parse(_ text: String) {
+    private func parse(_ text: String) {
         let rows = text.split { $0.isNewline }
         var verts: [Vector] = []
         var norms: [Vector] = []

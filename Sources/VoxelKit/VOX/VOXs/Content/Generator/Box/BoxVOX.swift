@@ -21,7 +21,7 @@ public class BoxVOX: VOXGenerator {
         set { generatorModel = newValue }
     }
     
-    override open var shaderName: String { return "contentGeneratorBoxVOX" }
+    override open var shaderName: String { "contentGeneratorBoxVOX" }
     
     // MARK: - Public Properties
     

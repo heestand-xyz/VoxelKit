@@ -21,7 +21,7 @@ public class SphereVOX: VOXGenerator {
         set { generatorModel = newValue }
     }
     
-    override open var shaderName: String { return "contentGeneratorSphereVOX" }
+    override open var shaderName: String { "contentGeneratorSphereVOX" }
     
     // MARK: - Public Properties
     

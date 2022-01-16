@@ -30,7 +30,7 @@ public class GradientVOX: VOXGenerator {
         set { generatorModel = newValue }
     }
     
-    override open var shaderName: String { return "contentGeneratorGradientVOX" }
+    override open var shaderName: String { "contentGeneratorGradientVOX" }
     
     // MARK: - Public Types
     

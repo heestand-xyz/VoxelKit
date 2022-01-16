@@ -19,7 +19,7 @@ public class ColorVOX: VOXGenerator {
         set { generatorModel = newValue }
     }
     
-    override open var shaderName: String { return "contentGeneratorColorVOX" }
+    override open var shaderName: String { "contentGeneratorColorVOX" }
     
     // MARK: - Property Helpers
     
