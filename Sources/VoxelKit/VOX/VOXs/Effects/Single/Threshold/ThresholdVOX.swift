@@ -27,7 +27,7 @@ public class ThresholdVOX: VOXSingleEffect {
         [threshold, 0.0]
     }
     
-    // MARK: - Life Cycle
+    // MARK: - Life Cycle -
     
     public required init() {
         super.init(name: "Threshold", typeName: "vox-effect-single-threshold")

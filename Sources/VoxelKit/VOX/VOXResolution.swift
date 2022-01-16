@@ -11,7 +11,7 @@ import Resolution
 
 extension Resolution3D {
     
-    static let `default`: Resolution3D = .cube(10)
+    public static let `default`: Resolution3D = .cube(100)
 }
 
 extension VOX {

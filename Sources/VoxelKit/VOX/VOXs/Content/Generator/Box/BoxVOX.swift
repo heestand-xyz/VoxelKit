@@ -14,6 +14,13 @@ import Resolution
 
 public class BoxVOX: VOXGenerator {
     
+    public typealias Model = BoxVoxelModel
+    
+    private var model: Model {
+        get { generatorModel as! Model }
+        set { generatorModel = newValue }
+    }
+    
     override open var shaderName: String { return "contentGeneratorBoxVOX" }
     
     // MARK: - Public Properties
@@ -34,10 +41,41 @@ public class BoxVOX: VOXGenerator {
         [position, size, edgeRadius, cornerRadius, super.color, edgeColor, super.backgroundColor]
     }
     
-    // MARK: - Life Cycle
+    // MARK: - Life Cycle -
     
-    public required init(at resolution: Resolution3D) {
-        super.init(at: resolution, name: "Sphere", typeName: "vox-content-generator-box")
+    public init(model: Model) {
+        super.init(model: model)
+    }
+    
+    public required init(at resolution: Resolution3D = .default) {
+        let model = Model(resolution: resolution)
+        super.init(model: model)
+    }
+    
+    // MARK: - Live Model
+    
+    public override func modelUpdateLive() {
+        super.modelUpdateLive()
+        
+        position = model.position
+        size = model.size
+        edgeRadius = model.edgeRadius
+        edgeColor = model.edgeColor
+        cornerRadius = model.cornerRadius
+        
+        super.modelUpdateLiveDone()
+    }
+    
+    public override func liveUpdateModel() {
+        super.liveUpdateModel()
+        
+        model.position = position
+        model.size = size
+        model.edgeRadius = edgeRadius
+        model.edgeColor = edgeColor
+        model.cornerRadius = cornerRadius
+        
+        super.liveUpdateModelDone()
     }
     
 }

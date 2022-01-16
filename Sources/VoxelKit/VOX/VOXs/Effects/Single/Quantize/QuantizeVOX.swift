@@ -27,7 +27,7 @@ public class QuantizeVOX: VOXSingleEffect {
         [fraction]
     }
     
-    // MARK: - Life Cycle
+    // MARK: - Life Cycle -
     
     public required init() {
         super.init(name: "Quantize", typeName: "vox-effect-single-quantize")

@@ -12,7 +12,7 @@ import PixelColor
 import simd
 import Resolution
 
-public struct ColorStep {
+public struct ColorStep: Codable {
     public var step: CGFloat
     public var color: PixelColor
     public init(_ step: CGFloat, _ color: PixelColor) {
@@ -22,6 +22,13 @@ public struct ColorStep {
 }
 
 public class GradientVOX: VOXGenerator {
+    
+    public typealias Model = GradientVoxelModel
+    
+    private var model: Model {
+        get { generatorModel as! Model }
+        set { generatorModel = newValue }
+    }
     
     override open var shaderName: String { return "contentGeneratorGradientVOX" }
     
@@ -69,21 +76,30 @@ public class GradientVOX: VOXGenerator {
     
     // MARK: - Public Properties
     
+    public var colorSteps: [ColorStep] {
+        get { model.colorStops }
+        set {
+            model.colorStops = newValue
+            super.render()
+        }
+    }
+
     @LiveEnum("direction") public var direction: Direction = .linear(.x)
     @LiveFloat("scale") public var scale: CGFloat = 1.0
     @LiveFloat("offset") public var offset: CGFloat = 0.0
     @LiveVector("position") public var position: SIMD3<Double> = .zero
-    @LiveEnum("extendRamp") public var extendRamp: ExtendMode = .hold
-    public var colorSteps: [ColorStep] = [ColorStep(0.0, .black), ColorStep(1.0, .white)] { didSet { super.render() } }
+    @LiveEnum("extendMode") public var extendMode: ExtendMode = .hold
     
     // MARK: - Property Helpers
     
     public override var liveList: [LiveWrap] {
-        super.liveList + [_direction, _scale, _offset, _position, _extendRamp]
+        super.liveList.filter({ liveWrap in
+            !["backgroundColor", "color"].contains(liveWrap.typeName)
+        }) + [_direction, _scale, _offset, _position, _extendMode]
     }
     
     open override var uniforms: [CGFloat] {
-        return [CGFloat(direction.index), scale, offset, position.x, position.y, position.z, CGFloat(extendRamp.index), CGFloat(direction.axis?.index ?? 0)]
+        return [CGFloat(direction.index), scale, offset, position.x, position.y, position.z, CGFloat(extendMode.index), CGFloat(direction.axis?.index ?? 0)]
     }
     
     public override var uniformArray: [[CGFloat]] {
@@ -94,10 +110,42 @@ public class GradientVOX: VOXGenerator {
     
     public override var uniformArrayLength: Int? { 5 }
     
-    // MARK: - Life Cycle
+    // MARK: - Life Cycle -
     
-    public required init(at resolution: Resolution3D) {
-        super.init(at: resolution, name: "Gradient", typeName: "vox-content-generator-gradient")
+    public init(model: Model) {
+        super.init(model: model)
     }
+    
+    public required init(at resolution: Resolution3D = .default) {
+        let model = Model(resolution: resolution)
+        super.init(model: model)
+    }
+    
+    // MARK: - Live Model
+    
+    public override func modelUpdateLive() {
+        super.modelUpdateLive()
+        
+        direction = model.direction
+        scale = model.scale
+        offset = model.offset
+        position = model.position
+        extendMode = model.extendMode
+        
+        super.modelUpdateLiveDone()
+    }
+    
+    public override func liveUpdateModel() {
+        super.liveUpdateModel()
+        
+        model.direction = direction
+        model.scale = scale
+        model.offset = offset
+        model.position = position
+        model.extendMode = extendMode
+        
+        super.liveUpdateModelDone()
+    }
+    
     
 }

@@ -33,7 +33,7 @@ public class LevelsVOX: VOXSingleEffect {
         [brightness, darkness, contrast, gamma, inverted, opacity, offset]
     }
     
-    // MARK: - Life Cycle
+    // MARK: - Life Cycle -
     
     public required init() {
         super.init(name: "Levels", typeName: "vox-effect-single-levels")

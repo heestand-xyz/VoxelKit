@@ -28,7 +28,7 @@ public class EdgeVOX: VOXSingleEffect {
         [strength, distance]
     }
     
-    // MARK: - Life Cycle
+    // MARK: - Life Cycle -
     
     public required init() {
         super.init(name: "Edge", typeName: "vox-effect-single-edge")

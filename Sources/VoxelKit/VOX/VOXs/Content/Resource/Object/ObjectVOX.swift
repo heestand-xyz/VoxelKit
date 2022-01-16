@@ -144,7 +144,7 @@ public class ObjectVOX: VOXResource {
     }
     public override var uniformIndexArrayMaxLimit: Int? { 10_000 }
     
-    // MARK: - Life Cycle
+    // MARK: - Life Cycle -
     
     public init(at resolution: Resolution3D, fileName: String) {
         super.init(at: resolution, name: "Object", typeName: "vox-content-resource-object")

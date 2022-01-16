@@ -28,7 +28,7 @@ public class DisplaceVOX: VOXMergerEffect {
         [distance, origin]
     }
     
-    // MARK: - Life Cycle
+    // MARK: - Life Cycle -
     
     public required init() {
         super.init(name: "Displace", typeName: "vox-effect-merger-displace")
@@ -48,12 +48,12 @@ public extension NODEOut {
         return displacePix
     }
     
-    func voxNoiseDisplace(distance: CGFloat, wPosition: CGFloat = 0.0, octaves: Int = 10) -> DisplaceVOX {
+    func voxNoiseDisplace(distance: CGFloat, motion: CGFloat = 0.0, octaves: Int = 10) -> DisplaceVOX {
         let vox = self as! VOX & NODEOut
         let noisePix = NoiseVOX(at: vox.renderedResolution3d)
         noisePix.name = "noiseDisplace:noise"
         noisePix.colored = true
-        noisePix.wPosition = wPosition
+        noisePix.motion = motion
         noisePix.octaves = octaves
         return vox.voxDisplace(vox: noisePix, distance: distance)
     }

@@ -27,7 +27,7 @@ public class CrossVOX: VOXMergerEffect {
         [fraction]
     }
     
-    // MARK: - Life Cycle
+    // MARK: - Life Cycle -
     
     public required init() {
         super.init(name: "Cross", typeName: "vox-effect-merger-cross")

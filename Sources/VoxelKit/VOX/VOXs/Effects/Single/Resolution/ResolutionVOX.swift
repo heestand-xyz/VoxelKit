@@ -23,7 +23,7 @@ public class ResolutionVOX: VOXSingleEffect, NODEResolution3D/*, CustomRenderDel
         [_resolution]
     }
     
-    // MARK: - Life Cycle
+    // MARK: - Life Cycle -
     
     required public init(at resolution: Resolution3D) {
         self.resolution = resolution

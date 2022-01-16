@@ -38,7 +38,7 @@ public class LookupVOX: VOXMergerEffect {
         [axis == .x ? 0 : 1, holdEdge ? 1 : 0, holdEdgeFraction]
     }
     
-    // MARK: - Life Cycle
+    // MARK: - Life Cycle -
     
     public required init() {
         super.init(name: "Lookup", typeName: "vox-effect-merger-lookup")
