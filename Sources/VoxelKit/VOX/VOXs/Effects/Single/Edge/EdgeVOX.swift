@@ -11,6 +11,13 @@ import CoreGraphics
 
 public class EdgeVOX: VOXSingleEffect {
     
+    public typealias Model = EdgeVoxelModel
+    
+    private var model: Model {
+        get { singleEffectModel as! Model }
+        set { singleEffectModel = newValue }
+    }
+    
     override open var shaderName: String { return "effectSingleEdgeVOX" }
     
     // MARK: - Public Properties
@@ -30,9 +37,33 @@ public class EdgeVOX: VOXSingleEffect {
     
     // MARK: - Life Cycle -
     
+    public init(model: Model) {
+        super.init(model: model)
+    }
+    
     public required init() {
-        super.init(name: "Edge", typeName: "vox-effect-single-edge")
-        extend = .hold
+        let model = Model()
+        super.init(model: model)
+    }
+    
+    // MARK: - Live Model
+    
+    public override func modelUpdateLive() {
+        super.modelUpdateLive()
+        
+        strength = model.strength
+        distance = model.distance
+        
+        super.modelUpdateLiveDone()
+    }
+    
+    public override func liveUpdateModel() {
+        super.liveUpdateModel()
+        
+        model.strength = strength
+        model.distance = distance
+        
+        super.liveUpdateModelDone()
     }
     
 }
