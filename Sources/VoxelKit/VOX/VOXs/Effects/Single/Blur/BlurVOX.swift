@@ -12,6 +12,13 @@ import Resolution
 
 public class BlurVOX: VOXSingleEffect {
     
+    public typealias Model = BlurVoxelModel
+    
+    private var model: Model {
+        get { singleEffectModel as! Model }
+        set { singleEffectModel = newValue }
+    }
+    
     override open var shaderName: String { return "effectSingleBlurVOX" }
     
     // MARK: - Public Properties
@@ -102,10 +109,41 @@ public class BlurVOX: VOXSingleEffect {
     
     override open var shaderNeedsAspect: Bool { return true }
     
-    public required init() {
-        super.init(name: "Blur", typeName: "vox-effect-single-blur")
-        extend = .hold
+    // MARK: - Life Cycle -
+    
+    public init(model: Model) {
+        super.init(model: model)
     }
+    
+    public required init() {
+        let model = Model()
+        super.init(model: model)
+    }
+    
+    // MARK: - Live Model
+    
+    public override func modelUpdateLive() {
+        super.modelUpdateLive()
+        
+        style = model.style
+        radius = model.radius
+        quality = model.quality
+        position = model.position
+        
+        super.modelUpdateLiveDone()
+    }
+    
+    public override func liveUpdateModel() {
+        super.liveUpdateModel()
+        
+        model.style = style
+        model.radius = radius
+        model.quality = quality
+        model.position = position
+        
+        super.liveUpdateModelDone()
+    }
+    
 }
 
 public extension NODEOut {

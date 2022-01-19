@@ -11,10 +11,19 @@ import MetalKit
 import Resolution
 import Combine
 
-public class VOXEffect: VOX, NODEEffect/*, NODETileable3D*/ {
+public class VOXEffect: VOX, NODEEffect {
     
-    public var inputList: [NODE & NODEOut] = []
-    public var outputPathList: [NODEOutPath] = []
+    var effectModel: VoxelEffectModel {
+        get { voxelModel as! VoxelEffectModel }
+        set { voxelModel = newValue }
+    }
+    
+    public var inputList: [NODE & NODEOut] = [] {
+        didSet { effectModel.inputNodeReferences = inputList.map({ NodeReference(node: $0, connection: .single) }) }
+    }
+    public var outputPathList: [NODEOutPath] = [] {
+        didSet { effectModel.outputNodeReferences = outputPathList.map(NodeReference.init) }
+    }
     public var connectedIn: Bool { !inputList.isEmpty }
     public var connectedOut: Bool { !outputPathList.isEmpty }
 
@@ -25,4 +34,9 @@ public class VOXEffect: VOX, NODEEffect/*, NODETileable3D*/ {
     public var renderPublisher: PassthroughSubject<RenderPack, Never> = PassthroughSubject()
     public var cancellableIns: [AnyCancellable] = []
     
+    // MARK: - Life Cycle -
+    
+    init(model: VoxelEffectModel) {
+        super.init(model: model)
+    }
 }

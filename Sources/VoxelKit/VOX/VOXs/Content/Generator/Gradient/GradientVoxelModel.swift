@@ -20,7 +20,6 @@ public struct GradientVoxelModel: VoxelGeneratorModel {
     
     public var outputNodeReferences: [NodeReference] = []
 
-    public var viewInterpolation: ViewInterpolation = .linear
     public var interpolation: PixelInterpolation = .linear
     public var extend: ExtendMode = .zero
     
