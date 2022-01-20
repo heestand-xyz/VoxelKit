@@ -12,6 +12,13 @@ import CoreGraphics
 
 public class FeedbackVOX: VOXSingleEffect {
     
+    public typealias Model = FeedbackVoxelModel
+    
+    private var model: Model {
+        get { singleEffectModel as! Model }
+        set { singleEffectModel = newValue }
+    }
+    
     override open var shaderName: String { return "nilVOX" }
     
     // MARK: - Private Properties
@@ -27,14 +34,38 @@ public class FeedbackVOX: VOXSingleEffect {
     }
     
     @LiveBool("feedbackActive") public var feedbackActive: Bool = true
-    public var feedbackInput: (VOX & NODEOut)? { didSet { if feedbackActive { render() } } }
+    public var feedbackInput: (VOX & NODEOut)? {
+        didSet {
+            if let feedbackInput: VOX = feedbackInput {
+                model.feedbackInputNodeReference = NodeReference(node: feedbackInput, connection: .single)
+            } else {
+                model.feedbackInputNodeReference = nil
+            }
+            if feedbackActive {
+                render()
+            }
+        }
+    }
     
     public override var liveList: [LiveWrap] {
         [_feedbackActive]
     }
+    // MARK: - Life Cycle -
+    
+    public init(model: Model) {
+        super.init(model: model)
+        setup()
+    }
     
     public required init() {
-        super.init(name: "Feedback", typeName: "vox-effect-single-feedback")
+        let model = Model()
+        super.init(model: model)
+        setup()
+    }
+    
+    // MARK: - Setup
+    
+    private func setup() {
         VoxelKit.main.render.listenToFramesUntil {
             if self.input?.texture != nil && self.feedTexture != nil {
                 self.render()
@@ -44,6 +75,26 @@ public class FeedbackVOX: VOXSingleEffect {
             }
         }
     }
+    
+    // MARK: - Live Model
+    
+    public override func modelUpdateLive() {
+        super.modelUpdateLive()
+        
+        feedbackActive = model.feedbackActive
+        
+        super.modelUpdateLiveDone()
+    }
+    
+    public override func liveUpdateModel() {
+        super.liveUpdateModel()
+        
+        model.feedbackActive = feedbackActive
+        
+        super.liveUpdateModelDone()
+    }
+    
+    // MARK: - Feedback
     
     func tileFeedTexture(at tileIndex: TileIndex) -> MTLTexture? {
         guard let tileFeedVox = feedbackInput as? VOX & NODETileable3D else {
