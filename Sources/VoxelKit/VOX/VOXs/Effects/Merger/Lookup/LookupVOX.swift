@@ -11,6 +11,13 @@ import CoreGraphics
 
 public class LookupVOX: VOXMergerEffect {
     
+    public typealias Model = LookupVoxelModel
+    
+    private var model: Model {
+        get { mergerEffectModel as! Model }
+        set { mergerEffectModel = newValue }
+    }
+    
     override open var shaderName: String { return "effectMergerLookupVOX" }
     
     // MARK: - Public Properties
@@ -40,8 +47,33 @@ public class LookupVOX: VOXMergerEffect {
     
     // MARK: - Life Cycle -
     
+    public init(model: Model) {
+        super.init(model: model)
+    }
+    
     public required init() {
-        super.init(name: "Lookup", typeName: "vox-effect-merger-lookup")
+        let model = Model()
+        super.init(model: model)
+    }
+    
+    // MARK: - Live Model
+    
+    public override func modelUpdateLive() {
+        super.modelUpdateLive()
+        
+        axis = model.axis
+        holdEdge = model.holdEdge
+        
+        super.modelUpdateLiveDone()
+    }
+    
+    public override func liveUpdateModel() {
+        super.liveUpdateModel()
+        
+        model.axis = axis
+        model.holdEdge = holdEdge
+        
+        super.liveUpdateModelDone()
     }
     
 }

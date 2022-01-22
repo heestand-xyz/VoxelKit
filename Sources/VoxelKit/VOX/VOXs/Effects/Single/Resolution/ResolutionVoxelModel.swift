@@ -9,13 +9,13 @@ import Resolution
 import PixelColor
 import simd
 
-public struct FeedbackVoxelModel: VoxelSingleEffectModel {
+public struct ResolutionVoxelModel: VoxelSingleEffectModel {
     
     // MARK: Global
     
     public var id: UUID = UUID()
-    public var name: String = "Feedback"
-    public var typeName: String = "vox-effect-single-feedback"
+    public var name: String = "Resolution"
+    public var typeName: String = "vox-effect-single-resolution"
     public var bypass: Bool = false
     
     public var inputNodeReferences: [NodeReference] = []
@@ -26,6 +26,5 @@ public struct FeedbackVoxelModel: VoxelSingleEffectModel {
     
     // MARK: Local
     
-    public var feedbackInputNodeReference: NodeReference?
-    public var feedActive: Bool = true
+    public var resolution: Resolution3D = .default
 }

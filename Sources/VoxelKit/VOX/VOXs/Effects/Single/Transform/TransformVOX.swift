@@ -11,6 +11,13 @@ import CoreGraphics
 
 public class TransformVOX: VOXSingleEffect {
     
+    public typealias Model = TransformVoxelModel
+    
+    private var model: Model {
+        get { singleEffectModel as! Model }
+        set { singleEffectModel = newValue }
+    }
+    
     override open var shaderName: String { return "effectSingleTransformVOX" }
     
     // MARK: - Public Properties
@@ -32,8 +39,37 @@ public class TransformVOX: VOXSingleEffect {
     
     // MARK: - Life Cycle -
     
+    public init(model: Model) {
+        super.init(model: model)
+    }
+    
     public required init() {
-        super.init(name: "Transform", typeName: "vox-effect-single-transform")
+        let model = Model()
+        super.init(model: model)
+    }
+    
+    // MARK: - Live Model
+    
+    public override func modelUpdateLive() {
+        super.modelUpdateLive()
+        
+        position = model.position
+        rotation = model.rotation
+        scale = model.scale
+        size = model.size
+        
+        super.modelUpdateLiveDone()
+    }
+    
+    public override func liveUpdateModel() {
+        super.liveUpdateModel()
+        
+        model.position = position
+        model.rotation = rotation
+        model.scale = scale
+        model.size = size
+        
+        super.liveUpdateModelDone()
     }
     
 }

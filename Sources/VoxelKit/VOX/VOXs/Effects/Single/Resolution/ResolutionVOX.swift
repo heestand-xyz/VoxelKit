@@ -13,6 +13,13 @@ import Resolution
 @available(iOS 11.3, *)
 public class ResolutionVOX: VOXSingleEffect, NODEResolution3D/*, CustomRenderDelegate*/ {
 
+    public typealias Model = ResolutionVoxelModel
+    
+    private var model: Model {
+        get { singleEffectModel as! Model }
+        set { singleEffectModel = newValue }
+    }
+    
     override open var shaderName: String { return "effectSingleResolutionVOX" }
     
     // MARK: - Public Properties
@@ -25,30 +32,38 @@ public class ResolutionVOX: VOXSingleEffect, NODEResolution3D/*, CustomRenderDel
     
     // MARK: - Life Cycle -
     
+    public init(model: Model) {
+        super.init(model: model)
+    }
+    
+    public required init() {
+        let model = Model()
+        super.init(model: model)
+    }
+    
     required public init(at resolution: Resolution3D) {
         self.resolution = resolution
-        super.init(name: "Resolution", typeName: "vox-effect-single-resolution")
-//        customRenderDelegate = self
-//        customRenderActive = true
+        let model = Model(resolution: resolution)
+        super.init(model: model)
     }
     
-    required init() {
-        self.resolution = ._128
-        super.init(name: "Resolution", typeName: "vox-effect-single-resolution")
+    // MARK: - Live Model
+    
+    public override func modelUpdateLive() {
+        super.modelUpdateLive()
+        
+        resolution = model.resolution
+        
+        super.modelUpdateLiveDone()
     }
     
-//    public func customRender(_ texture: MTLTexture, with commandBuffer: MTLCommandBuffer) -> MTLTexture? {
-//        do {
-//            let destinationTexture = try Texture.emptyTexture3D(at: resolution, bits: VoxelKit.main.render.bits, on: VoxelKit.main.render.metalDevice)
-//            let scaleKernel = MPSImageReduceRowMax(device: VoxelKit.main.render.metalDevice)
-//            scaleKernel.clipRectSource = MTLRegion(origin: MTLOrigin(x: 0, y: 0, z: 0), size: MTLSize(width: resolution.x, height: resolution.y, depth: resolution.z))
-//            scaleKernel.encode(commandBuffer: commandBuffer, sourceTexture: texture, destinationTexture: destinationTexture)
-//            return destinationTexture
-//        } catch {
-//            VoxelKit.main.logger.log(node: self, .error, .generator, "Resolution Custom Render failed.", e: error)
-//            return nil
-//        }
-//    }
+    public override func liveUpdateModel() {
+        super.liveUpdateModel()
+        
+        model.resolution = resolution
+        
+        super.liveUpdateModelDone()
+    }
     
 }
 

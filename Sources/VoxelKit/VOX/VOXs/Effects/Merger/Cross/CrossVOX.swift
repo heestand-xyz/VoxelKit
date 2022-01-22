@@ -11,6 +11,13 @@ import CoreGraphics
 
 public class CrossVOX: VOXMergerEffect {
     
+    public typealias Model = CrossVoxelModel
+    
+    private var model: Model {
+        get { mergerEffectModel as! Model }
+        set { mergerEffectModel = newValue }
+    }
+    
     override open var shaderName: String { return "effectMergerCrossVOX" }
     
     // MARK: - Public Properties
@@ -29,8 +36,31 @@ public class CrossVOX: VOXMergerEffect {
     
     // MARK: - Life Cycle -
     
+    public init(model: Model) {
+        super.init(model: model)
+    }
+    
     public required init() {
-        super.init(name: "Cross", typeName: "vox-effect-merger-cross")
+        let model = Model()
+        super.init(model: model)
+    }
+    
+    // MARK: - Live Model
+    
+    public override func modelUpdateLive() {
+        super.modelUpdateLive()
+        
+        fraction = model.fraction
+        
+        super.modelUpdateLiveDone()
+    }
+    
+    public override func liveUpdateModel() {
+        super.liveUpdateModel()
+        
+        model.fraction = fraction
+        
+        super.liveUpdateModelDone()
     }
     
 }

@@ -11,6 +11,13 @@ import CoreGraphics
 
 public class DisplaceVOX: VOXMergerEffect {
     
+    public typealias Model = DisplaceVoxelModel
+    
+    private var model: Model {
+        get { mergerEffectModel as! Model }
+        set { mergerEffectModel = newValue }
+    }
+    
     override open var shaderName: String { return "effectMergerDisplaceVOX" }
     
     // MARK: - Public Properties
@@ -30,9 +37,33 @@ public class DisplaceVOX: VOXMergerEffect {
     
     // MARK: - Life Cycle -
     
+    public init(model: Model) {
+        super.init(model: model)
+    }
+    
     public required init() {
-        super.init(name: "Displace", typeName: "vox-effect-merger-displace")
-        extend = .hold
+        let model = Model()
+        super.init(model: model)
+    }
+    
+    // MARK: - Live Model
+    
+    public override func modelUpdateLive() {
+        super.modelUpdateLive()
+        
+        distance = model.distance
+        origin = model.origin
+        
+        super.modelUpdateLiveDone()
+    }
+    
+    public override func liveUpdateModel() {
+        super.liveUpdateModel()
+        
+        model.distance = distance
+        model.origin = origin
+        
+        super.liveUpdateModelDone()
     }
     
 }

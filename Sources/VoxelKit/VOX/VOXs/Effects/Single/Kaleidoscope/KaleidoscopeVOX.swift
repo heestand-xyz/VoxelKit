@@ -12,6 +12,13 @@ import simd
 
 public class KaleidoscopeVOX: VOXSingleEffect {
     
+    public typealias Model = KaleidoscopeVoxelModel
+    
+    private var model: Model {
+        get { singleEffectModel as! Model }
+        set { singleEffectModel = newValue }
+    }
+    
     override open var shaderName: String { return "effectSingleKaleidoscopeVOX" }
     
     // MARK: - Public Properties
@@ -36,9 +43,41 @@ public class KaleidoscopeVOX: VOXSingleEffect {
         [CGFloat(axis.index)]
     }
     
+    // MARK: - Life Cycle -
+    
+    public init(model: Model) {
+        super.init(model: model)
+    }
+    
     public required init() {
-        super.init(name: "Kaleidoscope", typeName: "vox-effect-single-kaleidoscope")
-        extend = .mirror
+        let model = Model()
+        super.init(model: model)
+    }
+    
+    // MARK: - Live Model
+    
+    public override func modelUpdateLive() {
+        super.modelUpdateLive()
+        
+        divisions = model.divisions
+        mirror = model.mirror
+        rotation = model.rotation
+        position = model.position
+        axis = model.axis
+        
+        super.modelUpdateLiveDone()
+    }
+    
+    public override func liveUpdateModel() {
+        super.liveUpdateModel()
+        
+        model.divisions = divisions
+        model.mirror = mirror
+        model.rotation = rotation
+        model.position = position
+        model.axis = axis
+        
+        super.liveUpdateModelDone()
     }
     
 }

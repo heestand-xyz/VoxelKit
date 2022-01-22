@@ -9,13 +9,13 @@ import Resolution
 import PixelColor
 import simd
 
-public struct FeedbackVoxelModel: VoxelSingleEffectModel {
+public struct TransformVoxelModel: VoxelSingleEffectModel {
     
     // MARK: Global
     
     public var id: UUID = UUID()
-    public var name: String = "Feedback"
-    public var typeName: String = "vox-effect-single-feedback"
+    public var name: String = "Transform"
+    public var typeName: String = "vox-effect-single-transform"
     public var bypass: Bool = false
     
     public var inputNodeReferences: [NodeReference] = []
@@ -26,6 +26,8 @@ public struct FeedbackVoxelModel: VoxelSingleEffectModel {
     
     // MARK: Local
     
-    public var feedbackInputNodeReference: NodeReference?
-    public var feedActive: Bool = true
+    public var position: SIMD3<Double> = .zero
+    public var rotation: SIMD3<Double> = .zero
+    public var scale: CGFloat = 1.0
+    public var size: SIMD3<Double> = SIMD3<Double>(x: 1.0, y: 1.0, z: 1.0)
 }

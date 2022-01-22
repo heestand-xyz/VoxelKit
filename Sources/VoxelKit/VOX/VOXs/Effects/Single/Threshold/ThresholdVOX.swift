@@ -11,6 +11,13 @@ import CoreGraphics
 
 public class ThresholdVOX: VOXSingleEffect {
     
+    public typealias Model = ThresholdVoxelModel
+    
+    private var model: Model {
+        get { singleEffectModel as! Model }
+        set { singleEffectModel = newValue }
+    }
+    
     override open var shaderName: String { return "effectSingleThresholdVOX" }
     
     // MARK: - Public Properties
@@ -29,8 +36,31 @@ public class ThresholdVOX: VOXSingleEffect {
     
     // MARK: - Life Cycle -
     
+    public init(model: Model) {
+        super.init(model: model)
+    }
+    
     public required init() {
-        super.init(name: "Threshold", typeName: "vox-effect-single-threshold")
+        let model = Model()
+        super.init(model: model)
+    }
+    
+    // MARK: - Live Model
+    
+    public override func modelUpdateLive() {
+        super.modelUpdateLive()
+        
+        threshold = model.threshold
+        
+        super.modelUpdateLiveDone()
+    }
+    
+    public override func liveUpdateModel() {
+        super.liveUpdateModel()
+        
+        model.threshold = threshold
+        
+        super.liveUpdateModelDone()
     }
     
 }

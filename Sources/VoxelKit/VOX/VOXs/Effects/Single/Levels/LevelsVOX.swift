@@ -11,6 +11,13 @@ import CoreGraphics
 
 public class LevelsVOX: VOXSingleEffect {
     
+    public typealias Model = LevelsVoxelModel
+    
+    private var model: Model {
+        get { singleEffectModel as! Model }
+        set { singleEffectModel = newValue }
+    }
+    
     override open var shaderName: String { return "effectSingleLevelsVOX" }
     
     // MARK: - Public Properties
@@ -35,8 +42,43 @@ public class LevelsVOX: VOXSingleEffect {
     
     // MARK: - Life Cycle -
     
+    public init(model: Model) {
+        super.init(model: model)
+    }
+    
     public required init() {
-        super.init(name: "Levels", typeName: "vox-effect-single-levels")
+        let model = Model()
+        super.init(model: model)
+    }
+    
+    // MARK: - Live Model
+    
+    public override func modelUpdateLive() {
+        super.modelUpdateLive()
+        
+        brightness = model.brightness
+        darkness = model.darkness
+        contrast = model.contrast
+        gamma = model.gamma
+        inverted = model.inverted
+        opacity = model.opacity
+        offset = model.offset
+        
+        super.modelUpdateLiveDone()
+    }
+    
+    public override func liveUpdateModel() {
+        super.liveUpdateModel()
+        
+        model.brightness = brightness
+        model.darkness = darkness
+        model.contrast = contrast
+        model.gamma = gamma
+        model.inverted = inverted
+        model.opacity = opacity
+        model.offset = offset
+        
+        super.liveUpdateModelDone()
     }
     
 }

@@ -33,7 +33,7 @@ public class FeedbackVOX: VOXSingleEffect {
         return try? Texture.copy3D(texture: texture, on: VoxelKit.main.render.metalDevice, in: VoxelKit.main.render.commandQueue)
     }
     
-    @LiveBool("feedbackActive") public var feedbackActive: Bool = true
+    @LiveBool("feedActive") public var feedActive: Bool = true
     public var feedbackInput: (VOX & NODEOut)? {
         didSet {
             if let feedbackInput: VOX = feedbackInput {
@@ -41,15 +41,16 @@ public class FeedbackVOX: VOXSingleEffect {
             } else {
                 model.feedbackInputNodeReference = nil
             }
-            if feedbackActive {
+            if feedActive {
                 render()
             }
         }
     }
     
     public override var liveList: [LiveWrap] {
-        [_feedbackActive]
+        [_feedActive]
     }
+    
     // MARK: - Life Cycle -
     
     public init(model: Model) {
@@ -81,7 +82,7 @@ public class FeedbackVOX: VOXSingleEffect {
     public override func modelUpdateLive() {
         super.modelUpdateLive()
         
-        feedbackActive = model.feedbackActive
+        feedActive = model.feedActive
         
         super.modelUpdateLiveDone()
     }
@@ -89,7 +90,7 @@ public class FeedbackVOX: VOXSingleEffect {
     public override func liveUpdateModel() {
         super.liveUpdateModel()
         
-        model.feedbackActive = feedbackActive
+        model.feedActive = feedActive
         
         super.liveUpdateModelDone()
     }
@@ -108,7 +109,7 @@ public class FeedbackVOX: VOXSingleEffect {
     public override func didRender(renderPack: RenderPack) {
         super.didRender(renderPack: renderPack)
         if feedReset {
-            feedbackActive = true
+            feedActive = true
             feedReset = false
         }
         readyToFeed = true
@@ -116,11 +117,11 @@ public class FeedbackVOX: VOXSingleEffect {
     }
     
     public func resetFeed() {
-        guard feedbackActive else {
+        guard feedActive else {
             VoxelKit.main.logger.log(node: self, .info, .effect, "Feedback reset; feed not active.")
             return
         }
-        feedbackActive = false
+        feedActive = false
         feedReset = true
         render()
     }

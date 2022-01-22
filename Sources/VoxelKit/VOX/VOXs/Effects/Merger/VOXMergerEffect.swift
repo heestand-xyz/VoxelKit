@@ -27,7 +27,7 @@ public class VOXMergerEffect: VOXEffect, NODEMergerEffect, NODEInMerger {
     
     // MARK: - Life Cycle -
     
-    public init(model: VoxelSingleEffectModel) {
+    public init(model: VoxelMergerEffectModel) {
         super.init(model: model)
     }
     

@@ -9,13 +9,13 @@ import Resolution
 import PixelColor
 import simd
 
-public struct FeedbackVoxelModel: VoxelSingleEffectModel {
+public struct NilVoxelModel: VoxelSingleEffectModel {
     
     // MARK: Global
     
     public var id: UUID = UUID()
-    public var name: String = "Feedback"
-    public var typeName: String = "vox-effect-single-feedback"
+    public var name: String = "Nil"
+    public var typeName: String = "vox-effect-single-nil"
     public var bypass: Bool = false
     
     public var inputNodeReferences: [NodeReference] = []
@@ -23,9 +23,4 @@ public struct FeedbackVoxelModel: VoxelSingleEffectModel {
 
     public var interpolation: PixelInterpolation = .linear
     public var extend: ExtendMode = .zero
-    
-    // MARK: Local
-    
-    public var feedbackInputNodeReference: NodeReference?
-    public var feedActive: Bool = true
 }

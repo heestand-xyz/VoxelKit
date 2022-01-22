@@ -11,43 +11,45 @@ import Resolution
 
 final public class NilVOX: VOXSingleEffect {
     
+    public typealias Model = NilVoxelModel
+    
+    private var model: Model {
+        get { singleEffectModel as! Model }
+        set { singleEffectModel = newValue }
+    }
+    
     override public var shaderName: String { return "nilVOX" }
     
-    let nilOverrideBits: Bits?
+    private var nilOverrideBits: Bits?
     public override var overrideBits: Bits? { nilOverrideBits }
     
-    public required init(name: String = "Nil") {
-        nilOverrideBits = nil
-        super.init(name: name, typeName: "vox-effect-single-nil")
+    // MARK: - Life Cycle -
+    
+    public convenience init(overrideBits: Bits) {
+        self.init()
+        nilOverrideBits = overrideBits
+    }
+    
+    public init(model: Model) {
+        super.init(model: model)
     }
     
     public required init() {
-        nilOverrideBits = nil
-        super.init(name: "Nil", typeName: "vox-effect-single-nil")
+        let model = Model()
+        super.init(model: model)
     }
     
-    public init(overrideBits: Bits) {
-        nilOverrideBits = overrideBits
-        super.init(name: "Nil (\(overrideBits.rawValue)bit)", typeName: "vox-effect-single-nil")
+    // MARK: - Live Model
+    
+    public override func modelUpdateLive() {
+        super.modelUpdateLive()
+        super.modelUpdateLiveDone()
     }
     
-    // MARK: Codable
-    
-//    enum CodingKeys: CodingKey {
-//        case nilOverrideBits
-//    }
-//    
-//    required init(from decoder: Decoder) throws {
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        nilOverrideBits = try container.decode(Bits?.self, forKey: .nilOverrideBits)
-//        try super.init(from: decoder)
-//    }
-//    
-//    public override func encode(to encoder: Encoder) throws {
-//        var container = encoder.container(keyedBy: CodingKeys.self)
-//        try container.encode(nilOverrideBits, forKey: .nilOverrideBits)
-//        try super.encode(to: encoder)
-//    }
+    public override func liveUpdateModel() {
+        super.liveUpdateModel()
+        super.liveUpdateModelDone()
+    }
     
 }
 
