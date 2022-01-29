@@ -18,6 +18,12 @@ extension VOX {
     }
     
     public func encodeVoxelModel() throws -> Data {
+        try VOX.encode(voxelModel: voxelModel)
+    }
+    
+    public static func encode(voxelModel: VoxelModel) throws -> Data {
+        
+        let typeName: String = voxelModel.typeName
         
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
