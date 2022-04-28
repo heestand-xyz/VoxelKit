@@ -10,6 +10,7 @@ import simd
 import MetalKit
 import Resolution
 import PixelColor
+import TextureMap
 
 public extension VOX {
     
@@ -43,7 +44,7 @@ public extension VOX {
     var renderedRaw8: [UInt8]? {
         guard let texture = dynamicTexture else { return nil }
         do {
-            return try Texture.raw3d8(texture: texture)
+            return try TextureMap.raw3d8(texture: texture)
         } catch {
             VoxelKit.main.logger.log(node: self, .error, .texture, "Raw 8 Bit texture failed.", e: error)
             return nil
@@ -55,7 +56,7 @@ public extension VOX {
     var renderedRaw16: [Float16]? {
         guard let texture = dynamicTexture else { return nil }
         do {
-            return try Texture.raw3d16(texture: texture)
+            return try TextureMap.raw3d16(texture: texture)
         } catch {
             VoxelKit.main.logger.log(node: self, .error, .texture, "Raw 16 Bit texture failed.", e: error)
             return nil
@@ -66,7 +67,7 @@ public extension VOX {
     var renderedRaw32: [Float]? {
         guard let texture = dynamicTexture else { return nil }
         do {
-            return try Texture.raw3d32(texture: texture)
+            return try TextureMap.raw3d32(texture: texture)
         } catch {
             VoxelKit.main.logger.log(node: self, .error, .texture, "Raw 32 Bit texture failed.", e: error)
             return nil
@@ -77,9 +78,9 @@ public extension VOX {
         guard let texture = dynamicTexture else { return nil }
         do {
             #if os(macOS) || targetEnvironment(macCatalyst)
-            return try Texture.rawNormalizedCopy3d(texture: texture, bits: VoxelKit.main.render.bits, on: VoxelKit.main.render.metalDevice, in: VoxelKit.main.render.commandQueue)
+            return try TextureMap.rawNormalizedCopy3d(texture: texture, bits: VoxelKit.main.render.bits.tmBits ?? ._8, on: VoxelKit.main.render.metalDevice, in: VoxelKit.main.render.commandQueue)
             #else
-            return try Texture.rawNormalized3d(texture: texture, bits: VoxelKit.main.render.bits)
+            return try TextureMap.rawNormalized3d(texture: texture, bits: VoxelKit.main.render.bits.tmBits ?? ._8)
             #endif
         } catch {
             VoxelKit.main.logger.log(node: self, .error, .texture, "Raw Normalized texture failed.", e: error)
@@ -99,9 +100,9 @@ public extension VOX {
         let texture = textures[tileIndex.z][tileIndex.y][tileIndex.x]
         do {
             #if os(macOS) || targetEnvironment(macCatalyst)
-            return try Texture.rawNormalizedCopy3d(texture: texture, bits: VoxelKit.main.render.bits, on: VoxelKit.main.render.metalDevice, in: VoxelKit.main.render.commandQueue)
+            return try TextureMap.rawNormalizedCopy3d(texture: texture, bits: VoxelKit.main.render.bits.tmBits ?? ._8, on: VoxelKit.main.render.metalDevice, in: VoxelKit.main.render.commandQueue)
             #else
-            return try Texture.rawNormalized3d(texture: texture, bits: VoxelKit.main.render.bits)
+            return try TextureMap.rawNormalized3d(texture: texture, bits: VoxelKit.main.render.bits.tmBits ?? ._8)
             #endif
         } catch {
             VoxelKit.main.logger.log(node: self, .error, .texture, "Raw Normalized texture failed.", e: error)
