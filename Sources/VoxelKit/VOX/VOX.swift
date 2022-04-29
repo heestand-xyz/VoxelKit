@@ -28,7 +28,8 @@ public class VOX: NODE3D, Equatable {
     public var renderObject: Render { VoxelKit.main.render }
     
     public var id: UUID {
-        voxelModel.id
+        get { voxelModel.id }
+        set { voxelModel.id = newValue }
     }
     public var name: String {
         get { voxelModel.name }
