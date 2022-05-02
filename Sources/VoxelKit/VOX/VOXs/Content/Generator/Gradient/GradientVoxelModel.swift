@@ -38,3 +38,18 @@ public struct GradientVoxelModel: VoxelGeneratorModel {
     public var position: SIMD3<Double> = .zero
     public var extendMode: ExtendMode = .hold
 }
+
+extension GradientVoxelModel {
+    
+    public func isEqual(to nodeModel: NodeModel) -> Bool {
+        guard let voxelModel = nodeModel as? Self else { return false }
+        guard isVoxelGeneratorEqual(to: voxelModel) else { return false }
+        guard colorStops == voxelModel.colorStops else { return false }
+        guard direction == voxelModel.direction else { return false }
+        guard scale == voxelModel.scale else { return false }
+        guard offset == voxelModel.offset else { return false }
+        guard position == voxelModel.position else { return false }
+        guard extendMode == voxelModel.extendMode else { return false }
+        return true
+    }
+}

@@ -23,7 +23,7 @@ public class BlurVOX: VOXSingleEffect {
     
     // MARK: - Public Properties
     
-    public enum BlurStyle: String, Enumable {
+    public enum BlurStyle: String, Equatable, Enumable {
         case box
         case zoom
         case random
@@ -47,7 +47,7 @@ public class BlurVOX: VOXSingleEffect {
         public var typeName: String { rawValue }
     }
     
-    public enum SampleQualityMode: Int, Enumable {
+    public enum SampleQualityMode: Int, Equatable, Enumable {
         case low = 4
         case mid = 8
         case high = 16

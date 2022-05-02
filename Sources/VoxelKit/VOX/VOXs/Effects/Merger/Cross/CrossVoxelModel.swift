@@ -30,3 +30,13 @@ public struct CrossVoxelModel: VoxelMergerEffectModel {
     
     public var fraction: CGFloat = 0.5
 }
+
+extension CrossVoxelModel {
+    
+    public func isEqual(to nodeModel: NodeModel) -> Bool {
+        guard let voxelModel = nodeModel as? Self else { return false }
+        guard isVoxelMergerEffectEqual(to: voxelModel) else { return false }
+        guard fraction == voxelModel.fraction else { return false }
+        return true
+    }
+}

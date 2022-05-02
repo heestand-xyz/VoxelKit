@@ -31,3 +31,16 @@ public struct TransformVoxelModel: VoxelSingleEffectModel {
     public var scale: CGFloat = 1.0
     public var size: SIMD3<Double> = SIMD3<Double>(x: 1.0, y: 1.0, z: 1.0)
 }
+
+extension TransformVoxelModel {
+    
+    public func isEqual(to nodeModel: NodeModel) -> Bool {
+        guard let voxelModel = nodeModel as? Self else { return false }
+        guard isVoxelSingleEffectEqual(to: voxelModel) else { return false }
+        guard position == voxelModel.position else { return false }
+        guard rotation == voxelModel.rotation else { return false }
+        guard scale == voxelModel.scale else { return false }
+        guard size == voxelModel.size else { return false }
+        return true
+    }
+}

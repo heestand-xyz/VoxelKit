@@ -28,3 +28,13 @@ public struct ResolutionVoxelModel: VoxelSingleEffectModel {
     
     public var resolution: Resolution3D = .default
 }
+
+extension ResolutionVoxelModel {
+    
+    public func isEqual(to nodeModel: NodeModel) -> Bool {
+        guard let voxelModel = nodeModel as? Self else { return false }
+        guard isVoxelSingleEffectEqual(to: voxelModel) else { return false }
+        guard resolution == voxelModel.resolution else { return false }
+        return true
+    }
+}

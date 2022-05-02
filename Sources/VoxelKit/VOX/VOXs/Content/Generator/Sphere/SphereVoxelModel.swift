@@ -36,3 +36,16 @@ public struct SphereVoxelModel: VoxelGeneratorModel {
     public var edgeRadius: CGFloat = 0.0
     public var edgeColor: PixelColor = .gray
 }
+
+extension SphereVoxelModel {
+    
+    public func isEqual(to nodeModel: NodeModel) -> Bool {
+        guard let voxelModel = nodeModel as? Self else { return false }
+        guard isVoxelGeneratorEqual(to: voxelModel) else { return false }
+        guard radius == voxelModel.radius else { return false }
+        guard position == voxelModel.position else { return false }
+        guard edgeRadius == voxelModel.edgeRadius else { return false }
+        guard edgeColor == voxelModel.edgeColor else { return false }
+        return true
+    }
+}

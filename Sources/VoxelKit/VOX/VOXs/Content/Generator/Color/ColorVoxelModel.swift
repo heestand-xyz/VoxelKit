@@ -29,3 +29,12 @@ public struct ColorVoxelModel: VoxelGeneratorModel {
     public var backgroundColor: PixelColor = .black
     public var color: PixelColor = .white
 }
+
+extension ColorVoxelModel {
+    
+    public func isEqual(to nodeModel: NodeModel) -> Bool {
+        guard let voxelModel = nodeModel as? Self else { return false }
+        guard isVoxelGeneratorEqual(to: voxelModel) else { return false }
+        return true
+    }
+}

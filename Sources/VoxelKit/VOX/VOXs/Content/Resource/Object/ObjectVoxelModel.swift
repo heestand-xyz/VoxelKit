@@ -29,3 +29,13 @@ public struct ObjectVoxelModel: VoxelResourceModel {
     
     public var mode: ObjectVOX.Mode = .edge
 }
+
+extension ObjectVoxelModel {
+    
+    public func isEqual(to nodeModel: NodeModel) -> Bool {
+        guard let voxelModel = nodeModel as? Self else { return false }
+        guard isVoxelResourceEqual(to: voxelModel) else { return false }
+        guard mode == voxelModel.mode else { return false }
+        return true
+    }
+}

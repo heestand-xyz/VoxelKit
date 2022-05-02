@@ -24,3 +24,12 @@ public struct NilVoxelModel: VoxelSingleEffectModel {
     public var interpolation: PixelInterpolation = .linear
     public var extend: ExtendMode = .zero
 }
+
+extension NilVoxelModel {
+    
+    public func isEqual(to nodeModel: NodeModel) -> Bool {
+        guard let voxelModel = nodeModel as? Self else { return false }
+        guard isVoxelSingleEffectEqual(to: voxelModel) else { return false }
+        return true
+    }
+}

@@ -12,7 +12,7 @@ import PixelColor
 import simd
 import Resolution
 
-public struct ColorStep: Codable {
+public struct ColorStep: Codable, Equatable {
     public var step: CGFloat
     public var color: PixelColor
     public init(_ step: CGFloat, _ color: PixelColor) {
@@ -34,7 +34,7 @@ public class GradientVOX: VOXGenerator {
     
     // MARK: - Public Types
     
-    public enum Direction: Enumable {
+    public enum Direction: Enumable, Equatable {
         case linear(Axis)
         case radial
         case angle(Axis)

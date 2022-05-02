@@ -40,3 +40,20 @@ public struct NoiseVoxelModel: VoxelGeneratorModel {
     public var random: Bool = false
     public var includeAlpha: Bool = false
 }
+
+extension NoiseVoxelModel {
+    
+    public func isEqual(to nodeModel: NodeModel) -> Bool {
+        guard let voxelModel = nodeModel as? Self else { return false }
+        guard isVoxelGeneratorEqual(to: voxelModel) else { return false }
+        guard seed == voxelModel.seed else { return false }
+        guard octaves == voxelModel.octaves else { return false }
+        guard position == voxelModel.position else { return false }
+        guard motion == voxelModel.motion else { return false }
+        guard zoom == voxelModel.zoom else { return false }
+        guard colored == voxelModel.colored else { return false }
+        guard random == voxelModel.random else { return false }
+        guard includeAlpha == voxelModel.includeAlpha else { return false }
+        return true
+    }
+}

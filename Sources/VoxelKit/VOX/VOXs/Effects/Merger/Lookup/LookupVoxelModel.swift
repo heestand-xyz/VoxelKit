@@ -31,3 +31,14 @@ public struct LookupVoxelModel: VoxelMergerEffectModel {
     public var axis: Axis = .x
     public var holdEdge: Bool = true
 }
+
+extension LookupVoxelModel {
+    
+    public func isEqual(to nodeModel: NodeModel) -> Bool {
+        guard let voxelModel = nodeModel as? Self else { return false }
+        guard isVoxelMergerEffectEqual(to: voxelModel) else { return false }
+        guard axis == voxelModel.axis else { return false }
+        guard holdEdge == voxelModel.holdEdge else { return false }
+        return true
+    }
+}

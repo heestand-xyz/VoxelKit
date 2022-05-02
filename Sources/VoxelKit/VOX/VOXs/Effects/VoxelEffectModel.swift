@@ -8,3 +8,14 @@
 import RenderKit
 
 public typealias VoxelEffectModel = VoxelModel & NodeEffectModel
+
+extension VoxelModel {
+    
+    func isVoxelEffectEqual(to voxelModel: VoxelEffectModel) -> Bool {
+        guard let self = self as? VoxelEffectModel else { return false }
+        guard isVoxelEffectEqual(to: voxelModel) else { return false }
+        guard self.inputNodeReferences == voxelModel.inputNodeReferences else { return false }
+        guard self.outputNodeReferences == voxelModel.outputNodeReferences else { return false }
+        return true
+    }
+}

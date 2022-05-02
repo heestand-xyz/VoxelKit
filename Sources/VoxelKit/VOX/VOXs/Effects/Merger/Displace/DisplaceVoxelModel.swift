@@ -31,3 +31,14 @@ public struct DisplaceVoxelModel: VoxelMergerEffectModel {
     public var distance: CGFloat = 1.0
     public var origin: CGFloat = 0.5
 }
+
+extension DisplaceVoxelModel {
+    
+    public func isEqual(to nodeModel: NodeModel) -> Bool {
+        guard let voxelModel = nodeModel as? Self else { return false }
+        guard isVoxelMergerEffectEqual(to: voxelModel) else { return false }
+        guard distance == voxelModel.distance else { return false }
+        guard origin == voxelModel.origin else { return false }
+        return true
+    }
+}

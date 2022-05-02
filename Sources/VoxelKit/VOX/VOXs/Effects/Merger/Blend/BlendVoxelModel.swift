@@ -30,3 +30,13 @@ public struct BlendVoxelModel: VoxelMergerEffectModel {
     
     public var blendMode: BlendMode = .add
 }
+
+extension BlendVoxelModel {
+    
+    public func isEqual(to nodeModel: NodeModel) -> Bool {
+        guard let voxelModel = nodeModel as? Self else { return false }
+        guard isVoxelMergerEffectEqual(to: voxelModel) else { return false }
+        guard blendMode == voxelModel.blendMode else { return false }
+        return true
+    }
+}
