@@ -9,7 +9,7 @@ import Foundation
 
 extension VOX {
     
-    // MARK: Codable
+    // MARK: - Encode
     
     public enum CodingError: Error {
         case typeNameUnknown(String)
@@ -94,6 +94,8 @@ extension VOX {
         
         throw CodingError.typeNameUnknown(typeName)
     }
+    
+    // MARK: - Decode
     
     struct TypeNameContainer: Decodable {
         let typeName: String
