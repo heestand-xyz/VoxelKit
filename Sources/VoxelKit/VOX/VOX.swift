@@ -39,6 +39,8 @@ public class VOX: NODE3D, Equatable {
         voxelModel.typeName
     }
     
+    public var information: String? { nil }
+    
     public var delegate: NODEDelegate?
     
     public var shaderName: String { "" }
