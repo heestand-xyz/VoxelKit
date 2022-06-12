@@ -52,7 +52,7 @@ public class VOXGenerator: VOXContent, NODEGenerator, NODEResolution3D {
     func setupGenerator() {
         applyResolution { [weak self] in
             self?.render()
-            #warning("Delay on Init")
+            // FIXME: Delay on Init
             VoxelKit.main.render.delay(frames: 1) { [weak self] in
                 self?.render()
             }
